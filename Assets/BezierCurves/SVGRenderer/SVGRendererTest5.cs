@@ -260,6 +260,7 @@ public class SVGRendererTest5 : MonoBehaviour
                         break;
                     default:
                         break;
+                    
                 }
             }
 
