@@ -1,0 +1,44 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+RWStructuredBuffer<float3> Result;
+
+StructuredBuffer<float3> Input;
+
+const float PI=3.14159;
+
+[numthreads(5,1,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    float width=2;
+    
+    float3 c1=float3(Input[id.x*3].x,Input[id.x*3].y,Input[id.x*3].z);
+    float3 c2=float3(Input[id.x*3+1].x,Input[id.x*3+1].y,Input[id.x*3+1].z);
+    float3 c3=float3(Input[id.x*3+2].x,Input[id.x*3+2].y,Input[id.x*3+2].z);
+    float3 c4=float3(Input[id.x*3+3].x,Input[id.x*3+3].y,Input[id.x*3+3].z);
+
+    float3 abVec=c2-c1;
+    float3 c1Norm=float3(abVec.y,-abVec.x,abVec.z);
+
+    float3 cdVec=c4-c3;
+    float3 c4Norm=float3(cdVec.y,-cdVec.x,cdVec.z);
+    
+    Result[id.x*12]=c1+normalize(c1Norm)*width;
+    Result[id.x*12+1]=c1-normalize(c1Norm)*width;
+    Result[id.x*12+2]=c2;
+
+    Result[id.x*12+3]=c1-normalize(c1Norm)*width;
+    Result[id.x*12+4]=c2;
+    Result[id.x*12+5]=c3;
+
+    Result[id.x*12+6]=c1-normalize(c1Norm)*width;
+    Result[id.x*12+7]=c3;
+    Result[id.x*12+8]=c4-normalize(c4Norm)*width;
+
+    Result[id.x*12+9]=c4-normalize(c4Norm)*width;
+    Result[id.x*12+10]=c3;
+    Result[id.x*12+11]=c4+normalize(c4Norm)*width;
+    //if(id.x*3+3==12)Result[id.x*6+5]=Input[0];
+    //Result[id.xy] = float4(id.x & id.y, (id.x & 15)/15.0, (id.y & 15)/15.0, 0.0);
+    //Result[id.x*3] = float3(1,1,1);
+}

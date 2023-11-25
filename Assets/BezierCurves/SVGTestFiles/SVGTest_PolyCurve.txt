@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="1080" width="1980">
+<path id='g0-21920' d="M 6 8 C 5 9 6 10 8 10 C 10 10 11 8 10 6 C 9 4 7 3 4 3 C 1 3 1 4 4 5 C 7 6 7 7 6 8" stroke ="red" stroke-width="10" fill ="green"/>
+
+<use x='-1' y='-1' xlink:href='#g0-21920'/>
+</svg>
+</body>
+</html>
