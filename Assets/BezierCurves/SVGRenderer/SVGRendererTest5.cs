@@ -261,6 +261,7 @@ public class SVGRendererTest5 : MonoBehaviour
                     default:
                         break;
                     
+                    
                 }
             }
 
