@@ -1,21 +1,9 @@
-using GenericShape;
-using Habrador_Computational_Geometry;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Net;
-//using System.Numerics;
-using System.Reflection;
-using System.Security.Cryptography;
-using System.Text.RegularExpressions;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.UI.GridLayoutGroup;
-using Color = UnityEngine.Color;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class CurveDrawer7 : MonoBehaviour
@@ -23,17 +11,18 @@ public class CurveDrawer7 : MonoBehaviour
     
     public List<SubPath> allPoints = new List<SubPath>();
     public List<Vector3> vertices= new List<Vector3>();
+    public List<int> indices= new List<int>();
     public Material material;
 
     
     private ComputeBuffer curveDataBuffer;
-    struct CurvesControlPointsPack
+    struct CurveDataWrapper
     {
         public Vector4 start;
         public Vector4 control1;
         public Vector4 control2;
         public Vector4 end;
-        public int fillAll;
+        //public int fillAll;
         public int orientation;
     }
 
@@ -48,23 +37,57 @@ public class CurveDrawer7 : MonoBehaviour
         }
 
         //Debug.Log(getOrientation(holePoints[0]));
+        List<CurveDataWrapper> ShaderinputDataWrappers = new List<CurveDataWrapper>();
+        
         for (int i = 0; i < allPoints.Count; i++)
         {
-            List<float3> boundingBoxVerticesOfHull = computeBoundingBox(allPoints[i].controlPoints);
-            foreach (float3 point in boundingBoxVerticesOfHull)
+            List<float3> controlPointsSubPath=allPoints[i].controlPoints;
+            
+            List<float3> boundingBoxVerticesInTriangleStrip = computeBoundingBox(allPoints[i]);
+            foreach (float3 point in boundingBoxVerticesInTriangleStrip)
             {
                 vertices.Add(new Vector3(point.x,point.y,point.z));
             }
+            for (int j = 0; j < controlPointsSubPath.Count / 3; i++)
+            {
+                CurveDataWrapper ShaderinputDataWrapper = new CurveDataWrapper();
+
+                ShaderinputDataWrapper.start = new Vector4(controlPointsSubPath[j * 3].x, controlPointsSubPath[j * 3].y,
+                    controlPointsSubPath[j * 3].z, 0);
+                ShaderinputDataWrapper.control1 = new Vector4(controlPointsSubPath[j * 3+1].x, controlPointsSubPath[j * 3+1].y,
+                    controlPointsSubPath[j * 3+1].z, 0);
+                ShaderinputDataWrapper.control2 = new Vector4(controlPointsSubPath[j * 3+2].x, controlPointsSubPath[j * 3+2].y,
+                    controlPointsSubPath[j * 3+2].z, 0);
+                ShaderinputDataWrapper.end = new Vector4(controlPointsSubPath[j * 3+3].x, controlPointsSubPath[j * 3+3].y,
+                    controlPointsSubPath[j * 3+3].z, 0);
+                ShaderinputDataWrapper.orientation = allPoints[i].orientation;
+                
+                
+                ShaderinputDataWrappers.Add(ShaderinputDataWrapper);
+            }
         }
+
         
+        Mesh mesh = new Mesh();
+        mesh.vertices = vertices.ToArray();
+        for (int i = 0; i < vertices.Count; i++)
+        {
+            indices.Add(i);
+        }
+        mesh.SetIndices(indices, MeshTopology.Triangles, 0);
+
+        int stride = System.Runtime.InteropServices.Marshal.SizeOf(typeof(CurveDataWrapper));
+        curveDataBuffer = new ComputeBuffer(ShaderinputDataWrappers.Count, stride);
+        curveDataBuffer.SetData(ShaderinputDataWrappers.ToArray());
+        material.SetBuffer("curves", curveDataBuffer);
         
-        
-        //GetComponent<MeshFilter>().mesh = mesh;
+        GetComponent<MeshFilter>().mesh = mesh;
         GetComponent<MeshRenderer>().material = material;
 
     }
-    protected List<float3> computeBoundingBox(List<float3> Points)
+    protected List<float3> computeBoundingBox(SubPath subpath)
     {
+        List<float3> Points = subpath.controlPoints;
         List<float3> boundingBoxVertices = new List<float3>();
 
         for(int i = 0; i < Points.Count/3; i++)
@@ -72,26 +95,19 @@ public class CurveDrawer7 : MonoBehaviour
             boundingBoxVertices.Add(Points[i * 3]);
             boundingBoxVertices.Add(Points[i * 3 + 1]);
             boundingBoxVertices.Add(Points[i * 3 + 2]);
+            
             boundingBoxVertices.Add(Points[i * 3]);
             boundingBoxVertices.Add(Points[i * 3 + 2]);
             boundingBoxVertices.Add(Points[i * 3 + 3]);
+            
+            boundingBoxVertices.Add(Points[i * 3]);
+            boundingBoxVertices.Add(Points[i * 3 + 3]);
+            boundingBoxVertices.Add(subpath.basePoint);
         }
 
         return boundingBoxVertices;
     }
-
     
-    protected int getOrientation(List<float3> polygon)
-    {
-        double d = 0;
-        for (int i = 0; i < polygon.Count - 1; i++)
-            d += -0.5 * (polygon[i + 1].y + polygon[i].y) * (polygon[i + 1].x - polygon[i].x);
-        if (d > 0)
-        {
-            return 1; //counterclockwise
-        }
-        return 0;       //clockwise
-    }
     protected int GetDirection(Vector3 p1, Vector3 p2, Vector3 p3)
     {
         Vector3 edge1 = p2 - p1;
