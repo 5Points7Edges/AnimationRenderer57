@@ -704,7 +704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 8780d4979b0175345ae3e10e8a651459, type: 2}
-  svgFile: {fileID: 4900000, guid: 340da6e321a994c4392528b89f271225, type: 3}
+  svgFile: {fileID: 4900000, guid: d6d2a0139da58da4dafe030a16246ba0, type: 3}
 --- !u!23 &717583526
 MeshRenderer:
   m_ObjectHideFlags: 0

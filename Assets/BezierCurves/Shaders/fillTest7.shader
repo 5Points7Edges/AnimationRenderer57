@@ -67,6 +67,7 @@ Shader "Custom/BezierTest/fillTest7"
                 float4 control2;
                 float4 end;
                 int orientation;
+                int orientationMainTri;
 
             };
             StructuredBuffer<curveData> curves;
@@ -109,9 +110,10 @@ Shader "Custom/BezierTest/fillTest7"
                 
                 o.orientation=curves[curveIndex].orientation;
                 o.fillAll=0;
-                curveIndex=v.id%9;
-                if (curveIndex==6 || curveIndex==7 ||curveIndex==8)
+                int curveIndex9=v.id%9;
+                if (curveIndex9==6 || curveIndex9==7 ||curveIndex9==8)
                 {
+                    o.orientation=curves[curveIndex].orientationMainTri;
                     o.fillAll=1;
                 }
                 return o;

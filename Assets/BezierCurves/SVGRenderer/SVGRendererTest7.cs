@@ -51,7 +51,7 @@ public class SVGRendererTest7 : MonoBehaviour
         
         for(int CoordinateIndex = 0; CoordinateIndex < Coordinates.Count; CoordinateIndex++)
         {
-            GameObject shape = new GameObject("shape[" + CoordinateIndex + "][" + "" + "]");
+            GameObject shape = new GameObject("shape[" + CoordinateIndex + "]");
             shape.AddComponent<MeshFilter>();
             shape.AddComponent<MeshRenderer>();
             shape.AddComponent<CurveDrawer7>();
@@ -66,7 +66,7 @@ public class SVGRendererTest7 : MonoBehaviour
                 for (int k = 0; k < controlPointsOfaM.Count; k++)
                 {
                     controlPointsOfaM[k] = new float3(controlPointsOfaM[k].x + Coordinates[CoordinateIndex].x,
-                        -(controlPointsOfaM[k].y + Coordinates[CoordinateIndex].y), 0);
+                      -(controlPointsOfaM[k].y + Coordinates[CoordinateIndex].y), 0);
                     //controlPointsOfaM[k] = new float3(controlPointsOfaM[k].x, -(controlPointsOfaM[k].y), 0);
                     controlPointsOfaM[k] = new float3(transform.TransformPoint(new Vector3(controlPointsOfaM[k].x,
                         controlPointsOfaM[k].y, controlPointsOfaM[k].z)));
@@ -155,10 +155,10 @@ public class SVGRendererTest7 : MonoBehaviour
             List<List<float3>> Shapes = new List<List<float3>>();
 
             string id = match.Groups[1].Value;
-            Debug.Log($"Value of ID attribute: {id}");
+            //Debug.Log($"Value of ID attribute: {id}");
 
             string path = match.Groups[2].Value;
-            Debug.Log($"Value of d attribute: {path}");
+            //Debug.Log($"Value of d attribute: {path}");
             match = match.NextMatch();
 
             string separators = @"(?=[A-Za-z])";
