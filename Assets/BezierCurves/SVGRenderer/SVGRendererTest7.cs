@@ -136,7 +136,7 @@ public class SVGRendererTest7 : MonoBehaviour
         {
             return 1; //counterclockwise
         }
-        return 0;       //clockwise
+        return -1;       //clockwise
     }
     public Dictionary<string, List<List<float3>>> PathParsing(string input)
     {

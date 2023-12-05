@@ -27,7 +27,6 @@ public class CurveDrawer6 : MonoBehaviour
     public List<Vector3> vertices= new List<Vector3>();
     public Material material;
 
-
     private ComputeBuffer curveDataBuffer;
     struct CurvesControlPointsPack
     {
@@ -151,13 +150,7 @@ public class CurveDrawer6 : MonoBehaviour
         }
         */
         //Debug.Log(holePoints_My[0].Count);
-        
-        /*
-        for(int i=0;i< holePoints_My[0].Count; i++)
-        {
-            Debug.Log(holePoints_My[0][i].x.ToString()+ holePoints_My[0][i].y.ToString());
-        }
-        */
+
         HashSet<Triangle2> triangles=_EarClipping.Triangulate(internalAreaCorners_My, holePoints_My);
 
         List<int> indices = new List<int>();

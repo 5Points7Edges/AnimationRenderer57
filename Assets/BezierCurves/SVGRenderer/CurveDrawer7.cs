@@ -48,7 +48,7 @@ public class CurveDrawer7 : MonoBehaviour
             {
                 vertices.Add(new Vector3(point.x,point.y,point.z));
             }
-            for (int j = 0; j < controlPointsSubPath.Count / 3; i++)
+            for (int j = 0; j < controlPointsSubPath.Count / 3; j++)
             {
                 CurveDataWrapper ShaderinputDataWrapper = new CurveDataWrapper();
 
@@ -60,9 +60,11 @@ public class CurveDrawer7 : MonoBehaviour
                     controlPointsSubPath[j * 3+2].z, 0);
                 ShaderinputDataWrapper.end = new Vector4(controlPointsSubPath[j * 3+3].x, controlPointsSubPath[j * 3+3].y,
                     controlPointsSubPath[j * 3+3].z, 0);
-                ShaderinputDataWrapper.orientation = allPoints[i].orientation;
-                
-                
+                Vector3 a = new Vector3(ShaderinputDataWrapper.start.x,ShaderinputDataWrapper.start.y,ShaderinputDataWrapper.start.z);
+                Vector3 b = new Vector3(ShaderinputDataWrapper.control1.x,ShaderinputDataWrapper.control1.y,ShaderinputDataWrapper.control1.z);
+                Vector3 c = new Vector3(ShaderinputDataWrapper.control2.x,ShaderinputDataWrapper.control2.y,ShaderinputDataWrapper.control2.z);
+                ShaderinputDataWrapper.orientation = GetDirection(a,b,c);
+                Debug.Log(ShaderinputDataWrapper.orientation);
                 ShaderinputDataWrappers.Add(ShaderinputDataWrapper);
             }
         }
@@ -92,6 +94,7 @@ public class CurveDrawer7 : MonoBehaviour
 
         for(int i = 0; i < Points.Count/3; i++)
         {
+            
             boundingBoxVertices.Add(Points[i * 3]);
             boundingBoxVertices.Add(Points[i * 3 + 1]);
             boundingBoxVertices.Add(Points[i * 3 + 2]);
@@ -100,9 +103,10 @@ public class CurveDrawer7 : MonoBehaviour
             boundingBoxVertices.Add(Points[i * 3 + 2]);
             boundingBoxVertices.Add(Points[i * 3 + 3]);
             
+            boundingBoxVertices.Add(subpath.basePoint);
             boundingBoxVertices.Add(Points[i * 3]);
             boundingBoxVertices.Add(Points[i * 3 + 3]);
-            boundingBoxVertices.Add(subpath.basePoint);
+            
         }
 
         return boundingBoxVertices;
@@ -112,17 +116,16 @@ public class CurveDrawer7 : MonoBehaviour
     {
         Vector3 edge1 = p2 - p1;
         Vector3 edge2 = p3 - p2;
-
         Vector3 crossProduct = Vector3.Cross(edge1, edge2);
 
         // decide which side the triangle points at
         if (crossProduct.z > 0)
         {
-            return 0;
+            return 1;
         }
         else if (crossProduct.z <= 0)
         {
-            return 1;
+            return -1;
         }
         return 1;
     }

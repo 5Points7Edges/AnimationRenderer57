@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/shelf/Uncommitted_changes_before_Update_at_11_25_2023_11_37_AM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/shelf/Uncommitted_changes_before_Update_at_11_25_2023_11_37_AM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/fillTest7_Mat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/Materials/fillTest7_Mat.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/CurveDrawer6.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/CurveDrawer6.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/CurveDrawer7.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/CurveDrawer7.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SVGRendererTest7.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SVGRendererTest7.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/fillTest7.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/fillTest7.shader" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/BezierCurveTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/BezierCurveTest.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,6 +28,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/CurveDrawer6.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/BezierCurves/SVGRenderer/CurveDrawer7.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SubPath.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/Scenes/BezierCurveTest.unity" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -42,6 +50,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -107,7 +116,11 @@
       <workItem from="1700907680661" duration="1084000" />
       <workItem from="1701104807411" duration="23000" />
       <workItem from="1701290536612" duration="3598000" />
-      <workItem from="1701331082537" duration="3035000" />
+      <workItem from="1701331082537" duration="4944000" />
+      <workItem from="1701363475165" duration="2297000" />
+      <workItem from="1701367603725" duration="2109000" />
+      <workItem from="1701378466771" duration="3471000" />
+      <workItem from="1701792871227" duration="8700000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -125,7 +138,23 @@
       <option name="project" value="LOCAL" />
       <updated>1700908723881</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add some new files in preparation for next version of the demo">
+      <option name="closed" value="true" />
+      <created>1701334886995</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1701334886995</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update CurveDrawer7.cs with new manim methods">
+      <option name="closed" value="true" />
+      <created>1701336683199</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1701336683199</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,6 +189,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="commit test" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit test" />
+    <MESSAGE value="add some new files in preparation for next version of the demo" />
+    <MESSAGE value="update CurveDrawer7.cs with new manim methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="update CurveDrawer7.cs with new manim methods" />
   </component>
 </project>
