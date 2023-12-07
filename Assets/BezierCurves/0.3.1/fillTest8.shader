@@ -66,7 +66,8 @@ Shader "Custom/BezierTest/fillTest8"
                 float4 control1;
                 float4 control2;
                 float4 end;
-                int orientation;
+                int orientation1;
+                int orientation2;
                 int orientationMainTri;
 
             };
@@ -108,13 +109,17 @@ Shader "Custom/BezierTest/fillTest8"
                 o.C2=mul(unity_ObjectToWorld, curves[curveIndex].control2).xyz;
                 o.end=mul(unity_ObjectToWorld, curves[curveIndex].end).xyz;
                 
-                o.orientation=curves[curveIndex].orientation;
+                o.orientation=curves[curveIndex].orientation1;
                 o.fillAll=0;
                 int curveIndex9=v.id%9;
                 if (curveIndex9==6 || curveIndex9==7 ||curveIndex9==8)
                 {
                     o.orientation=curves[curveIndex].orientationMainTri;
                     o.fillAll=1;
+                }
+                if (curveIndex9==3 || curveIndex9==4 ||curveIndex9==5)
+                {
+                    o.orientation=curves[curveIndex].orientation2;
                 }
                 return o;
             }

@@ -23,7 +23,8 @@ public class CurveDrawer8 : MonoBehaviour
         public Vector4 control2;
         public Vector4 end;
         //public int fillAll;
-        public int orientation;
+        public int orientation1;
+        public int orientation2;
         public int orientationMainTri;
     }
 
@@ -66,7 +67,8 @@ public class CurveDrawer8 : MonoBehaviour
                 Vector3 c = new Vector3(ShaderinputDataWrapper.control2.x,ShaderinputDataWrapper.control2.y,ShaderinputDataWrapper.control2.z);
                 Vector3 d = new Vector3(ShaderinputDataWrapper.end.x,ShaderinputDataWrapper.end.y,ShaderinputDataWrapper.end.z);
                 Vector3 base0 = new Vector3(allPoints[i].basePoint.x,allPoints[i].basePoint.y,allPoints[i].basePoint.z);
-                ShaderinputDataWrapper.orientation = GetDirection(a,b,c);
+                ShaderinputDataWrapper.orientation1 = GetDirection(a, b, c);
+                ShaderinputDataWrapper.orientation2 = GetDirection(a, c, d);
                 ShaderinputDataWrapper.orientationMainTri = GetDirection(base0,a,d);
                 //Debug.Log(ShaderinputDataWrapper.orientation);
                 ShaderinputDataWrappers.Add(ShaderinputDataWrapper);
