@@ -4,108 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="Restructuring the whole projects&#10;Adding important comments to each version of the renderer">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/BoundingBox.compute" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/BoundingBox.compute.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/FillBoundingBox.compute" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/FillBoundingBox.compute.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/Visualisation_Mat.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/Visualisation_Mat.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/fillTest1_Mat.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/fillTest1_Mat.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/fillTest3_Mat.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/fillTest3_Mat.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/fillTest4_Mat.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/fillTest4_Mat.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/fillTest5_Mat.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/fillTest5_Mat.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/fillTest6_Mat.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/fillTest6_Mat.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/fillTest7_Mat.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/fillTest7_Mat.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/strokeTest1_Mat.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/strokeTest1_Mat.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/strokeTest2_Mat.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/strokeTest2_Mat.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/strokeTest3_Mat.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Materials/strokeTest3_Mat.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/CurveDrawer2.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/CurveDrawer2.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/CurveDrawer3.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/CurveDrawer3.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/CurveDrawer4.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/CurveDrawer4.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/CurveDrawer5.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/CurveDrawer5.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/CurveDrawer6.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/CurveDrawer6.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/CurveDrawer7.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/CurveDrawer7.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/Earclipping.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/Earclipping/AngleType.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/Earclipping/AngleType.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/Earclipping/Circle.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/Earclipping/Circle.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/Earclipping/PointNode.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/Earclipping/PointNode.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/Earclipping/Polygon.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/Earclipping/Polygon.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/Earclipping/PolygonNode.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/Earclipping/PolygonNode.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/Earclipping/Triangle.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/Earclipping/Triangle.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/HandleVisualization.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/HandleVisualization.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SVGRenderer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SVGRenderer.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SVGRendererTest2.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SVGRendererTest2.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SVGRendererTest3.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SVGRendererTest3.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SVGRendererTest4.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SVGRendererTest4.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SVGRendererTest5.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SVGRendererTest5.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SVGRendererTest6.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SVGRendererTest6.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SVGRendererTest7.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SVGRendererTest7.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SubPath.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SubPath.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGTestFiles/SVGTest_PolyCurve.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/SVGTestFiles/SVGTest_PolyCurve.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/Visual.shader" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/Visual.shader.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/fillTest1.shader" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/fillTest1.shader.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/fillTest3.shader" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/fillTest3.shader.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/fillTest4.shader" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/fillTest4.shader.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/fillTest5.shader" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/fillTest5.shader.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/fillTest7.shader" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/fillTest7.shader.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/strockeTest1.shader" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/strockeTest1.shader.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/strokeTest2.shader" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/strokeTest2.shader.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/strokeTest3.shader" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/strokeTest3.shader.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/strokeTest4.shader" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/Shaders/strokeTest4.shader.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/fillTest1.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/fillTest1.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/strokeTest1.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/strokeTest1.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/strokeTest2.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/strokeTest2.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/strokeTest3.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/strokeTest3.cs.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,8 +20,8 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.1.2/SVGRenderer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/CurveDrawer6.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/SVGRenderer/SubPath.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.1/CurveDrawer8.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.1/SubPath8.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -212,7 +112,7 @@
       <workItem from="1701367603725" duration="2109000" />
       <workItem from="1701378466771" duration="3471000" />
       <workItem from="1701792871227" duration="15943000" />
-      <workItem from="1701964042775" duration="4682000" />
+      <workItem from="1701964042775" duration="5394000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -262,7 +162,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701814866378</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Restructuring the whole projects&#10;Adding important comments to each version of the renderer">
+      <option name="closed" value="true" />
+      <created>1701968916833</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1701968916833</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -301,6 +209,7 @@
     <MESSAGE value="update CurveDrawer7.cs with new manim methods" />
     <MESSAGE value="Using Manim Algorithm" />
     <MESSAGE value="Complete Demo Version 0.3.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="Complete Demo Version 0.3.0" />
+    <MESSAGE value="Restructuring the whole projects&#10;Adding important comments to each version of the renderer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Restructuring the whole projects&#10;Adding important comments to each version of the renderer" />
   </component>
 </project>
