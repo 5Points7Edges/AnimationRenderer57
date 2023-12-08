@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="save">
+    <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="update to 0.3.1 SVGRenderer is now robust">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.1/SVGRendererTest8.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.1/SVGRendererTest8.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/BezierCurveTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/BezierCurveTest.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,6 +24,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.1.2/SVGRenderer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.1/CurveDrawer8.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.1/SubPath8.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/Scenes/BezierCurveTest.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/Scenes/BezierCurveTest.unity" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -114,7 +116,8 @@
       <workItem from="1701367603725" duration="2109000" />
       <workItem from="1701378466771" duration="3471000" />
       <workItem from="1701792871227" duration="15943000" />
-      <workItem from="1701964042775" duration="7068000" />
+      <workItem from="1701964042775" duration="10133000" />
+      <workItem from="1702047388759" duration="6270000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -188,7 +191,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701969569151</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="update to 0.3.1 SVGRenderer is now robust">
+      <option name="closed" value="true" />
+      <created>1701982458844</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1701982458845</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,6 +241,7 @@
     <MESSAGE value="Restructuring the whole projects&#10;Adding important comments to each version of the renderer" />
     <MESSAGE value="make new dir" />
     <MESSAGE value="save" />
-    <option name="LAST_COMMIT_MESSAGE" value="save" />
+    <MESSAGE value="update to 0.3.1 SVGRenderer is now robust" />
+    <option name="LAST_COMMIT_MESSAGE" value="update to 0.3.1 SVGRenderer is now robust" />
   </component>
 </project>

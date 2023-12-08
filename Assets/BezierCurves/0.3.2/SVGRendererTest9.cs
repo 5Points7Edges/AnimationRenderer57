@@ -16,14 +16,14 @@ using UnityEngine;
 using Color = UnityEngine.Color;
 /*
  * Author:Thomas Lu
- * v0.3.1
- * svg Renderer
- * fixed a small bug that two triangles of a curve segments can have different orientation.
- * officially robust
- * FPS (ChuShiBiao.svg): ca. 230 fps
+ * v0.3.2
+ * Animation Renderer
+ * code cleaning
+ * manipulate each point of the shapes seperately
+ * FPS (ChuShiBiao.svg): ca. 12 fps
  */
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-public class SVGRendererTest8 : MonoBehaviour
+public class SVGRendererTest9 : MonoBehaviour
 {
 
     public Material material;
@@ -31,7 +31,7 @@ public class SVGRendererTest8 : MonoBehaviour
     private List<GameObject> allShapeGameObjects = new List<GameObject>();
     Dictionary<string, int> a;
 
-    Dictionary<string, List<List<float3>>> UnpackedSVG =new Dictionary<string, List<List<float3>>>();
+    Dictionary<string, List<List<Vector3>>> UnpackedSVG =new Dictionary<string, List<List<Vector3>>>();
 
     public TextAsset svgFile;
 
@@ -52,7 +52,7 @@ public class SVGRendererTest8 : MonoBehaviour
         }
 
 
-        Dictionary<string, List<List<float3>>> UnpackedPaths = PathParsing(svgFile.text);
+        Dictionary<string, List<List<Vector3>>> UnpackedPaths = PathParsing(svgFile.text);
 
         List<Coordinate> Coordinates = CoordinatesParsing(svgFile.text);
         //Debug.Log("still Alive"+Coordinates.Count);
@@ -62,33 +62,34 @@ public class SVGRendererTest8 : MonoBehaviour
             GameObject shape = new GameObject("shape[" + CoordinateIndex + "]");
             shape.AddComponent<MeshFilter>();
             shape.AddComponent<MeshRenderer>();
-            shape.AddComponent<CurveDrawer8>();
-            shape.GetComponent<CurveDrawer8>().material = new Material(material);
+            shape.AddComponent<CurveDrawer9>();
+            shape.GetComponent<CurveDrawer9>().material = new Material(material);
             shape.transform.parent = transform;
             
             for (int MIndex = 0; MIndex < UnpackedPaths[Coordinates[CoordinateIndex].pathID].Count; MIndex++)
             {
                 
-                List<float3> controlPointsOfaM =
-                    new List<float3>(UnpackedPaths[Coordinates[CoordinateIndex].pathID][MIndex]);
+                List<Vector3> controlPointsOfaM = new List<Vector3>(UnpackedPaths[Coordinates[CoordinateIndex].pathID][MIndex]);
+                
                 for (int k = 0; k < controlPointsOfaM.Count; k++)
                 {
-                    controlPointsOfaM[k] = new float3(controlPointsOfaM[k].x + Coordinates[CoordinateIndex].x,
-                      -(controlPointsOfaM[k].y + Coordinates[CoordinateIndex].y), 0);
-                    //controlPointsOfaM[k] = new float3(controlPointsOfaM[k].x, -(controlPointsOfaM[k].y), 0);
-                    controlPointsOfaM[k] = new float3(transform.TransformPoint(new Vector3(controlPointsOfaM[k].x,
-                        controlPointsOfaM[k].y, controlPointsOfaM[k].z)));
+                    controlPointsOfaM[k] = new Vector3(controlPointsOfaM[k].x + Coordinates[CoordinateIndex].x,
+                      -(controlPointsOfaM[k].y + Coordinates[CoordinateIndex].y), controlPointsOfaM[k].z);
+                    //controlPointsOfaM[k] = new Vector3(controlPointsOfaM[k].x, -(controlPointsOfaM[k].y), 0);
+                    controlPointsOfaM[k] = transform.TransformPoint(controlPointsOfaM[k]);
                 }
+
+                int orientation = getDirection(controlPointsOfaM);
                 
-                int orientation = getOrientation(controlPointsOfaM);
-                SubPath8 subPath = new SubPath8(orientation,controlPointsOfaM);
+                SubPath9 subPath = new SubPath9(orientation,controlPointsOfaM);
                 
-                shape.GetComponent<CurveDrawer8>().allPoints.Add(subPath);
+                shape.GetComponent<CurveDrawer9>().allPoints.Add(subPath);
             }
             allShapeGameObjects.Add(shape);
 
         }
     }
+    
     class SVGCommand
     {
         public char command {get; private set;}
@@ -136,7 +137,7 @@ public class SVGRendererTest8 : MonoBehaviour
         }
         return result;
     }
-    protected int getOrientation(List<float3> polygon)
+    protected int getDirection(List<Vector3> polygon)
     {
         double d = 0;
         for (int i = 0; i < polygon.Count - 1; i++)
@@ -147,10 +148,10 @@ public class SVGRendererTest8 : MonoBehaviour
         }
         return -1;       //clockwise
     }
-    public Dictionary<string, List<List<float3>>> PathParsing(string input)
+    public Dictionary<string, List<List<Vector3>>> PathParsing(string input)
     {
 
-        Dictionary<string, List<List<float3>>> result = new Dictionary<string, List<List<float3>>>();
+        Dictionary<string, List<List<Vector3>>> result = new Dictionary<string, List<List<Vector3>>>();
         
 
         string pattern = @"<path\s*id\s*=\s*[""']([^""']*)[""']\s*[^>]*d\s*=\s*[""']([^""']*)[""'][^>]*>";
@@ -161,7 +162,7 @@ public class SVGRendererTest8 : MonoBehaviour
 
         while (match.Success)
         {
-            List<List<float3>> Shapes = new List<List<float3>>();
+            List<List<Vector3>> Shapes = new List<List<Vector3>>();
 
             string id = match.Groups[1].Value;
             Debug.Log($"Value of ID attribute: {id}");
@@ -175,7 +176,7 @@ public class SVGRendererTest8 : MonoBehaviour
 
             float lastX=0,lastY=0, lastlastX = 0, lastlastY = 0, x,y;
 
-            List<float3> controlPoints = new List<float3>();
+            List<Vector3> controlPoints = new List<Vector3>();
 
             
             // our "interpreter". Runs the list of commands and does something for each of them.
@@ -187,16 +188,16 @@ public class SVGRendererTest8 : MonoBehaviour
                 {
                     case 'M':
                         
-                        controlPoints.Add(new float3(c.arguments[0], c.arguments[1],0));
+                        controlPoints.Add(new Vector3(c.arguments[0], c.arguments[1],0));
 
                         lastX = c.arguments[0];
                         lastY = c.arguments[1];
 
                         break;
                     case 'C':
-                        controlPoints.Add(new float3(c.arguments[0], c.arguments[1], 0));
-                        controlPoints.Add(new float3(c.arguments[2], c.arguments[3], 0));
-                        controlPoints.Add(new float3(c.arguments[4], c.arguments[5], 0));
+                        controlPoints.Add(new Vector3(c.arguments[0], c.arguments[1], 0));
+                        controlPoints.Add(new Vector3(c.arguments[2], c.arguments[3], 0));
+                        controlPoints.Add(new Vector3(c.arguments[4], c.arguments[5], 0));
 
                         lastX = c.arguments[4];
                         lastY = c.arguments[5];
@@ -206,9 +207,9 @@ public class SVGRendererTest8 : MonoBehaviour
 
                         break;
                     case 'S':
-                        controlPoints.Add(new float3(lastX - lastlastX + lastX,lastY-lastlastY+lastY, 0));
-                        controlPoints.Add(new float3(c.arguments[0], c.arguments[1], 0));
-                        controlPoints.Add(new float3(c.arguments[2], c.arguments[3], 0));
+                        controlPoints.Add(new Vector3(lastX - lastlastX + lastX,lastY-lastlastY+lastY, 0));
+                        controlPoints.Add(new Vector3(c.arguments[0], c.arguments[1], 0));
+                        controlPoints.Add(new Vector3(c.arguments[2], c.arguments[3], 0));
 
                         lastX = c.arguments[2];
                         lastY = c.arguments[3];
@@ -219,9 +220,9 @@ public class SVGRendererTest8 : MonoBehaviour
                     case 'L':
                         x = c.arguments[0];
                         y = c.arguments[1];
-                        controlPoints.Add(new float3((x - lastX) /3 + lastX, (y - lastY) / 3 + lastY, 0));
-                        controlPoints.Add(new float3((x - lastX) * 2 / 3 + lastX, (y - lastY) * 2 / 3 + lastY, 0));
-                        controlPoints.Add(new float3(x, y, 0));
+                        controlPoints.Add(new Vector3((x - lastX) /3 + lastX, (y - lastY) / 3 + lastY, 0));
+                        controlPoints.Add(new Vector3((x - lastX) * 2 / 3 + lastX, (y - lastY) * 2 / 3 + lastY, 0));
+                        controlPoints.Add(new Vector3(x, y, 0));
 
                         lastX = x;
                         lastY = y;
@@ -229,9 +230,9 @@ public class SVGRendererTest8 : MonoBehaviour
                     case 'H':
                         x = c.arguments[0];
                         y = lastY;
-                        controlPoints.Add(new float3((x - lastX) / 3 + lastX, (y - lastY) / 3 + lastY, 0));
-                        controlPoints.Add(new float3((x - lastX) * 2 / 3 + lastX, (y - lastY) * 2 / 3 + lastY, 0));
-                        controlPoints.Add(new float3(x, y, 0));
+                        controlPoints.Add(new Vector3((x - lastX) / 3 + lastX, (y - lastY) / 3 + lastY, 0));
+                        controlPoints.Add(new Vector3((x - lastX) * 2 / 3 + lastX, (y - lastY) * 2 / 3 + lastY, 0));
+                        controlPoints.Add(new Vector3(x, y, 0));
 
                         lastX = x;
                         lastY = y;
@@ -239,16 +240,16 @@ public class SVGRendererTest8 : MonoBehaviour
                     case 'V':
                         x = lastX;
                         y = c.arguments[0];
-                        controlPoints.Add(new float3((x - lastX) / 3 + lastX, (y - lastY) / 3 + lastY, 0));
-                        controlPoints.Add(new float3((x - lastX) * 2 / 3 + lastX, (y - lastY) * 2 / 3 + lastY, 0));
-                        controlPoints.Add(new float3(x, y, 0));
+                        controlPoints.Add(new Vector3((x - lastX) / 3 + lastX, (y - lastY) / 3 + lastY, 0));
+                        controlPoints.Add(new Vector3((x - lastX) * 2 / 3 + lastX, (y - lastY) * 2 / 3 + lastY, 0));
+                        controlPoints.Add(new Vector3(x, y, 0));
 
                         lastX = x;
                         lastY = y;
                         break;
                     case 'Z':
                         Shapes.Add(controlPoints);
-                        controlPoints = new List<float3>();
+                        controlPoints = new List<Vector3>();
                         break;
                     default:
                         break;
@@ -269,6 +270,18 @@ public class SVGRendererTest8 : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        
+        foreach(GameObject shape in allShapeGameObjects)
+        {
+            foreach (SubPath9 subPath in shape?.GetComponent<CurveDrawer9>().allPoints)
+            {
+                for (int i = 0; i < subPath.controlPoints.Count; i++)
+                {
+                    subPath.controlPoints[i]= new Vector3(subPath.controlPoints[i].x + (float)0.5,subPath.controlPoints[i].y, subPath.controlPoints[i].z);
+                }
+                
+            }
+        }
         
     }
 }
