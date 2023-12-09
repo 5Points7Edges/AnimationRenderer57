@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using Color = UnityEngine.Color;
 /*
  * Author:Thomas Lu
@@ -23,7 +24,7 @@ using Color = UnityEngine.Color;
  * FPS (ChuShiBiao.svg): ca. 12 fps
  */
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-public class SVGRendererTest9 : MonoBehaviour
+public class AnimationTest9 : MonoBehaviour
 {
 
     public Material material;
@@ -31,10 +32,16 @@ public class SVGRendererTest9 : MonoBehaviour
     private List<GameObject> allShapeGameObjects = new List<GameObject>();
     Dictionary<string, int> a;
 
-    Dictionary<string, List<List<Vector3>>> UnpackedSVG =new Dictionary<string, List<List<Vector3>>>();
+    Dictionary<string, List<List<Vector3>>> UnpackedSourceSVG =new Dictionary<string, List<List<Vector3>>>();
+    Dictionary<string, List<List<Vector3>>> UnpackedTargetSVG =new Dictionary<string, List<List<Vector3>>>();
 
-    public TextAsset svgFile;
+    public TextAsset sourceSVGFile;
+    public TextAsset targetSVGFile;
+    
+    public float speed = 3;
+    private float val=0;
 
+    public bool animationEnable=false;
     struct Coordinate
     {
         public float x, y;
@@ -52,12 +59,17 @@ public class SVGRendererTest9 : MonoBehaviour
         }
 
 
-        Dictionary<string, List<List<Vector3>>> UnpackedPaths = PathParsing(svgFile.text);
+        UnpackedSourceSVG = PathParsing(sourceSVGFile.text);
+        List<Coordinate> coordinatesSource = CoordinatesParsing(sourceSVGFile.text);
+        
+        UnpackedTargetSVG = PathParsing(targetSVGFile.text);
+        List<Coordinate> coordinatesTarget = CoordinatesParsing(targetSVGFile.text);
 
-        List<Coordinate> Coordinates = CoordinatesParsing(svgFile.text);
+        
         //Debug.Log("still Alive"+Coordinates.Count);
         
-        for(int CoordinateIndex = 0; CoordinateIndex < Coordinates.Count; CoordinateIndex++)
+        //Pepare for source SVG
+        for(int CoordinateIndex = 0; CoordinateIndex < coordinatesSource.Count; CoordinateIndex++)
         {
             GameObject shape = new GameObject("shape[" + CoordinateIndex + "]");
             shape.AddComponent<MeshFilter>();
@@ -66,30 +78,69 @@ public class SVGRendererTest9 : MonoBehaviour
             shape.GetComponent<CurveDrawer9>().material = new Material(material);
             shape.transform.parent = transform;
             
-            for (int MIndex = 0; MIndex < UnpackedPaths[Coordinates[CoordinateIndex].pathID].Count; MIndex++)
+            for (int MIndex = 0; MIndex < UnpackedSourceSVG[coordinatesSource[CoordinateIndex].pathID].Count; MIndex++)
             {
                 
-                List<Vector3> controlPointsOfaM = new List<Vector3>(UnpackedPaths[Coordinates[CoordinateIndex].pathID][MIndex]);
+                List<Vector3> controlPointsOfaM = new List<Vector3>(UnpackedSourceSVG[coordinatesSource[CoordinateIndex].pathID][MIndex]);
                 
                 for (int k = 0; k < controlPointsOfaM.Count; k++)
                 {
-                    controlPointsOfaM[k] = new Vector3(controlPointsOfaM[k].x + Coordinates[CoordinateIndex].x,
-                      -(controlPointsOfaM[k].y + Coordinates[CoordinateIndex].y), controlPointsOfaM[k].z);
+                    controlPointsOfaM[k] = new Vector3(controlPointsOfaM[k].x + coordinatesSource[CoordinateIndex].x,
+                      -(controlPointsOfaM[k].y + coordinatesSource[CoordinateIndex].y), controlPointsOfaM[k].z);
                     //controlPointsOfaM[k] = new Vector3(controlPointsOfaM[k].x, -(controlPointsOfaM[k].y), 0);
                     controlPointsOfaM[k] = transform.TransformPoint(controlPointsOfaM[k]);
                 }
 
                 int orientation = getDirection(controlPointsOfaM);
                 
-                SubPath9 subPath = new SubPath9(orientation,controlPointsOfaM);
                 
-                shape.GetComponent<CurveDrawer9>().allPoints.Add(subPath);
+                shape.GetComponent<CurveDrawer9>().allPointsInitial.Add(new SubPath9(orientation,controlPointsOfaM));
+                shape.GetComponent<CurveDrawer9>().allPoints.Add(new SubPath9(orientation,controlPointsOfaM));
             }
             allShapeGameObjects.Add(shape);
 
         }
+
+        //Pepare for target SVG
+        for(int CoordinateIndex = 0; CoordinateIndex < coordinatesTarget.Count; CoordinateIndex++)
+        {
+            GameObject shape = allShapeGameObjects[CoordinateIndex];
+            
+            for (int MIndex = 0; MIndex < UnpackedTargetSVG[coordinatesTarget[CoordinateIndex].pathID].Count; MIndex++)
+            {
+                
+                List<Vector3> controlPointsOfaM = new List<Vector3>(UnpackedTargetSVG[coordinatesTarget[CoordinateIndex].pathID][MIndex]);
+                
+                for (int k = 0; k < controlPointsOfaM.Count; k++)
+                {
+                    controlPointsOfaM[k] = new Vector3(controlPointsOfaM[k].x + coordinatesTarget[CoordinateIndex].x-10,
+                        -(controlPointsOfaM[k].y + coordinatesTarget[CoordinateIndex].y), controlPointsOfaM[k].z);
+                    //controlPointsOfaM[k] = new Vector3(controlPointsOfaM[k].x, -(controlPointsOfaM[k].y), 0);
+                    controlPointsOfaM[k] = transform.TransformPoint(controlPointsOfaM[k]);
+                }
+
+                controlPointsOfaM.Reverse();
+                int orientation = getDirection(controlPointsOfaM);
+                
+                shape.GetComponent<CurveDrawer9>().allPointsEnd.Add(new SubPath9(orientation,controlPointsOfaM));
+            }
+        }
+        
     }
-    
+    public void OnAnimationStart()
+    {
+        animationEnable = true;
+        Debug.Log("Start Button Clicked!");
+    }
+    public void OnAnimationStop()
+    {
+        animationEnable = false;
+        Debug.Log("Stop Button Clicked!");
+    }
+    public void OnAnimationRestart()
+    {
+        Debug.Log("Restart Button Clicked!");
+    }
     class SVGCommand
     {
         public char command {get; private set;}
@@ -165,10 +216,10 @@ public class SVGRendererTest9 : MonoBehaviour
             List<List<Vector3>> Shapes = new List<List<Vector3>>();
 
             string id = match.Groups[1].Value;
-            Debug.Log($"Value of ID attribute: {id}");
+            //Debug.Log($"Value of ID attribute: {id}");
 
             string path = match.Groups[2].Value;
-            Debug.Log($"Value of d attribute: {path}");
+            //Debug.Log($"Value of d attribute: {path}");
             match = match.NextMatch();
 
             string separators = @"(?=[A-Za-z])";
@@ -270,16 +321,30 @@ public class SVGRendererTest9 : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (!animationEnable) return;
+        
+        val = (float)(Math.Sin(Time.time*speed)+1)/2;
         
         foreach(GameObject shape in allShapeGameObjects)
         {
-            foreach (SubPath9 subPath in shape?.GetComponent<CurveDrawer9>().allPoints)
+            for (int i=0;i < shape?.GetComponent<CurveDrawer9>().allPoints.Count;i++)
             {
-                for (int i = 0; i < subPath.controlPoints.Count; i++)
+                SubPath9 subPath = shape?.GetComponent<CurveDrawer9>().allPoints[i];
+                SubPath9 subPathInitial = shape?.GetComponent<CurveDrawer9>().allPointsInitial[i];
+                SubPath9 subPathEnd = shape?.GetComponent<CurveDrawer9>().allPointsEnd[i];
+                for (int j = 0; j < subPath.controlPoints.Count; j++)
                 {
-                    subPath.controlPoints[i]= new Vector3(subPath.controlPoints[i].x + (float)0.5,subPath.controlPoints[i].y, subPath.controlPoints[i].z);
+                    float startx = subPathInitial.controlPoints[j].x;
+                    float starty = subPathInitial.controlPoints[j].y;
+
+                    float endx = subPathEnd.controlPoints[j].x;
+                    float endy = subPathEnd.controlPoints[j].y;
+
+                    float currentx = (endx - startx) * val + startx;
+                    float currenty = (endy - starty) * val + starty;
+                    subPath.controlPoints[j]= new Vector3(currentx,currenty, subPathInitial.controlPoints[j].z);
                 }
-                
+                subPath.calculateBasePoint();
             }
         }
         

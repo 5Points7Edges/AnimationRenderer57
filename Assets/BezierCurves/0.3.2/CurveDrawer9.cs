@@ -8,7 +8,8 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class CurveDrawer9 : MonoBehaviour
 {
-    
+    public List<SubPath9> allPointsInitial = new List<SubPath9>();
+    public List<SubPath9> allPointsEnd = new List<SubPath9>();
     public List<SubPath9> allPoints = new List<SubPath9>();
     
     public Material material;
@@ -164,14 +165,15 @@ public class CurveDrawer9 : MonoBehaviour
         {
             indices.Add(i);
         }
-        
+        Mesh mesh = new Mesh();
+        mesh.vertices = vertices.ToArray();
+        mesh.SetIndices(indices, MeshTopology.Triangles, 0);
         curveDataBuffer.SetData(ShaderinputDataWrappers.ToArray());
-        meshFilter.mesh.vertices = vertices.ToArray();
-        meshFilter.mesh.SetIndices(indices, MeshTopology.Triangles, 0);
+        meshFilter.mesh = mesh;
         
     }
     private void OnDestroy()
     {
-        //curveDataBuffer.Release();
+        curveDataBuffer.Release();
     }
 }

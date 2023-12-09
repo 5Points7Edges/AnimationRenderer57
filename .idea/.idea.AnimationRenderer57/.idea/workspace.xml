@@ -4,9 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="update to 0.3.1 SVGRenderer is now robust">
+    <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="create a simple Morphing">
+      <change afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/AnimationTest9.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/AnimationTest9.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/BezierCurves/SVGTestFiles/SVGTest_Poly Curve_Inverse.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/BezierCurves/SVGTestFiles/SVGTest_Poly Curve_Inverse.txt.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Font.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.1/SVGRendererTest8.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.1/SVGRendererTest8.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.2.0 Visualizer/HandleVisualization.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.2.0 Visualizer/HandleVisualization.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/CurveDrawer9.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/CurveDrawer9.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/SVGRendererTest9.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/SVGRendererTest9.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/SubPath9.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/SubPath9.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/fillTest9.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/fillTest9.shader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGTestFiles/SVGTest_PolyCurve.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/SVGTestFiles/SVGTest_PolyCurve.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/BezierCurveTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/BezierCurveTest.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,7 +38,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.1/CurveDrawer8.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.1/SubPath8.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/Scenes/BezierCurveTest.unity" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/Scenes/BezierCurveTest.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_BaseEditorPanel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_FontAssetEditor.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -117,7 +131,9 @@
       <workItem from="1701378466771" duration="3471000" />
       <workItem from="1701792871227" duration="15943000" />
       <workItem from="1701964042775" duration="10133000" />
-      <workItem from="1702047388759" duration="6270000" />
+      <workItem from="1702047388759" duration="6359000" />
+      <workItem from="1702062678976" duration="10159000" />
+      <workItem from="1702145172266" duration="5341000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -199,7 +215,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701982458845</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="The simplest animation implemented">
+      <option name="closed" value="true" />
+      <created>1702053783854</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1702053783854</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -242,6 +266,8 @@
     <MESSAGE value="make new dir" />
     <MESSAGE value="save" />
     <MESSAGE value="update to 0.3.1 SVGRenderer is now robust" />
-    <option name="LAST_COMMIT_MESSAGE" value="update to 0.3.1 SVGRenderer is now robust" />
+    <MESSAGE value="The simplest animation implemented" />
+    <MESSAGE value="create a simple Morphing" />
+    <option name="LAST_COMMIT_MESSAGE" value="create a simple Morphing" />
   </component>
 </project>

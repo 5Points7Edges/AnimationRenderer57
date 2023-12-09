@@ -256,7 +256,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 24cd95be1d0b97242b210ec300f927f8, type: 2}
-  svgFile: {fileID: 4900000, guid: d6d2a0139da58da4dafe030a16246ba0, type: 3}
+  svgFile: {fileID: 4900000, guid: e1a5803e711f7374193b22b2bfab53a9, type: 3}
+  button: {fileID: 0}
 --- !u!23 &344548089
 MeshRenderer:
   m_ObjectHideFlags: 0

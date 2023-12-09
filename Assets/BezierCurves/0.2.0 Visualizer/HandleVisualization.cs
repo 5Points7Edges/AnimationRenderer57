@@ -30,7 +30,7 @@ public class HandleVisualization : MonoBehaviour
     private List<GameObject> paths = new List<GameObject>();
     Dictionary<string, int> a;
 
-    Dictionary<string, List<List<float3>>> UnpackedSVG = new Dictionary<string, List<List<float3>>>();
+    Dictionary<string, List<List<Vector3>>> UnpackedSVG = new Dictionary<string, List<List<Vector3>>>();
 
     public TextAsset svgFile;
 
@@ -51,7 +51,7 @@ public class HandleVisualization : MonoBehaviour
         }
 
 
-        Dictionary<string, List<List<float3>>> Unpacked = PathParsing(svgFile.text);
+        Dictionary<string, List<List<Vector3>>> Unpacked = PathParsing(svgFile.text);
 
         List<Coordinate> Coordinates = CoordinatesParsing(svgFile.text);
         //Debug.Log("still Alive"+Coordinates.Count);
@@ -62,11 +62,13 @@ public class HandleVisualization : MonoBehaviour
             for (int j = 0; j < Unpacked[Coordinates[i].id].Count; j++)
             {
                 //if (j == 1) continue;
-                List<float3> controlPoints = new List<float3>(Unpacked[Coordinates[i].id][j]);
+                List<Vector3> controlPoints = new List<Vector3>(Unpacked[Coordinates[i].id][j]);
                 for (int k = 0; k < controlPoints.Count; k++)
                 {
-                    controlPoints[k] = new float3(controlPoints[k].x + Coordinates[i].x, -(controlPoints[k].y + Coordinates[i].y), 0);
+                    controlPoints[k] = new Vector3(controlPoints[k].x + Coordinates[i].x, -(controlPoints[k].y + Coordinates[i].y), 0);
+                    controlPoints[k] = transform.TransformPoint(controlPoints[k]);
                 }
+                
                 Vector3[] vertex=new Vector3[controlPoints.Count];
                 for (int k = 0; k < controlPoints.Count; k++)
                 {
@@ -162,10 +164,10 @@ public class HandleVisualization : MonoBehaviour
         return result;
     }
 
-    public Dictionary<string, List<List<float3>>> PathParsing(string input)
+    public Dictionary<string, List<List<Vector3>>> PathParsing(string input)
     {
 
-        Dictionary<string, List<List<float3>>> result = new Dictionary<string, List<List<float3>>>();
+        Dictionary<string, List<List<Vector3>>> result = new Dictionary<string, List<List<Vector3>>>();
 
 
         string pattern = @"<path\s*id\s*=\s*[""']([^""']*)[""']\s*[^>]*d\s*=\s*[""']([^""']*)[""'][^>]*>";
@@ -176,7 +178,7 @@ public class HandleVisualization : MonoBehaviour
 
         while (match.Success)
         {
-            List<List<float3>> Shapes = new List<List<float3>>();
+            List<List<Vector3>> Shapes = new List<List<Vector3>>();
 
             string id = match.Groups[1].Value;
             Debug.Log($"Value of ID attribute: {id}");
@@ -190,7 +192,7 @@ public class HandleVisualization : MonoBehaviour
 
             float lastX = 0, lastY = 0, lastlastX = 0, lastlastY = 0, x, y;
 
-            List<float3> controlPoints = new List<float3>();
+            List<Vector3> controlPoints = new List<Vector3>();
 
 
             // our "interpreter". Runs the list of commands and does something for each of them.
@@ -202,16 +204,16 @@ public class HandleVisualization : MonoBehaviour
                 {
                     case 'M':
 
-                        controlPoints.Add(new float3(c.arguments[0], c.arguments[1], 0));
+                        controlPoints.Add(new Vector3(c.arguments[0], c.arguments[1], 0));
 
                         lastX = c.arguments[0];
                         lastY = c.arguments[1];
 
                         break;
                     case 'C':
-                        controlPoints.Add(new float3(c.arguments[0], c.arguments[1], 0));
-                        controlPoints.Add(new float3(c.arguments[2], c.arguments[3], 0));
-                        controlPoints.Add(new float3(c.arguments[4], c.arguments[5], 0));
+                        controlPoints.Add(new Vector3(c.arguments[0], c.arguments[1], 0));
+                        controlPoints.Add(new Vector3(c.arguments[2], c.arguments[3], 0));
+                        controlPoints.Add(new Vector3(c.arguments[4], c.arguments[5], 0));
 
                         lastX = c.arguments[4];
                         lastY = c.arguments[5];
@@ -221,9 +223,9 @@ public class HandleVisualization : MonoBehaviour
 
                         break;
                     case 'S':
-                        controlPoints.Add(new float3(lastX - lastlastX + lastX, lastY - lastlastY + lastY, 0));
-                        controlPoints.Add(new float3(c.arguments[0], c.arguments[1], 0));
-                        controlPoints.Add(new float3(c.arguments[2], c.arguments[3], 0));
+                        controlPoints.Add(new Vector3(lastX - lastlastX + lastX, lastY - lastlastY + lastY, 0));
+                        controlPoints.Add(new Vector3(c.arguments[0], c.arguments[1], 0));
+                        controlPoints.Add(new Vector3(c.arguments[2], c.arguments[3], 0));
 
                         lastX = c.arguments[2];
                         lastY = c.arguments[3];
@@ -234,9 +236,9 @@ public class HandleVisualization : MonoBehaviour
                     case 'L':
                         x = c.arguments[0];
                         y = c.arguments[1];
-                        controlPoints.Add(new float3((x - lastX) / 3 + lastX, (y - lastY) / 3 + lastY, 0));
-                        controlPoints.Add(new float3((x - lastX) * 2 / 3 + lastX, (y - lastY) * 2 / 3 + lastY, 0));
-                        controlPoints.Add(new float3(x, y, 0));
+                        controlPoints.Add(new Vector3((x - lastX) / 3 + lastX, (y - lastY) / 3 + lastY, 0));
+                        controlPoints.Add(new Vector3((x - lastX) * 2 / 3 + lastX, (y - lastY) * 2 / 3 + lastY, 0));
+                        controlPoints.Add(new Vector3(x, y, 0));
 
                         lastX = x;
                         lastY = y;
@@ -244,9 +246,9 @@ public class HandleVisualization : MonoBehaviour
                     case 'H':
                         x = c.arguments[0];
                         y = lastY;
-                        controlPoints.Add(new float3((x - lastX) / 3 + lastX, (y - lastY) / 3 + lastY, 0));
-                        controlPoints.Add(new float3((x - lastX) * 2 / 3 + lastX, (y - lastY) * 2 / 3 + lastY, 0));
-                        controlPoints.Add(new float3(x, y, 0));
+                        controlPoints.Add(new Vector3((x - lastX) / 3 + lastX, (y - lastY) / 3 + lastY, 0));
+                        controlPoints.Add(new Vector3((x - lastX) * 2 / 3 + lastX, (y - lastY) * 2 / 3 + lastY, 0));
+                        controlPoints.Add(new Vector3(x, y, 0));
 
                         lastX = x;
                         lastY = y;
@@ -254,16 +256,16 @@ public class HandleVisualization : MonoBehaviour
                     case 'V':
                         x = lastX;
                         y = c.arguments[0];
-                        controlPoints.Add(new float3((x - lastX) / 3 + lastX, (y - lastY) / 3 + lastY, 0));
-                        controlPoints.Add(new float3((x - lastX) * 2 / 3 + lastX, (y - lastY) * 2 / 3 + lastY, 0));
-                        controlPoints.Add(new float3(x, y, 0));
+                        controlPoints.Add(new Vector3((x - lastX) / 3 + lastX, (y - lastY) / 3 + lastY, 0));
+                        controlPoints.Add(new Vector3((x - lastX) * 2 / 3 + lastX, (y - lastY) * 2 / 3 + lastY, 0));
+                        controlPoints.Add(new Vector3(x, y, 0));
 
                         lastX = x;
                         lastY = y;
                         break;
                     case 'Z':
                         Shapes.Add(controlPoints);
-                        controlPoints = new List<float3>();
+                        controlPoints = new List<Vector3>();
                         break;
                     default:
                         break;
