@@ -1,4 +1,5 @@
 # AnimationRenderer57
  a simple bezier curve renderer
-![image](https://github.com/5Points7Edges/AnimationRenderer57/assets/57830705/26165d1c-4c88-4773-bcba-322f59d64df5)
-![image](https://github.com/5Points7Edges/AnimationRenderer57/assets/57830705/fe36814e-a8e5-4378-965e-1631b29e356e)
+<img width="680" alt="image" src="https://github.com/5Points7Edges/AnimationRenderer57/assets/57830705/05eab5d1-cf15-4113-a0b3-2ad7a557b021">
+<img width="734" alt="image" src="https://github.com/5Points7Edges/AnimationRenderer57/assets/57830705/a9437c4f-e5cd-4599-945e-33fa44633d58">
+
