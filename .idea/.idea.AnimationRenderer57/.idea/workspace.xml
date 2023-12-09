@@ -5,21 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="create a simple Morphing">
-      <change afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/AnimationTest9.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/AnimationTest9.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/BezierCurves/SVGTestFiles/SVGTest_Poly Curve_Inverse.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/BezierCurves/SVGTestFiles/SVGTest_Poly Curve_Inverse.txt.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Font.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.2.0 Visualizer/HandleVisualization.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.2.0 Visualizer/HandleVisualization.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/CurveDrawer9.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/CurveDrawer9.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/SVGRendererTest9.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/SVGRendererTest9.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/SubPath9.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/SubPath9.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/fillTest9.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/fillTest9.shader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGTestFiles/SVGTest_PolyCurve.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/SVGTestFiles/SVGTest_PolyCurve.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/AnimationTest9.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/AnimationTest9.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/BezierCurveTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/BezierCurveTest.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -133,7 +120,7 @@
       <workItem from="1701964042775" duration="10133000" />
       <workItem from="1702047388759" duration="6359000" />
       <workItem from="1702062678976" duration="10159000" />
-      <workItem from="1702145172266" duration="5341000" />
+      <workItem from="1702145172266" duration="6423000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -223,7 +210,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702053783854</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="create a simple Morphing">
+      <option name="closed" value="true" />
+      <created>1702161690577</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1702161690579</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

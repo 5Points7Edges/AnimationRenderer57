@@ -263,6 +263,7 @@ MonoBehaviour:
   sourceSVGFile: {fileID: 4900000, guid: 06f89fa5f58d591419798d6dae888085, type: 3}
   targetSVGFile: {fileID: 4900000, guid: 00425bd6143b55b4abaa24c533d105ad, type: 3}
   speed: 3
+  timer: 0
   animationEnable: 0
 --- !u!23 &161003649
 MeshRenderer:
@@ -399,7 +400,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Animation Start
+  m_Text: Animation Start Or Stop
 --- !u!222 &316955619
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -502,7 +503,7 @@ GameObject:
   - component: {fileID: 752258224}
   - component: {fileID: 752258223}
   m_Layer: 5
-  m_Name: Stop
+  m_Name: Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -574,7 +575,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 161003648}
         m_TargetAssemblyTypeName: AnimationTest9, Assembly-CSharp
-        m_MethodName: OnAnimationStop
+        m_MethodName: OnAnimationTest1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1353,7 +1354,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Animation Stop
+  m_Text: 'Test Function 1
 
 '
 --- !u!222 &1720519277
@@ -1517,7 +1518,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 161003648}
         m_TargetAssemblyTypeName: AnimationTest9, Assembly-CSharp
-        m_MethodName: OnAnimationStart
+        m_MethodName: OnAnimationStartOrStop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

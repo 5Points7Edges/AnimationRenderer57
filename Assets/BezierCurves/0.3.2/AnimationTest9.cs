@@ -40,7 +40,9 @@ public class AnimationTest9 : MonoBehaviour
     
     public float speed = 3;
     private float val=0;
-
+    
+    public float timer = 0;
+    
     public bool animationEnable=false;
     struct Coordinate
     {
@@ -127,18 +129,18 @@ public class AnimationTest9 : MonoBehaviour
         }
         
     }
-    public void OnAnimationStart()
+    public void OnAnimationStartOrStop()
     {
-        animationEnable = true;
-        Debug.Log("Start Button Clicked!");
+        animationEnable = !animationEnable;
     }
-    public void OnAnimationStop()
+    public void OnAnimationTest1()
     {
-        animationEnable = false;
-        Debug.Log("Stop Button Clicked!");
+        //animationEnable = false;
+        Debug.Log("Test Button Clicked!");
     }
     public void OnAnimationRestart()
     {
+        this.Start();
         Debug.Log("Restart Button Clicked!");
     }
     class SVGCommand
@@ -322,8 +324,8 @@ public class AnimationTest9 : MonoBehaviour
     private void Update()
     {
         if (!animationEnable) return;
-        
-        val = (float)(Math.Sin(Time.time*speed)+1)/2;
+        timer += Time.deltaTime;
+        val = (float)(Math.Sin(timer*speed)+1)/2;
         
         foreach(GameObject shape in allShapeGameObjects)
         {
