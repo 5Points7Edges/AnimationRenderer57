@@ -9,9 +9,11 @@ using UnityEngine;
 public class CurveDrawer9 : MonoBehaviour
 {
     public List<SubPath9> allPointsInitial = new List<SubPath9>();
+    public List<SubPath9> allPointsAnimationInitialized = new List<SubPath9>();
     public List<SubPath9> allPointsEnd = new List<SubPath9>();
     public List<SubPath9> allPoints = new List<SubPath9>();
-    
+
+    public List<float> lengthOfCurves = new List<float>();
     public Material material;
 
     
@@ -29,7 +31,7 @@ public class CurveDrawer9 : MonoBehaviour
         public int orientation2;
         public int orientationMainTri;
     }
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -70,6 +72,8 @@ public class CurveDrawer9 : MonoBehaviour
                 ShaderinputDataWrapper.orientationMainTri = GetDirection(allPoints[i].basePoint,ShaderinputDataWrapper.start,ShaderinputDataWrapper.end);
                 //Debug.Log(ShaderinputDataWrapper.orientation1);
                 ShaderinputDataWrappers.Add(ShaderinputDataWrapper);
+                
+                
             }
         }
 
@@ -89,8 +93,20 @@ public class CurveDrawer9 : MonoBehaviour
         
         meshFilter.mesh = mesh;
         meshRenderer.material = material;
-
+        animationInitialization();
+        
     }
+    
+    public void animationInitialization()
+    {
+        
+    }
+    public float curveLengthCalculation(Vector3 start,Vector3 c1,Vector3 c2,Vector3 end)
+    {
+        
+        return (float) 1;
+    }
+    
     public List<Vector3> computeBoundingBox(SubPath9 subpath)
     {
         List<Vector3> Points = subpath.controlPoints;

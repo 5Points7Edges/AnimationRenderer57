@@ -260,8 +260,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 24cd95be1d0b97242b210ec300f927f8, type: 2}
-  sourceSVGFile: {fileID: 4900000, guid: 06f89fa5f58d591419798d6dae888085, type: 3}
-  targetSVGFile: {fileID: 4900000, guid: 00425bd6143b55b4abaa24c533d105ad, type: 3}
+  sourceSVGFile: {fileID: 4900000, guid: 2ac941c475f3dcd4bbc0cc8440d62bb0, type: 3}
+  targetSVGFile: {fileID: 4900000, guid: 2ac941c475f3dcd4bbc0cc8440d62bb0, type: 3}
   speed: 3
   timer: 0
   animationEnable: 0
@@ -879,7 +879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1095285269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1204,7 +1204,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1684314218
 MonoBehaviour:
   m_ObjectHideFlags: 0

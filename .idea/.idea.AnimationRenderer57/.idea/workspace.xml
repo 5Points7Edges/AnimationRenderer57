@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/AnimationTest9.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/AnimationTest9.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/CurveDrawer9.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.2/CurveDrawer9.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" afterDir="false" />
     </list>
@@ -43,11 +44,10 @@
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.1.2/SVGRenderer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.1/CurveDrawer8.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.1/SubPath8.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/BezierCurves/0.3.2/AnimationTest9.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.2/AnimationTest9.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/BezierCurves/0.3.2/CurveDrawer9.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.2/CurveDrawer9.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.2/SubPath9.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/Scenes/BezierCurveTest.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_BaseEditorPanel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_FontAssetEditor.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -144,7 +144,8 @@
       <workItem from="1702047388759" duration="6359000" />
       <workItem from="1702062678976" duration="10159000" />
       <workItem from="1702145172266" duration="6423000" />
-      <workItem from="1702211053804" duration="2384000" />
+      <workItem from="1702211053804" duration="2448000" />
+      <workItem from="1702318729432" duration="7012000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -242,7 +243,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702161690579</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="commit Test">
+      <option name="closed" value="true" />
+      <created>1702216334859</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1702216334859</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,6 +296,7 @@
     <MESSAGE value="update to 0.3.1 SVGRenderer is now robust" />
     <MESSAGE value="The simplest animation implemented" />
     <MESSAGE value="create a simple Morphing" />
-    <option name="LAST_COMMIT_MESSAGE" value="create a simple Morphing" />
+    <MESSAGE value="commit Test" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit Test" />
   </component>
 </project>

@@ -62,10 +62,10 @@ public class AnimationTest9 : MonoBehaviour
 
 
         UnpackedSourceSVG = PathParsing(sourceSVGFile.text);
-        List<Coordinate> coordinatesSource = CoordinatesParsing(sourceSVGFile.text);
+        List<Coordinate> coordinatesSource = CoordinatesParsing(sourceSVGFile.text,0);
         
         UnpackedTargetSVG = PathParsing(targetSVGFile.text);
-        List<Coordinate> coordinatesTarget = CoordinatesParsing(targetSVGFile.text);
+        List<Coordinate> coordinatesTarget = CoordinatesParsing(targetSVGFile.text,1);
 
         
         //Debug.Log("still Alive"+Coordinates.Count);
@@ -87,12 +87,13 @@ public class AnimationTest9 : MonoBehaviour
                 
                 for (int k = 0; k < controlPointsOfaM.Count; k++)
                 {
-                    controlPointsOfaM[k] = new Vector3(controlPointsOfaM[k].x + coordinatesSource[CoordinateIndex].x,
-                      -(controlPointsOfaM[k].y + coordinatesSource[CoordinateIndex].y), controlPointsOfaM[k].z);
+                    controlPointsOfaM[k] = new Vector3(controlPointsOfaM[k].x/10 + coordinatesSource[CoordinateIndex].x,
+                      -(controlPointsOfaM[k].y/10 + coordinatesSource[CoordinateIndex].y), controlPointsOfaM[k].z);
                     //controlPointsOfaM[k] = new Vector3(controlPointsOfaM[k].x, -(controlPointsOfaM[k].y), 0);
                     controlPointsOfaM[k] = transform.TransformPoint(controlPointsOfaM[k]);
                 }
-
+                controlPointsOfaM.Reverse();
+                
                 int orientation = getDirection(controlPointsOfaM);
                 
                 
@@ -168,7 +169,7 @@ public class AnimationTest9 : MonoBehaviour
             return new SVGCommand(cmd,floatArgs);
         }
     }
-    List<Coordinate> CoordinatesParsing(string input)
+    List<Coordinate> CoordinatesParsing(string input,int sourceOrTarget)
     {
         List < Coordinate > result = new List < Coordinate >();
         string pattern = @"<use\s*x\s*=\s*[""']([^""']*)[""']\s*[^>]*y\s*=\s*[""']([^""']*)[""'][^>]*xlink:href\s*=\s*[""']#([^""']*)[""'][^>]*>";
@@ -187,6 +188,32 @@ public class AnimationTest9 : MonoBehaviour
             coord.pathID= match.Groups[3].Value;
             result.Add(coord);
             match = match.NextMatch();
+        }
+
+        if (result.Count == 0)
+        {
+            if (sourceOrTarget == 0)
+            {
+                foreach (var pair in UnpackedSourceSVG)
+                {
+                    Coordinate coord;
+                    coord.x = 0;
+                    coord.y = 0;
+                    coord.pathID = pair.Key;
+                    result.Add(coord);
+                }
+            }
+            else if (sourceOrTarget == 1)
+            {
+                foreach (var pair in UnpackedTargetSVG)
+                {
+                    Coordinate coord;
+                    coord.x = 0;
+                    coord.y = 0;
+                    coord.pathID = pair.Key;
+                    result.Add(coord);
+                }
+            }
         }
         return result;
     }
@@ -208,6 +235,7 @@ public class AnimationTest9 : MonoBehaviour
         
 
         string pattern = @"<path\s*id\s*=\s*[""']([^""']*)[""']\s*[^>]*d\s*=\s*[""']([^""']*)[""'][^>]*>";
+        //pattern = @"<path\s*d\s*=\s*[""']([^""']*)[""']\s*[^>]*p-id\s*=\s*[""']([^""']*)[""'][^>]*>";
 
         Regex regex = new Regex(pattern);
 
@@ -216,12 +244,12 @@ public class AnimationTest9 : MonoBehaviour
         while (match.Success)
         {
             List<List<Vector3>> Shapes = new List<List<Vector3>>();
-
+            
             string id = match.Groups[1].Value;
-            //Debug.Log($"Value of ID attribute: {id}");
+            Debug.Log($"Value of ID attribute: {id}");
 
             string path = match.Groups[2].Value;
-            //Debug.Log($"Value of d attribute: {path}");
+            Debug.Log($"Value of d attribute: {path}");
             match = match.NextMatch();
 
             string separators = @"(?=[A-Za-z])";
@@ -235,6 +263,7 @@ public class AnimationTest9 : MonoBehaviour
             // our "interpreter". Runs the list of commands and does something for each of them.
             foreach (string token in tokens)
             {
+                Debug.Log(token);
                 SVGCommand c = SVGCommand.Parse(token);
 
                 switch (c.command)
@@ -247,7 +276,15 @@ public class AnimationTest9 : MonoBehaviour
                         lastY = c.arguments[1];
 
                         break;
-                    case 'C':
+                    case 'm':
+                        
+                        controlPoints.Add(new Vector3(lastX+c.arguments[0], lastY+c.arguments[1],0));
+
+                        lastX = c.arguments[0];
+                        lastY = c.arguments[1];
+
+                        break;
+                    case 'C' :
                         controlPoints.Add(new Vector3(c.arguments[0], c.arguments[1], 0));
                         controlPoints.Add(new Vector3(c.arguments[2], c.arguments[3], 0));
                         controlPoints.Add(new Vector3(c.arguments[4], c.arguments[5], 0));
@@ -256,8 +293,28 @@ public class AnimationTest9 : MonoBehaviour
                         lastY = c.arguments[5];
                         lastlastX = c.arguments[2];
                         lastlastY = c.arguments[3];
+                        break;
+                    /*
+                    case 'c' :
+                        controlPoints.Add(new Vector3(c.arguments[0]+lastX, c.arguments[1]+lastY, 0));
+                        controlPoints.Add(new Vector3(c.arguments[2]+c.arguments[0]+lastX, c.arguments[3]+c.arguments[1]+lastY, 0));
+                        controlPoints.Add(new Vector3(c.arguments[4]+c.arguments[2]+c.arguments[0]+lastX, c.arguments[5]+c.arguments[3]+c.arguments[1]+lastY, 0));
 
+                        lastX = c.arguments[4] + c.arguments[2] + c.arguments[0] + lastX;
+                        lastY = c.arguments[5] + c.arguments[3] + c.arguments[1] + lastY;
+                        lastlastX = c.arguments[2];
+                        lastlastY = c.arguments[3];
+                        break;
+                        */
+                    case 'c' :
+                        controlPoints.Add(new Vector3(c.arguments[0]+lastX, c.arguments[1]+lastY, 0));
+                        controlPoints.Add(new Vector3(c.arguments[2]+lastX, c.arguments[3]+lastY, 0));
+                        controlPoints.Add(new Vector3(c.arguments[4]+lastX, c.arguments[5]+lastY, 0));
 
+                        lastX = c.arguments[4] + lastX;
+                        lastY = c.arguments[5] + lastY;
+                        lastlastX = c.arguments[2]+lastX;
+                        lastlastY = c.arguments[3]+lastY;
                         break;
                     case 'S':
                         controlPoints.Add(new Vector3(lastX - lastlastX + lastX,lastY-lastlastY+lastY, 0));
@@ -280,8 +337,28 @@ public class AnimationTest9 : MonoBehaviour
                         lastX = x;
                         lastY = y;
                         break;
-                    case 'H':
+                    case 'l':
+                        x = c.arguments[0]+lastX;
+                        y = c.arguments[1]+lastY;
+                        controlPoints.Add(new Vector3((x - lastX) /3 + lastX, (y - lastY) / 3 + lastY, 0));
+                        controlPoints.Add(new Vector3((x - lastX) * 2 / 3 + lastX, (y - lastY) * 2 / 3 + lastY, 0));
+                        controlPoints.Add(new Vector3(x, y, 0));
+
+                        lastX = x;
+                        lastY = y;
+                        break;
+                    case 'H' :
                         x = c.arguments[0];
+                        y = lastY;
+                        controlPoints.Add(new Vector3((x - lastX) / 3 + lastX, (y - lastY) / 3 + lastY, 0));
+                        controlPoints.Add(new Vector3((x - lastX) * 2 / 3 + lastX, (y - lastY) * 2 / 3 + lastY, 0));
+                        controlPoints.Add(new Vector3(x, y, 0));
+
+                        lastX = x;
+                        lastY = y;
+                        break;
+                    case 'h':
+                        x = c.arguments[0]+lastX;
                         y = lastY;
                         controlPoints.Add(new Vector3((x - lastX) / 3 + lastX, (y - lastY) / 3 + lastY, 0));
                         controlPoints.Add(new Vector3((x - lastX) * 2 / 3 + lastX, (y - lastY) * 2 / 3 + lastY, 0));
@@ -300,7 +377,17 @@ public class AnimationTest9 : MonoBehaviour
                         lastX = x;
                         lastY = y;
                         break;
-                    case 'Z':
+                    case 'v':
+                        x = lastX;
+                        y = c.arguments[0]+lastY;
+                        controlPoints.Add(new Vector3((x - lastX) / 3 + lastX, (y - lastY) / 3 + lastY, 0));
+                        controlPoints.Add(new Vector3((x - lastX) * 2 / 3 + lastX, (y - lastY) * 2 / 3 + lastY, 0));
+                        controlPoints.Add(new Vector3(x, y, 0));
+
+                        lastX = x;
+                        lastY = y;
+                        break;
+                    case 'Z' or 'z':
                         Shapes.Add(controlPoints);
                         controlPoints = new List<Vector3>();
                         break;
@@ -312,13 +399,24 @@ public class AnimationTest9 : MonoBehaviour
             }
 
             result.Add(id, Shapes);
+            for (int i = 0; i < Shapes.Count(); i++)
+            {
+                for (int j = 0; j < Shapes[i].Count; j++)
+                {
+                    Debug.Log(Shapes[i][j]);
+                }
+            }
         }
 
         
-
+        
         return result;
     }
 
+    public Vector3 rateFunction_Linear(Vector3 start, Vector3 end, float val)
+    {
+        return (end - start) * val + start;
+    }
 
     // Update is called once per frame
     private void Update()
@@ -336,15 +434,7 @@ public class AnimationTest9 : MonoBehaviour
                 SubPath9 subPathEnd = shape?.GetComponent<CurveDrawer9>().allPointsEnd[i];
                 for (int j = 0; j < subPath.controlPoints.Count; j++)
                 {
-                    float startx = subPathInitial.controlPoints[j].x;
-                    float starty = subPathInitial.controlPoints[j].y;
-
-                    float endx = subPathEnd.controlPoints[j].x;
-                    float endy = subPathEnd.controlPoints[j].y;
-
-                    float currentx = (endx - startx) * val + startx;
-                    float currenty = (endy - starty) * val + starty;
-                    subPath.controlPoints[j]= new Vector3(currentx,currenty, subPathInitial.controlPoints[j].z);
+                    subPath.controlPoints[j]= rateFunction_Linear(subPathInitial.controlPoints[j],subPathEnd.controlPoints[j],val);
                 }
                 subPath.calculateBasePoint();
             }
