@@ -10,7 +10,8 @@ using Unity.VisualScripting;
  * Author:Thomas Lu
  * v0.3.4
  * Animation Renderer
- * code cleaning
+ * code restructured (Path -> SubPath -> Segments -> Vector3)
+ * finding the best sequence by morphing curves
  */
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]

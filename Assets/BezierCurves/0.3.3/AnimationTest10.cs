@@ -8,13 +8,11 @@ using Unity.VisualScripting;
 
 /*
  * Author:Thomas Lu
- * v0.3.2
+ * v0.3.3
  * Animation Renderer
- * code cleaning
- * manipulate each point of the shapes seperately
- * FPS (ChuShiBiao.svg): ca. 12 fps
+ * redesigned the SVGParser, using SVGParser from VectorGraphics
+ * can morph a shape to another shape with more amount of curves
  */
-
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class AnimationTest10 : MonoBehaviour
 {
@@ -23,16 +21,16 @@ public class AnimationTest10 : MonoBehaviour
     public Material visualM;
     private List<GameObject> allShapeGameObjects = new List<GameObject>();
     Dictionary<string, int> a;
-    
+
     Dictionary<string, List<List<Vector3>>> UnpackedSourceSVG =new Dictionary<string, List<List<Vector3>>>();
     Dictionary<string, List<List<Vector3>>> UnpackedTargetSVG =new Dictionary<string, List<List<Vector3>>>();
 
     public TextAsset sourceSVGFile;
     public TextAsset targetSVGFile;
-    
+
     public float speed = 1;
     private float val=0;
-    
+
     public float timer = 0;
     public bool animationEnable=false;
 
@@ -47,7 +45,7 @@ public class AnimationTest10 : MonoBehaviour
             return;
         }
 
-        
+
         parseSVGFile(sourceSVGFile.text);
 
         parseTargetSVGFile(targetSVGFile.text);
@@ -59,7 +57,7 @@ public class AnimationTest10 : MonoBehaviour
         StringReader textReader = new StringReader(data);
         var sceneInfo = SVGParser.ImportSVG(textReader);
         Debug.Log(sceneInfo.NodeIDs.Count);
-        
+
         foreach (var path in sceneInfo.NodeIDs) //each Path
         {
             if (path.Value.Shapes == null) continue;
@@ -82,13 +80,13 @@ public class AnimationTest10 : MonoBehaviour
                        controlPointsOfaM.Add(new Vector3(segment.P1.x,-segment.P1.y,0));
                        controlPointsOfaM.Add(new Vector3(segment.P2.x,-segment.P2.y,0));
                    }
-                    
+
                    controlPointsOfaM.Add(new Vector3(controlPointsOfaM[0].x,controlPointsOfaM[0].y,0));
-                   
+
                    //controlPointsOfaM.Reverse();
                    int orientation = getDirection(controlPointsOfaM);
                    gameObject.GetComponent<CurveDrawer10>().allPointsInitial.Add(new SubPath10(orientation,controlPointsOfaM));
-               } 
+               }
                allShapeGameObjects.Add(gameObject);
             }
         }
@@ -100,13 +98,13 @@ public class AnimationTest10 : MonoBehaviour
         var sceneInfo = SVGParser.ImportSVG(textReader);
         Debug.Log(sceneInfo.NodeIDs.Count);
         int i = 0;
-        
+
         foreach (var path in sceneInfo.NodeIDs) //each Path
         {
             if (path.Value.Shapes == null) continue;
             foreach (var shape in path.Value.Shapes)
             {
-                
+
                 GameObject gameObject = allShapeGameObjects[i];
                 foreach (var contour in shape.Contours) //each closed M Or a SubPath
                 {
@@ -119,7 +117,7 @@ public class AnimationTest10 : MonoBehaviour
                         controlPointsOfaM.Add(new Vector3(segment.P2.x-10,-segment.P2.y,0));
                     }
                     controlPointsOfaM.Add(new Vector3(controlPointsOfaM[0].x,controlPointsOfaM[0].y,0));
-                   
+
                     //controlPointsOfaM.Reverse();
                     int orientation = getDirection(controlPointsOfaM);
                     gameObject.GetComponent<CurveDrawer10>().allPointsEnd.Add(new SubPath10(orientation,controlPointsOfaM));
@@ -143,7 +141,7 @@ public class AnimationTest10 : MonoBehaviour
         this.Start();
         Debug.Log("Restart Button Clicked!");
     }
-    
+
     protected int getDirection(List<Vector3> polygon)
     {
         double d = 0;
@@ -165,26 +163,26 @@ public class AnimationTest10 : MonoBehaviour
     private void Update()
     {
         if (!animationEnable) return;
-        
+
         timer += Time.deltaTime;
         val = (float)(-Math.Cos(timer*speed)+1)/2;
-        
+
         foreach(GameObject shape in allShapeGameObjects)
         {
-            
+
             for (int i=0;i < shape?.GetComponent<CurveDrawer10>().allPoints.Count;i++)
             {
                 SubPath10 subPath = shape?.GetComponent<CurveDrawer10>().allPoints[i];
                 SubPath10 subPathInitial = shape?.GetComponent<CurveDrawer10>().allPointsInitial[i];
                 SubPath10 subPathEnd = shape?.GetComponent<CurveDrawer10>().allPointsEnd[i];
-                
+
                 for (int j = 0; j < subPathInitial.controlPoints.Count; j++)
                 {
                     subPath.controlPoints[j]= rateFunction_Linear(subPathInitial.controlPoints[j],subPathEnd.controlPoints[j],val);
                 }
-                
+
             }
         }
-        
+
     }
 }
