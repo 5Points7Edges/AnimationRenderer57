@@ -429,7 +429,7 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 8dc4b1f8a10bf604583c78961d117014, type: 2}
   visualM: {fileID: 2100000, guid: 5dcb29c74fc96e74280e54ce08547556, type: 2}
   sourceSVGFile: {fileID: 4900000, guid: 06f89fa5f58d591419798d6dae888085, type: 3}
-  targetSVGFile: {fileID: 4900000, guid: e1a5803e711f7374193b22b2bfab53a9, type: 3}
+  targetSVGFile: {fileID: 4900000, guid: c92209bc673aa334682de970c5d1fce7, type: 3}
   speed: 1
   animationEnable: 0
 --- !u!1 &316955616

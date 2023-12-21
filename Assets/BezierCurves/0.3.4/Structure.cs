@@ -21,7 +21,7 @@ public class Segment11
         p2 = newSegment11.p2;
         p3 = newSegment11.p3;
     }
-    public (Vector3,Vector3,Vector3,Vector3,Vector3,Vector3,Vector3,Vector3) splitCurve(float t)
+    public (Vector3,Vector3,Vector3,Vector3,Vector3,Vector3,Vector3,Vector3) SplitCurve(float t)
     {
         Vector3 p01 = (p1 - p0) * t + p0;
         Vector3 p12 = (p2 - p1) * t + p1;
@@ -32,7 +32,7 @@ public class Segment11
 
         return (p0, p01, p012, p0123, p0123, p123,p23, p3);
     }
-    public float getLength()
+    public float GetLength()
     {
         float totalLength = 0;
         int approximation = 2;
@@ -64,17 +64,12 @@ public class SubPath11
         this.segments = new List<Segment11>(controlPoints);
         this.orientation = orientation;
     }
-    public SubPath11(SubPath11 newSubPath)
-    {
-        this.segments = new List<Segment11>(newSubPath.segments);
-        this.orientation = orientation;
-    }
     public SubPath11()
     {
         segments = new List<Segment11>();
     }
 
-    public Vector3 getBasePoint()
+    public Vector3 GetBasePoint()
     {
         return segments[0].p0;
     }
@@ -86,9 +81,9 @@ public class SubPath11
     public override string ToString()
     {
         Debug.Log("----------------------------");
-        string outputString="";
-        for(int i=0;i<segments.Count;i++){
-            Debug.Log(segments[i]);
+        foreach (var t in segments)
+        {
+            Debug.Log(t);
         };
         return "----------------------------";
     }

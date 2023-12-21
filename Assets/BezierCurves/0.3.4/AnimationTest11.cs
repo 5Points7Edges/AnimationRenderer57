@@ -117,11 +117,11 @@ public class AnimationTest11 : MonoBehaviour
                        
                         Segment11 mysegment = new Segment11();
 
-                        float xDelta = 2, yDelta = -10;
-                        mysegment.p0 = new Vector3(segment.P0.x+xDelta, -segment.P0.y+yDelta, 0);
-                        mysegment.p1 = new Vector3(segment.P1.x+xDelta, -segment.P1.y+yDelta, 0);
-                        mysegment.p2 = new Vector3(segment.P2.x+xDelta, -segment.P2.y+yDelta, 0);
-                        mysegment.p3 = new Vector3(contour.Segments[segmentIndex + 1].P0.x+xDelta, -contour.Segments[segmentIndex + 1].P0.y+yDelta, 0);
+                        float xDelta = 0, yDelta = 0;
+                        mysegment.p3= new Vector3(segment.P0.x+xDelta, -segment.P0.y+yDelta, 0);
+                        mysegment.p2 = new Vector3(segment.P1.x+xDelta, -segment.P1.y+yDelta, 0);
+                        mysegment.p1 = new Vector3(segment.P2.x+xDelta, -segment.P2.y+yDelta, 0);
+                        mysegment.p0 = new Vector3(contour.Segments[segmentIndex + 1].P0.x+xDelta, -contour.Segments[segmentIndex + 1].P0.y+yDelta, 0);
 
                         //mysegment.p0 = RotateRadians(mysegment.p0,3.14f/6);
                         //mysegment.p1 = RotateRadians(mysegment.p1,3.14f/6);
@@ -129,7 +129,7 @@ public class AnimationTest11 : MonoBehaviour
                         //mysegment.p3 = RotateRadians(mysegment.p3,3.14f/6);
                         controlPointsOfaM.Add(mysegment);
                     }
-                    //controlPointsOfaM.segments.Reverse();
+                    controlPointsOfaM.segments.Reverse();
                    
                     gameObject.GetComponent<CurveDrawer11>().pathEnd.Add(controlPointsOfaM);
                 }
@@ -159,19 +159,7 @@ public class AnimationTest11 : MonoBehaviour
         Debug.Log("Restart Button Clicked!");
     }
     
-    protected int getDirection(List<Vector3> polygon)
-    {
-        double d = 0;
-        for (int i = 0; i < polygon.Count - 1; i++)
-            d += -0.5 * (polygon[i + 1].y + polygon[i].y) * (polygon[i + 1].x - polygon[i].x);
-        if (d > 0)
-        {
-            return 1; //counterclockwise
-        }
-        return -1;       //clockwise
-    }
-
-    public Vector3 rateFunction_Linear(Vector3 start, Vector3 end, float val)
+    public static Vector3 rateFunction_Linear(Vector3 start, Vector3 end, float val)
     {
         return (end - start) * val + start;
     }

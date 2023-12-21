@@ -75,7 +75,7 @@ public class CurveDrawer11 : MonoBehaviour
         {
             SubPath11 controlPointsSubPath=pathCurrent.subPaths[i];
             
-            List<Vector3> boundingBoxVerticesInTriangleStrip = computeBoundingBox(pathCurrent.subPaths[i]);
+            List<Vector3> boundingBoxVerticesInTriangleStrip = ComputeBoundingBox(pathCurrent.subPaths[i]);
             foreach (Vector3 point in boundingBoxVerticesInTriangleStrip)
             {
                 vertices.Add(point);
@@ -91,7 +91,7 @@ public class CurveDrawer11 : MonoBehaviour
                 
                 ShaderinputDataWrapper.orientation1 = GetDirection(ShaderinputDataWrapper.start, ShaderinputDataWrapper.control1, ShaderinputDataWrapper.control2);
                 ShaderinputDataWrapper.orientation2 = GetDirection(ShaderinputDataWrapper.start, ShaderinputDataWrapper.control2, ShaderinputDataWrapper.end);
-                ShaderinputDataWrapper.orientationMainTri = GetDirection(pathCurrent.subPaths[i].getBasePoint(),ShaderinputDataWrapper.start,ShaderinputDataWrapper.end);
+                ShaderinputDataWrapper.orientationMainTri = GetDirection(pathCurrent.subPaths[i].GetBasePoint(),ShaderinputDataWrapper.start,ShaderinputDataWrapper.end);
                 //Debug.Log(ShaderinputDataWrapper.orientation1);
                 ShaderinputDataWrappers.Add(ShaderinputDataWrapper);
             }
@@ -208,7 +208,7 @@ public class CurveDrawer11 : MonoBehaviour
             float contourLengthInitial = 0;
             for (int j = 0; j < contourInitial.segments.Count(); j++)
             {
-                float length = contourInitial.segments[j].getLength();
+                float length = contourInitial.segments[j].GetLength();
                 contourLengthInitial += length;
                 lengthList.Add(length,j);
             }
@@ -225,7 +225,7 @@ public class CurveDrawer11 : MonoBehaviour
                 
                 int id=lengthList.Values.First();
                 
-                var splittedCurve = contourInitial.segments[id].splitCurve(0.49f);
+                var splittedCurve = contourInitial.segments[id].SplitCurve(0.49f);
                 //Debug.Log(splittedCurve);
                 
                 contourInitial.segments.RemoveAt(id);
@@ -250,8 +250,8 @@ public class CurveDrawer11 : MonoBehaviour
                 var tmp= lengthList.ToDictionary(d => d.Key , d=> d.Value> id ? d.Value : d.Value +1);
                 lengthList = new SortedDictionary<float, int>(tmp,new DescendingComparer<float>());
                 
-                lengthList.Add(firstCurve.getLength(),id);
-                lengthList.Add(secondCurve.getLength(),id+1);
+                lengthList.Add(firstCurve.GetLength(),id);
+                lengthList.Add(secondCurve.GetLength(),id+1);
                 
                 //Debug.Log("--------------------------"+PointsNeedToAdd);
                 //for(int  i=0;i<contourInitial.segments.Count();i++)Debug.Log(contourInitial.segments[i]);
@@ -261,41 +261,10 @@ public class CurveDrawer11 : MonoBehaviour
             
         }
     }
-    
 
-    public (Vector3,Vector3,Vector3,Vector3,Vector3,Vector3,Vector3,Vector3) splitCurve(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3,float t)
+    public static List<Vector3> ComputeBoundingBox(SubPath11 subPath)
     {
-        Vector3 p01 = (p1 - p0) * t + p0;
-        Vector3 p12 = (p2 - p1) * t + p1;
-        Vector3 p23 = (p3 - p2) * t + p2;
-        Vector3 p012 = (p12 - p01) * t + p01;
-        Vector3 p123 = (p23 - p12) * t + p12;
-        Vector3 p0123 = (p123 - p012) * t + p012;
-
-        return (p0, p01, p012, p0123, p0123, p123,p23, p3);
-    }
-    public float curveLengthCalculation(Vector3 start,Vector3 c1,Vector3 c2,Vector3 end)
-    {
-        float totalLength = 0;
-        int approximation = 2;
-        float unit = (float)1 / approximation;
-        for (int i = 0; i < approximation; i++)
-        {
-            Vector3 point0=BezierCubic(start, c1, c2, end, unit * i);
-            Vector3 point1=BezierCubic(start, c1, c2, end, unit * (i+1));
-            totalLength+=Vector3.Distance(point0,point1);
-        }
-        return totalLength;
-    }
-    //(1-t)^3*p0 + 3t(1-t)^2*p1 + 3t^2*(1-t)*p2 + t^3*p3
-    public Vector3 BezierCubic(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
-    {
-        Vector3 result = (float)Math.Pow((1 - t),3)*p0 + (float)Math.Pow((1 - t),2)*t*3*p1 + 3*t*t*(1-t)*p2+(float)Math.Pow(t,3)*p3;
-        return result;
-    }
-    public List<Vector3> computeBoundingBox(SubPath11 subpath)
-    {
-        List<Segment11> points = subpath.segments;
+        List<Segment11> points = subPath.segments;
         List<Vector3> boundingBoxVertices = new List<Vector3>();
 
         for(int i = 0; i < points.Count; i++)
@@ -309,7 +278,7 @@ public class CurveDrawer11 : MonoBehaviour
             boundingBoxVertices.Add(points[i].p2);
             boundingBoxVertices.Add(points[i].p3);
             
-            boundingBoxVertices.Add(subpath.getBasePoint());
+            boundingBoxVertices.Add(subPath.GetBasePoint());
             boundingBoxVertices.Add(points[i].p0);
             boundingBoxVertices.Add(points[i].p3);
             
@@ -318,7 +287,7 @@ public class CurveDrawer11 : MonoBehaviour
     }
     
     //n = u(x1, y1, z1) x v(x2, y2, z2) = (y1z2 - y2z1, x2z1-z2x1, x1y2 -x2y1)
-    public int GetDirection(Vector3 p1, Vector3 p2, Vector3 p3)
+    public static int GetDirection(Vector3 p1, Vector3 p2, Vector3 p3)
     {
         Vector3 edge1 = p2 - p1;
         Vector3 edge2 = p3 - p2;
@@ -336,13 +305,13 @@ public class CurveDrawer11 : MonoBehaviour
         List<Vector3> vertices= new List<Vector3>();
         List<int> indices= new List<int>();
         
-        List<CurveDataWrapper> ShaderinputDataWrappers = new List<CurveDataWrapper>();
+        List<CurveDataWrapper> shaderInputDataWrappers = new List<CurveDataWrapper>();
         
         for (int i = 0; i < pathCurrent.subPaths.Count(); i++)
         {
             SubPath11 controlPointsSubPath=pathCurrent.subPaths[i];
             
-            List<Vector3> boundingBoxVerticesInTriangleStrip = computeBoundingBox(pathCurrent.subPaths[i]);
+            List<Vector3> boundingBoxVerticesInTriangleStrip = ComputeBoundingBox(pathCurrent.subPaths[i]);
             foreach (Vector3 point in boundingBoxVerticesInTriangleStrip)
             {
                 vertices.Add(point);
@@ -350,18 +319,18 @@ public class CurveDrawer11 : MonoBehaviour
             
             for (int j = 0; j < controlPointsSubPath.segments.Count; j++)
             {
-                CurveDataWrapper ShaderinputDataWrapper = new CurveDataWrapper();
+                CurveDataWrapper shaderInputDataWrapper = new CurveDataWrapper();
 
-                ShaderinputDataWrapper.start = controlPointsSubPath.segments[j].p0;
-                ShaderinputDataWrapper.control1 = controlPointsSubPath.segments[j].p1;
-                ShaderinputDataWrapper.control2 = controlPointsSubPath.segments[j].p2;
-                ShaderinputDataWrapper.end = controlPointsSubPath.segments[j].p3;
+                shaderInputDataWrapper.start = controlPointsSubPath.segments[j].p0;
+                shaderInputDataWrapper.control1 = controlPointsSubPath.segments[j].p1;
+                shaderInputDataWrapper.control2 = controlPointsSubPath.segments[j].p2;
+                shaderInputDataWrapper.end = controlPointsSubPath.segments[j].p3;
                 
-                ShaderinputDataWrapper.orientation1 = GetDirection(ShaderinputDataWrapper.start, ShaderinputDataWrapper.control1, ShaderinputDataWrapper.control2);
-                ShaderinputDataWrapper.orientation2 = GetDirection(ShaderinputDataWrapper.start, ShaderinputDataWrapper.control2, ShaderinputDataWrapper.end);
-                ShaderinputDataWrapper.orientationMainTri = GetDirection(pathCurrent.subPaths[i].getBasePoint(),ShaderinputDataWrapper.start,ShaderinputDataWrapper.end);
-                //Debug.Log(ShaderinputDataWrapper.orientation1);
-                ShaderinputDataWrappers.Add(ShaderinputDataWrapper);
+                shaderInputDataWrapper.orientation1 = GetDirection(shaderInputDataWrapper.start, shaderInputDataWrapper.control1, shaderInputDataWrapper.control2);
+                shaderInputDataWrapper.orientation2 = GetDirection(shaderInputDataWrapper.start, shaderInputDataWrapper.control2, shaderInputDataWrapper.end);
+                shaderInputDataWrapper.orientationMainTri = GetDirection(pathCurrent.subPaths[i].GetBasePoint(),shaderInputDataWrapper.start,shaderInputDataWrapper.end);
+                //Debug.Log(ShaderInputDataWrapper.orientation1);
+                shaderInputDataWrappers.Add(shaderInputDataWrapper);
             }
         }
         
@@ -372,7 +341,7 @@ public class CurveDrawer11 : MonoBehaviour
         Mesh mesh = new Mesh();
         mesh.vertices = vertices.ToArray();
         mesh.SetIndices(indices, MeshTopology.Triangles, 0);
-        curveDataBuffer.SetData(ShaderinputDataWrappers.ToArray());
+        curveDataBuffer.SetData(shaderInputDataWrappers.ToArray());
         meshFilter.mesh = mesh;
         
         if (showDebug)
