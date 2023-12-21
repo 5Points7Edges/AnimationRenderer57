@@ -87,8 +87,8 @@ public class AnimationTest9 : MonoBehaviour
                 
                 for (int k = 0; k < controlPointsOfaM.Count; k++)
                 {
-                    controlPointsOfaM[k] = new Vector3(controlPointsOfaM[k].x/10 + coordinatesSource[CoordinateIndex].x,
-                      -(controlPointsOfaM[k].y/10 + coordinatesSource[CoordinateIndex].y), controlPointsOfaM[k].z);
+                    controlPointsOfaM[k] = new Vector3(controlPointsOfaM[k].x + coordinatesSource[CoordinateIndex].x,
+                      -(controlPointsOfaM[k].y + coordinatesSource[CoordinateIndex].y), controlPointsOfaM[k].z);
                     //controlPointsOfaM[k] = new Vector3(controlPointsOfaM[k].x, -(controlPointsOfaM[k].y), 0);
                     controlPointsOfaM[k] = transform.TransformPoint(controlPointsOfaM[k]);
                 }
@@ -122,7 +122,7 @@ public class AnimationTest9 : MonoBehaviour
                     controlPointsOfaM[k] = transform.TransformPoint(controlPointsOfaM[k]);
                 }
 
-                controlPointsOfaM.Reverse();
+                //controlPointsOfaM.Reverse();
                 int orientation = getDirection(controlPointsOfaM);
                 
                 shape.GetComponent<CurveDrawer9>().allPointsEnd.Add(new SubPath9(orientation,controlPointsOfaM));
