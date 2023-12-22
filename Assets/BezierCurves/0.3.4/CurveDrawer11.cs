@@ -154,7 +154,7 @@ public class CurveDrawer11 : MonoBehaviour
                 }
             }
             Debug.Log(bestStartID);
-            bestStartID = 6;
+            //bestStartID = 6;
             int count = contourInitial.segments.Count();
             //Debug.Log(contourInitial);
             
@@ -281,11 +281,16 @@ public class CurveDrawer11 : MonoBehaviour
             boundingBoxVertices.Add(subPath.GetBasePoint());
             boundingBoxVertices.Add(points[i].p0);
             boundingBoxVertices.Add(points[i].p3);
-            
         }
         return boundingBoxVertices;
     }
-    
+
+    public static bool isOnBothSide(Segment11 segment)
+    {
+        if (GetDirection(segment.p0, segment.p3, segment.p1) !=
+            GetDirection(segment.p0, segment.p3, segment.p2)) return true;
+        return false;
+    }
     //n = u(x1, y1, z1) x v(x2, y2, z2) = (y1z2 - y2z1, x2z1-z2x1, x1y2 -x2y1)
     public static int GetDirection(Vector3 p1, Vector3 p2, Vector3 p3)
     {

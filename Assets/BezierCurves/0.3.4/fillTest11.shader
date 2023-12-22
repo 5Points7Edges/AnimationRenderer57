@@ -153,7 +153,7 @@ Shader "Custom/BezierTest/fillTest11"
                     for(int i=0;i<=_approximationStep;i++){
                         float2 P1=BezierCurve((i-1)/_approximationStep,start,control1,control2,end);
                         float2 P2=BezierCurve(i/_approximationStep,start,control1,control2,end);
-                        dist=min(dist,PointToSegDist(pos.x,pos.y,P1.x,P1.y,P2.x,P2.y));
+                        //dist=min(dist,PointToSegDist(pos.x,pos.y,P1.x,P1.y,P2.x,P2.y));
                         if(LeftOfLine(P1,P2,pos) ){
                             ifOutput=-1;
                         }
@@ -165,7 +165,7 @@ Shader "Custom/BezierTest/fillTest11"
                     for(int i=0;i<=_approximationStep;i++){
                         float2 P1=BezierCurve((i-1)/_approximationStep,start,control1,control2,end);
                         float2 P2=BezierCurve(i/_approximationStep,start,control1,control2,end);
-                        dist=min(dist,PointToSegDist(pos.x,pos.y,P1.x,P1.y,P2.x,P2.y));
+                        //dist=min(dist,PointToSegDist(pos.x,pos.y,P1.x,P1.y,P2.x,P2.y));
                         if(!LeftOfLine(P1,P2,pos) ){
                             ifOutput=1;
                         }

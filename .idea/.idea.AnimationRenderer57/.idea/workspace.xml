@@ -8,7 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.4/AnimationTest11.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.4/AnimationTest11.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.4/CurveDrawer11.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.4/CurveDrawer11.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.4/Structure.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.4/Structure.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.4/fillTest11.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.4/fillTest11.shader" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +52,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/CurveDrawer11.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/Math.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/Structure.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/Scenes/MorphingTest.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/Scenes/MorphingTest.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_BaseEditorPanel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_FontAssetEditor.cs" root0="SKIP_HIGHLIGHTING" />
@@ -237,7 +238,7 @@
       <workItem from="1702494254816" duration="8792000" />
       <workItem from="1703158687729" duration="13977000" />
       <workItem from="1703172834326" duration="15658000" />
-      <workItem from="1703200705823" duration="1586000" />
+      <workItem from="1703200705823" duration="2920000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -375,7 +376,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703201108723</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="make some functions static, delete unused functions">
+      <option name="closed" value="true" />
+      <created>1703202320495</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1703202320495</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
