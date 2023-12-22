@@ -35,7 +35,20 @@ public class CurveDrawer12 : MonoBehaviour
         public int orientation2;
         public int orientationMainTri;
     }
-    
+    public struct lengthPair
+    {
+        public float length;
+        public int index;
+    }
+    public sealed class lengthPairComparer : IComparer<lengthPair> 
+    {
+        public int Compare(lengthPair x, lengthPair y)
+        {
+            if (x.length < y.length) return 1;
+            if (x.length > y.length) return -1;
+            return 0;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -127,12 +140,6 @@ public class CurveDrawer12 : MonoBehaviour
         
     }
 
-    class DescendingComparer<T> : IComparer<T> where T : IComparable<T> {
-        public int Compare(T x, T y) {
-            return y.CompareTo(x);
-        }
-    }
-
     public void findBestReihenfolge()
     {
         for (int contourIndex = 0; contourIndex < pathInitial.subPaths.Count; contourIndex++)
@@ -192,9 +199,10 @@ public class CurveDrawer12 : MonoBehaviour
     }
     public void insertExtraPoints()
     {
+        
         for (int contourIndex = 0; contourIndex < pathInitial.subPaths.Count; contourIndex++)
         {
-            SortedDictionary<float,int> lengthList = new SortedDictionary<float,int>(new DescendingComparer<float>());
+            List<lengthPair> lengthList = new List<lengthPair>();
             
             SubPath12 contourInitial = pathInitial.subPaths[contourIndex];
             
@@ -210,7 +218,7 @@ public class CurveDrawer12 : MonoBehaviour
             {
                 float length = contourInitial.segments[j].GetLength();
                 contourLengthInitial += length;
-                lengthList.Add(length,j);
+                lengthList.Add(new lengthPair{length = length,index = j});
             }
             
             int initalCurveCount=contourInitial.segments.Count;
@@ -222,14 +230,14 @@ public class CurveDrawer12 : MonoBehaviour
             {
                 //Debug.Log("--------------------------"+PointsNeedToAdd);
                 //for(int  i=0;i<contourInitial.segments.Count();i++)Debug.Log(contourInitial.segments[i]);
+                lengthList.Sort(new lengthPairComparer());
+                int id=lengthList[0].index;
                 
-                int id=lengthList.Values.First();
-                
-                var splittedCurve = contourInitial.segments[id].SplitCurve(0.49f);
+                var splittedCurve = contourInitial.segments[id].SplitCurve(0.46f);
                 //Debug.Log(splittedCurve);
                 
                 contourInitial.segments.RemoveAt(id);
-                lengthList.Remove(lengthList.Keys.First());
+                lengthList.Remove(lengthList[0]);
                 
                 //Debug.Log("--------------------------"+PointsNeedToAdd);
                 //for(int  i=0;i<contourInitial.segments.Count();i++)Debug.Log(contourInitial.segments[i]);
@@ -247,11 +255,16 @@ public class CurveDrawer12 : MonoBehaviour
                 contourInitial.segments.Insert(id,secondCurve);
                 contourInitial.segments.Insert(id,firstCurve);
                 
-                var tmp= lengthList.ToDictionary(d => d.Key , d=> d.Value> id ? d.Value : d.Value +1);
-                lengthList = new SortedDictionary<float, int>(tmp,new DescendingComparer<float>());
                 
-                lengthList.Add(firstCurve.GetLength(),id);
-                lengthList.Add(secondCurve.GetLength(),id+1);
+                for(int k=0;k<lengthList.Count;k++)
+                {
+                    lengthPair tmp = lengthList[k];
+                    tmp.index = tmp.index > id ? id + 1 : id;
+                    lengthList[k] = tmp;
+                }
+                
+                lengthList.Add(new lengthPair{length = firstCurve.GetLength(),index = id});
+                lengthList.Add(new lengthPair{length = secondCurve.GetLength(),index = id+1});
                 
                 //Debug.Log("--------------------------"+PointsNeedToAdd);
                 //for(int  i=0;i<contourInitial.segments.Count();i++)Debug.Log(contourInitial.segments[i]);

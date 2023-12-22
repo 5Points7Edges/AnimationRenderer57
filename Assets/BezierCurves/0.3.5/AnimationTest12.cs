@@ -54,6 +54,7 @@ public class AnimationTest12 : MonoBehaviour
         
         foreach (var path in sceneInfo.NodeIDs) //each Path
         {
+            Debug.Log("Haha");
             if (path.Value.Shapes == null) continue;
             foreach (var shape in path.Value.Shapes)
             {
@@ -72,10 +73,11 @@ public class AnimationTest12 : MonoBehaviour
                        var segment = contour.Segments[segmentIndex];
                        
                        Segment12 mysegment = new Segment12();
-                       mysegment.p0 = new Vector3(segment.P0.x, -segment.P0.y, 0);
-                       mysegment.p1 = new Vector3(segment.P1.x, -segment.P1.y, 0);
-                       mysegment.p2 = new Vector3(segment.P2.x, -segment.P2.y, 0);
-                       mysegment.p3 = new Vector3(contour.Segments[segmentIndex + 1].P0.x, -contour.Segments[segmentIndex + 1].P0.y, 0);
+                       float xScale = 1f, yScale = -1f;
+                       mysegment.p0 = new Vector3(segment.P0.x*xScale, segment.P0.y*yScale, 0);
+                       mysegment.p1 = new Vector3(segment.P1.x*xScale, segment.P1.y*yScale, 0);
+                       mysegment.p2 = new Vector3(segment.P2.x*xScale, segment.P2.y*yScale, 0);
+                       mysegment.p3 = new Vector3(contour.Segments[segmentIndex + 1].P0.x*xScale, contour.Segments[segmentIndex + 1].P0.y*yScale, 0);
                        
                        controlPointsOfaM.Add(mysegment);
                    }

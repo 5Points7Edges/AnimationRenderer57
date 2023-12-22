@@ -11,7 +11,11 @@ Shader "Custom/BezierTest/fillTest12"
     {
         Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent"}
         LOD 100
-
+        
+        GrabPass
+        {
+            "_BackgroundTexture"
+        }
 
         Pass
         {
@@ -19,9 +23,11 @@ Shader "Custom/BezierTest/fillTest12"
             Cull Off
 
             ZWrite Off
-            BlendOp Add , Add
-            Blend SrcAlpha OneMinusSrcAlpha , OneMinusDstAlpha One
-
+            
+            BlendOp Add, Add
+            Blend SrcAlpha OneMinusSrcAlpha, OneMinusDstAlpha One
+            //Blend Off
+            
             HLSLPROGRAM
 
             #pragma target 5.0
@@ -130,11 +136,12 @@ Shader "Custom/BezierTest/fillTest12"
             fixed4 frag (v2f input) : SV_Target
             {
                 float4 finalColor=_Color;
-                finalColor.a*=0.95;
+                float4 a=finalColor.a*0.95;
                 if(input.orientation<0)
                 {
-                    finalColor.a = -finalColor.a / (1 - finalColor.a);
+                    a = -a / (1-a);
                 }
+                finalColor.a=a;
                 //return finalColor;
                 if (input.fillAll==1)return finalColor;
                 
