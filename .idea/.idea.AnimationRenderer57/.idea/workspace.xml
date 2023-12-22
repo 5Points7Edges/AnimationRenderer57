@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="make some functions static, delete unused functions">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.4/AnimationTest11.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.4/AnimationTest11.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.4/CurveDrawer11.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.4/CurveDrawer11.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.4/fillTest11.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.4/fillTest11.shader" afterDir="false" />
-    </list>
+    <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,9 +44,11 @@
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.2/SubPath9.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/AnimationTest11.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/BezierCurves/0.3.4/AnimationTest11.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/BezierCurves/0.3.4/AnimationTest11.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/CurveDrawer11.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/Math.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/Structure.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/Scenes/MorphingTest.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/Scenes/MorphingTest.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/Scenes/MorphingTest.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_BaseEditorPanel.cs" root0="SKIP_HIGHLIGHTING" />
@@ -238,7 +235,7 @@
       <workItem from="1702494254816" duration="8792000" />
       <workItem from="1703158687729" duration="13977000" />
       <workItem from="1703172834326" duration="15658000" />
-      <workItem from="1703200705823" duration="2920000" />
+      <workItem from="1703200705823" duration="3070000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -384,7 +381,23 @@
       <option name="project" value="LOCAL" />
       <updated>1703202320495</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="small changes">
+      <option name="closed" value="true" />
+      <created>1703203777600</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1703203777600</updated>
+    </task>
+    <task id="LOCAL-00020" summary="save">
+      <option name="closed" value="true" />
+      <created>1703203787691</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1703203787691</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -425,7 +438,6 @@
     <MESSAGE value="Complete Demo Version 0.3.0" />
     <MESSAGE value="Restructuring the whole projects&#10;Adding important comments to each version of the renderer" />
     <MESSAGE value="make new dir" />
-    <MESSAGE value="save" />
     <MESSAGE value="update to 0.3.1 SVGRenderer is now robust" />
     <MESSAGE value="The simplest animation implemented" />
     <MESSAGE value="create a simple Morphing" />
@@ -435,7 +447,9 @@
     <MESSAGE value="update 0.3.4 find the best sequence of curves to morph" />
     <MESSAGE value="add some comments" />
     <MESSAGE value="make some functions static, delete unused functions" />
-    <option name="LAST_COMMIT_MESSAGE" value="make some functions static, delete unused functions" />
+    <MESSAGE value="small changes" />
+    <MESSAGE value="save" />
+    <option name="LAST_COMMIT_MESSAGE" value="save" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
