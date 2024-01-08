@@ -22,7 +22,7 @@ public class CurveDrawer12 : MonoBehaviour
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
 
-    public bool showDebug=true;
+    public bool showDebug=false;
     
     private GameObject shape;
     struct CurveDataWrapper

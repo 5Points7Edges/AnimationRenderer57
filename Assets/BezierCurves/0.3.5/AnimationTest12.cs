@@ -73,11 +73,12 @@ public class AnimationTest12 : MonoBehaviour
                        var segment = contour.Segments[segmentIndex];
                        
                        Segment12 mysegment = new Segment12();
-                       float xScale = 1f, yScale = -1f;
-                       mysegment.p0 = new Vector3(segment.P0.x*xScale, segment.P0.y*yScale, 0);
-                       mysegment.p1 = new Vector3(segment.P1.x*xScale, segment.P1.y*yScale, 0);
-                       mysegment.p2 = new Vector3(segment.P2.x*xScale, segment.P2.y*yScale, 0);
-                       mysegment.p3 = new Vector3(contour.Segments[segmentIndex + 1].P0.x*xScale, contour.Segments[segmentIndex + 1].P0.y*yScale, 0);
+                       float xScale = 1f, yScale = 1f;
+                       float xDelta = 0, yDelta = 0; 
+                       mysegment.p0 = new Vector3(segment.P0.x*xScale+xDelta, segment.P0.y*yScale+yDelta, -9);
+                       mysegment.p1 = new Vector3(segment.P1.x*xScale+xDelta, segment.P1.y*yScale+yDelta, -9);
+                       mysegment.p2 = new Vector3(segment.P2.x*xScale+xDelta, segment.P2.y*yScale+yDelta, -9);
+                       mysegment.p3 = new Vector3(contour.Segments[segmentIndex + 1].P0.x*xScale+xDelta, contour.Segments[segmentIndex + 1].P0.y*yScale+yDelta, -9);
                        
                        controlPointsOfaM.Add(mysegment);
                    }
@@ -112,7 +113,7 @@ public class AnimationTest12 : MonoBehaviour
                        
                         Segment12 mysegment = new Segment12();
 
-                        float xDelta = 2, yDelta = -10;
+                        float xDelta = -10, yDelta = 0;
                         mysegment.p0= new Vector3(segment.P0.x+xDelta, -segment.P0.y+yDelta, 0);
                         mysegment.p1 = new Vector3(segment.P1.x+xDelta, -segment.P1.y+yDelta, 0);
                         mysegment.p2 = new Vector3(segment.P2.x+xDelta, -segment.P2.y+yDelta, 0);

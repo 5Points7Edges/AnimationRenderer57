@@ -27,7 +27,8 @@ Shader "Custom/BezierTest/fillTest12"
             BlendOp Add, Add
             Blend SrcAlpha OneMinusSrcAlpha, OneMinusDstAlpha One
             //Blend Off
-            
+            //BlendOp LogicalXor
+            //Blend One One
             HLSLPROGRAM
 
             #pragma target 5.0
@@ -139,7 +140,7 @@ Shader "Custom/BezierTest/fillTest12"
                 float4 a=finalColor.a*0.95;
                 if(input.orientation<0)
                 {
-                    a = -a / (1-a);
+                   a = -a / (1-a);
                 }
                 finalColor.a=a;
                 //return finalColor;
