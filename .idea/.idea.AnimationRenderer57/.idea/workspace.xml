@@ -8,7 +8,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/AnimationTest12.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/AnimationTest12.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/CurveDrawer12.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/CurveDrawer12.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/fillTest12.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/fillTest12.shader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/Math.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/Math.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/Structure.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/Structure.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGTestFiles/ChuShiBiao Short.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/SVGTestFiles/ChuShiBiao Short.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,7 +85,7 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;CodeLensConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -245,7 +247,11 @@
       <workItem from="1703282659966" duration="2201000" />
       <workItem from="1704398601178" duration="1246000" />
       <workItem from="1704662067994" duration="1872000" />
-      <workItem from="1704735474208" duration="1788000" />
+      <workItem from="1704735474208" duration="2601000" />
+      <workItem from="1704738110058" duration="1739000" />
+      <workItem from="1704816900681" duration="5120000" />
+      <workItem from="1704823414465" duration="543000" />
+      <workItem from="1704827888567" duration="2683000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -423,7 +429,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703281633740</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Add secondary rendering">
+      <option name="closed" value="true" />
+      <created>1704737371194</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1704737371194</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -477,7 +491,8 @@
     <MESSAGE value="save" />
     <MESSAGE value="new version" />
     <MESSAGE value="add new test file. curve length can now be the same" />
-    <option name="LAST_COMMIT_MESSAGE" value="add new test file. curve length can now be the same" />
+    <MESSAGE value="Add secondary rendering" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add secondary rendering" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

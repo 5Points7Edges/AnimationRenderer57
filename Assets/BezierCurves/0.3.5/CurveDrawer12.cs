@@ -153,14 +153,14 @@ public class CurveDrawer12 : MonoBehaviour
             {
                 float currentTotalDistance = calculateTotalDistance(i,contourInitial,contourFinal);
                 
-                Debug.Log(currentTotalDistance+" "+i);
+                //Debug.Log(currentTotalDistance+" "+i);
                 if (currentTotalDistance> minDistance)
                 {
                     minDistance = currentTotalDistance;
                     bestStartID = i;
                 }
             }
-            Debug.Log(bestStartID);
+            //Debug.Log(bestStartID);
             //bestStartID = 6;
             int count = contourInitial.segments.Count();
             //Debug.Log(contourInitial);

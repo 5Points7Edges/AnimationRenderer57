@@ -48,6 +48,19 @@ public class Segment12
         return totalLength;
     }
 
+    public void reverse()
+    {
+        (p0,p3)=(p3,p0);
+        (p1,p2)=(p2,p1);
+    }
+    public void rotate(float radian)
+    {
+        p0 = math12.RotateRadians(p0, radian);
+        p1 = math12.RotateRadians(p1, radian);
+        p2 = math12.RotateRadians(p2, radian);
+        p3 = math12.RotateRadians(p3, radian);
+    }
+
     public override string ToString()
     {
         return p0 + " " + p1 + " " + p2 + " " + p3;
@@ -78,6 +91,23 @@ public class SubPath12
         segments.Add(newSegment);
     }
 
+    public SubPath12 transform(float x, float y)
+    {
+        SubPath12 tmp = new SubPath12();
+        foreach (var segment in segments)
+        {
+            Segment12 ttmp = new Segment12();
+            ttmp.p0 = new Vector3(segment.p0.x + x, segment.p0.y + y, 0);
+            ttmp.p1 = new Vector3(segment.p1.x + x, segment.p1.y + y, 0);
+            ttmp.p2 = new Vector3(segment.p2.x + x, segment.p2.y + y, 0);
+            ttmp.p3 = new Vector3(segment.p3.x + x, segment.p3.y + y, 0);
+            ttmp.length = segment.length;
+            tmp.segments.Add(ttmp);
+        }
+
+        tmp.orientation = this.orientation;
+        return tmp;
+    }
     public override string ToString()
     {
         Debug.Log("----------------------------");
@@ -104,5 +134,15 @@ public class Path12
     public void Add(SubPath12 newSubPath)
     {
         subPaths.Add(newSubPath);
+    }
+
+    public Path12 transform(float x, float y)
+    {
+        List<SubPath12> tmp = new List<SubPath12>();
+        foreach (var subpath in subPaths)
+        {
+            tmp.Add(subpath.transform(x,y));
+        }
+        return new Path12(tmp);
     }
 }

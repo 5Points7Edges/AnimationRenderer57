@@ -5,7 +5,8 @@ using System.IO;
 using UnityEngine;
 using Unity.VectorGraphics;
 using Unity.VisualScripting;
-
+using System.Text.RegularExpressions;
+using System.Linq;
 /*
  * Author:Thomas Lu
  * v0.3.5
@@ -18,6 +19,9 @@ public class AnimationTest12 : MonoBehaviour
     public Material material;
     public Material visualM;
     private List<GameObject> allShapeGameObjects = new List<GameObject>();
+
+    private List<Path12> sourceData = new List<Path12>();
+    private List<Path12> targetData = new List<Path12>();
     
     public TextAsset sourceSVGFile;
     public TextAsset targetSVGFile;
@@ -38,19 +42,129 @@ public class AnimationTest12 : MonoBehaviour
             Debug.LogError("Please Assign a material on the inspector");
             return;
         }
-
         
-        parseSVGFile(sourceSVGFile.text);
+        parseSVGFile(sourceSVGFile.text,sourceData);
+        parseTargetSVGFile(targetSVGFile.text,targetData);
+        
+        
+        //Debug.Log(allShapeGameObjects.Count);
+        //parseTargetSVGFile(targetSVGFile.text);
 
-        parseTargetSVGFile(targetSVGFile.text);
+        List<string> idList=IDParsing(sourceSVGFile.text);
+        List<Coordinate> co=CoordinatesParsing(sourceSVGFile.text);
+        
 
+        for (int i = 0; i < co.Count; i++)
+        {
+            int distinctID = idList.IndexOf(co[i].pathID);
+            Debug.Log(idList[distinctID]);
+            GameObject gameObject = new GameObject("shape["+i+"]");
+            gameObject.AddComponent<MeshFilter>();
+            gameObject.AddComponent<MeshRenderer>();
+            gameObject.AddComponent<CurveDrawer12>();
+            gameObject.GetComponent<CurveDrawer12>().material = new Material(material);
+            gameObject.GetComponent<CurveDrawer12>().visualM = visualM;
+            gameObject.transform.parent = transform;
+            gameObject.GetComponent<CurveDrawer12>().pathInitial=sourceData[distinctID].transform(co[i].x,co[i].y);
+            gameObject.GetComponent<CurveDrawer12>().pathEnd=targetData[distinctID].transform(co[i].x,co[i].y);
+            allShapeGameObjects.Add(gameObject);
+        }
+        
+        for (int i = 0; i < idList.Count; i++)
+        {
+            //Debug.Log(idList[i]);
+        }
+        for (int i = 0; i < co.Count; i++)
+        {
+            //Debug.Log(co[i].pathID+" "+i);
+        }
     }
+    struct Coordinate
+    {
+        public float x, y;
+        public string pathID;
+    }
+    class SVGCommand
+    {
+        public char command {get; private set;}
+        public float[] arguments {get; private set;}
 
-    public void parseSVGFile(string data)
+        public SVGCommand(char command, params float[] arguments)
+        {
+            this.command=command;
+            this.arguments=arguments;
+        }
+
+        public static SVGCommand Parse(string SVGpathstring)
+        {
+            var cmd = SVGpathstring.Take(1).Single();
+            string remainingargs = SVGpathstring.Substring(1);
+
+            string argSeparators = @"[\s,]|(?=-)";
+            var splitArgs = Regex
+                .Split(remainingargs, argSeparators)
+                .Where(t => !string.IsNullOrEmpty(t));
+
+            float[] floatArgs = splitArgs.Select(arg => float.Parse(arg)).ToArray();
+            return new SVGCommand(cmd,floatArgs);
+        }
+    }
+    List<Coordinate> CoordinatesParsing(string input)
+    {
+        List < Coordinate > result = new List < Coordinate >();
+        string pattern = @"<use\s*x\s*=\s*[""']([^""']*)[""']\s*[^>]*y\s*=\s*[""']([^""']*)[""'][^>]*xlink:href\s*=\s*[""']#([^""']*)[""'][^>]*>";
+
+        Regex regex = new Regex(pattern);
+
+        Match match = regex.Match(input);
+
+
+        while (match.Success)
+        {
+            Coordinate coord;
+            coord.x = float.Parse(match.Groups[1].Value);
+            coord.y = float.Parse(match.Groups[2].Value);
+            coord.pathID= match.Groups[3].Value;
+            result.Add(coord);
+            match = match.NextMatch();
+        }
+
+        if (result.Count == 0)
+        {
+            Debug.Log("No PathCoordinate Found");
+        }
+        return result;
+    }
+    List<string> IDParsing(string input)
+    {
+        List < string > result = new List < string >();
+        string pattern = @"<path\s*id\s*=\s*[""']([^""']*)[""']\s*[^>]*>";
+
+        Regex regex = new Regex(pattern);
+
+        Match match = regex.Match(input);
+        
+        while (match.Success)
+        {
+            string id = match.Groups[1].Value;
+            result.Add(id);
+            
+            match = match.NextMatch();
+        }
+
+        if (result.Count == 0)
+        {
+            Debug.Log("No PathID Found");
+        }
+        return result;
+    }
+    public void parseSVGFile(string data,List<Path12> structuredData)
     {
         StringReader textReader = new StringReader(data);
         var sceneInfo = SVGParser.ImportSVG(textReader);
         Debug.Log(sceneInfo.NodeIDs.Count);
+
+        
         
         foreach (var path in sceneInfo.NodeIDs) //each Path
         {
@@ -58,13 +172,8 @@ public class AnimationTest12 : MonoBehaviour
             if (path.Value.Shapes == null) continue;
             foreach (var shape in path.Value.Shapes)
             {
-               GameObject gameObject = new GameObject("shape");
-               gameObject.AddComponent<MeshFilter>();
-               gameObject.AddComponent<MeshRenderer>();
-               gameObject.AddComponent<CurveDrawer12>();
-               gameObject.GetComponent<CurveDrawer12>().material = new Material(material);
-               gameObject.GetComponent<CurveDrawer12>().visualM = visualM;
-               gameObject.transform.parent = transform;
+                
+                Path12 readData = new Path12();
                foreach (var contour in shape.Contours) //each closed M Or a SubPath
                {
                    SubPath12 controlPointsOfaM = new SubPath12();
@@ -73,37 +182,39 @@ public class AnimationTest12 : MonoBehaviour
                        var segment = contour.Segments[segmentIndex];
                        
                        Segment12 mysegment = new Segment12();
-                       float xScale = 1f, yScale = 1f;
+                       float xScale = 1f, yScale = -1f;
                        float xDelta = 0, yDelta = 0; 
                        mysegment.p0 = new Vector3(segment.P0.x*xScale+xDelta, segment.P0.y*yScale+yDelta, -9);
                        mysegment.p1 = new Vector3(segment.P1.x*xScale+xDelta, segment.P1.y*yScale+yDelta, -9);
                        mysegment.p2 = new Vector3(segment.P2.x*xScale+xDelta, segment.P2.y*yScale+yDelta, -9);
                        mysegment.p3 = new Vector3(contour.Segments[segmentIndex + 1].P0.x*xScale+xDelta, contour.Segments[segmentIndex + 1].P0.y*yScale+yDelta, -9);
-                       
+                       //mysegment.rotate(3.1416f);
+                       mysegment.reverse();
                        controlPointsOfaM.Add(mysegment);
                    }
-                   
-                   gameObject.GetComponent<CurveDrawer12>().pathInitial.Add(controlPointsOfaM);
+                   readData.Add(controlPointsOfaM);
                } 
-               allShapeGameObjects.Add(gameObject);
+               structuredData.Add(readData);
             }
         }
     }
 
-    public void parseTargetSVGFile(string data)
+    public void parseTargetSVGFile(string data,List<Path12> structuredData)
     {
         StringReader textReader = new StringReader(data);
         var sceneInfo = SVGParser.ImportSVG(textReader);
         Debug.Log(sceneInfo.NodeIDs.Count);
-        int i = 0;
+
+        
         
         foreach (var path in sceneInfo.NodeIDs) //each Path
         {
+            Debug.Log("Haha");
             if (path.Value.Shapes == null) continue;
             foreach (var shape in path.Value.Shapes)
             {
                 
-                GameObject gameObject = allShapeGameObjects[i];
+                Path12 readData = new Path12();
                 foreach (var contour in shape.Contours) //each closed M Or a SubPath
                 {
                     SubPath12 controlPointsOfaM = new SubPath12();
@@ -112,33 +223,23 @@ public class AnimationTest12 : MonoBehaviour
                         var segment = contour.Segments[segmentIndex];
                        
                         Segment12 mysegment = new Segment12();
-
-                        float xDelta = -10, yDelta = 0;
-                        mysegment.p0= new Vector3(segment.P0.x+xDelta, -segment.P0.y+yDelta, 0);
-                        mysegment.p1 = new Vector3(segment.P1.x+xDelta, -segment.P1.y+yDelta, 0);
-                        mysegment.p2 = new Vector3(segment.P2.x+xDelta, -segment.P2.y+yDelta, 0);
-                        mysegment.p3 = new Vector3(contour.Segments[segmentIndex + 1].P0.x+xDelta, -contour.Segments[segmentIndex + 1].P0.y+yDelta, 0);
-
-                        //mysegment.p0 = RotateRadians(mysegment.p0,3.14f/6);
-                        //mysegment.p1 = RotateRadians(mysegment.p1,3.14f/6);
-                        //mysegment.p2 = RotateRadians(mysegment.p2,3.14f/6);
-                        //mysegment.p3 = RotateRadians(mysegment.p3,3.14f/6);
+                        float xScale = 1f, yScale = -1f;
+                        float xDelta = 10, yDelta = 0; 
+                        mysegment.p0 = new Vector3(segment.P0.x*xScale+xDelta, segment.P0.y*yScale+yDelta, -9);
+                        mysegment.p1 = new Vector3(segment.P1.x*xScale+xDelta, segment.P1.y*yScale+yDelta, -9);
+                        mysegment.p2 = new Vector3(segment.P2.x*xScale+xDelta, segment.P2.y*yScale+yDelta, -9);
+                        mysegment.p3 = new Vector3(contour.Segments[segmentIndex + 1].P0.x*xScale+xDelta, contour.Segments[segmentIndex + 1].P0.y*yScale+yDelta, -9);
+                        //mysegment.rotate(3.1416f);
+                        mysegment.reverse();
                         controlPointsOfaM.Add(mysegment);
                     }
-                    //controlPointsOfaM.segments.Reverse();
-                   
-                    gameObject.GetComponent<CurveDrawer12>().pathEnd.Add(controlPointsOfaM);
-                }
-                i++;
+                    readData.Add(controlPointsOfaM);
+                } 
+                structuredData.Add(readData);
             }
         }
     }
-    public Vector3 RotateRadians(Vector3 v, float radians)
-    {
-        var ca = (float)Math.Cos(radians);
-        var sa = (float)Math.Sin(radians);
-        return new Vector3(ca*v.x - sa*v.y, sa*v.x + ca*v.y,0);
-    }
+    
     public void OnAnimationStartOrStop()
     {
         animationEnable = !animationEnable;
