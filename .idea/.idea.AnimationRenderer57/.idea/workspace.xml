@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="">
+    <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="add more compatibility for svg">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/AnimationTest12.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/AnimationTest12.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/CurveDrawer12.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/CurveDrawer12.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/Math.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/Math.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/Structure.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/Structure.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/SVGTestFiles/ChuShiBiao Short.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/SVGTestFiles/ChuShiBiao Short.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/TexTestFiles/empty.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/TexTestFiles/empty.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,6 +52,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/CurveDrawer11.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/Math.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/Structure.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/BezierCurves/0.3.5/AnimationTest12.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/BezierCurves/0.3.5/AnimationTest12.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.5/Structure.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_BaseEditorPanel.cs" root0="SKIP_HIGHLIGHTING" />
@@ -251,7 +250,9 @@
       <workItem from="1704738110058" duration="1739000" />
       <workItem from="1704816900681" duration="5120000" />
       <workItem from="1704823414465" duration="543000" />
-      <workItem from="1704827888567" duration="2683000" />
+      <workItem from="1704827888567" duration="3299000" />
+      <workItem from="1704907793575" duration="516000" />
+      <workItem from="1704913384507" duration="9496000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -437,7 +438,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704737371194</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="add more compatibility for svg">
+      <option name="closed" value="true" />
+      <created>1704831506432</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1704831506432</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -492,7 +501,8 @@
     <MESSAGE value="new version" />
     <MESSAGE value="add new test file. curve length can now be the same" />
     <MESSAGE value="Add secondary rendering" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add secondary rendering" />
+    <MESSAGE value="add more compatibility for svg" />
+    <option name="LAST_COMMIT_MESSAGE" value="add more compatibility for svg" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

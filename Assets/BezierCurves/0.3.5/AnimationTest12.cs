@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 //using System.Numerics;
 using UnityEngine;
@@ -7,6 +9,11 @@ using Unity.VectorGraphics;
 using Unity.VisualScripting;
 using System.Text.RegularExpressions;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using UnityEngine.Serialization;
+using Debug = UnityEngine.Debug;
+
 /*
  * Author:Thomas Lu
  * v0.3.5
@@ -23,41 +30,71 @@ public class AnimationTest12 : MonoBehaviour
     private List<Path12> sourceData = new List<Path12>();
     private List<Path12> targetData = new List<Path12>();
     
-    public TextAsset sourceSVGFile;
-    public TextAsset targetSVGFile;
     
     public float speed = 1;
     private float val=0;
     
     private float timer = 0;
     public bool animationEnable=false;
-
-
+    
+    public String sourceFileName;
+    public String targetFileName;
+    private string workFolder = @"E:\SVGCache\";
+    
     // Start is called before the first frame update
     void Start()
     {
-        Console.WriteLine($"Value of d attribute: ");
+        
+        if (sourceFileName == "") sourceFileName = "CSB";
+        if (targetFileName == "") targetFileName = "CSB";
         if (!material)
         {
             Debug.LogError("Please Assign a material on the inspector");
             return;
         }
+        if (!File.Exists(workFolder + sourceFileName + ".tex"))
+        {
+            Debug.LogError("source Tex File do not exist");
+            return;
+        }
+        if (!File.Exists(workFolder + targetFileName + ".tex"))
+        {
+            Debug.LogError("target Tex File do not exist");
+            return;
+        }
+        if (!File.Exists(workFolder + sourceFileName + ".svg"))
+        {
+            compile(sourceFileName);
+        }
+        if (!File.Exists(workFolder + targetFileName + ".svg"))
+        {
+            compile(targetFileName);
+        }
+
+        //string sourceSVGString = sourceSVGFile.text;
+        string sourceSVGString=File.ReadAllText(workFolder+sourceFileName+".svg");
         
-        parseSVGFile(sourceSVGFile.text,sourceData);
-        parseTargetSVGFile(targetSVGFile.text,targetData);
+        //string targetSVGString = targetSVGFile.text;
+        string targetSVGString = File.ReadAllText(workFolder+targetFileName+".svg");
+        
+        parseSVGFile(sourceSVGString,sourceData);
+        parseTargetSVGFile(targetSVGString,targetData);
         
         
         //Debug.Log(allShapeGameObjects.Count);
         //parseTargetSVGFile(targetSVGFile.text);
-
-        List<string> idList=IDParsing(sourceSVGFile.text);
-        List<Coordinate> co=CoordinatesParsing(sourceSVGFile.text);
+        
+        List<string> idSource=IDParsing(sourceSVGString);
+        List<Coordinate> coordinatesSource=CoordinatesParsing(sourceSVGString);
+        
+        List<string> idTarget=IDParsing(targetSVGString);
+        List<Coordinate> coordinatesTarget=CoordinatesParsing(targetSVGString);
         
 
-        for (int i = 0; i < co.Count; i++)
+        for (int i = 0; i < Math.Min(coordinatesSource.Count,coordinatesTarget.Count); i++)
         {
-            int distinctID = idList.IndexOf(co[i].pathID);
-            Debug.Log(idList[distinctID]);
+            int distinctID = idSource.IndexOf(coordinatesSource[i].pathID);
+            //Debug.Log(idSource[distinctID]);
             GameObject gameObject = new GameObject("shape["+i+"]");
             gameObject.AddComponent<MeshFilter>();
             gameObject.AddComponent<MeshRenderer>();
@@ -65,19 +102,46 @@ public class AnimationTest12 : MonoBehaviour
             gameObject.GetComponent<CurveDrawer12>().material = new Material(material);
             gameObject.GetComponent<CurveDrawer12>().visualM = visualM;
             gameObject.transform.parent = transform;
-            gameObject.GetComponent<CurveDrawer12>().pathInitial=sourceData[distinctID].transform(co[i].x,co[i].y);
-            gameObject.GetComponent<CurveDrawer12>().pathEnd=targetData[distinctID].transform(co[i].x,co[i].y);
+            gameObject.GetComponent<CurveDrawer12>().pathInitial=sourceData[distinctID].transform(coordinatesSource[i].x,coordinatesSource[i].y);
+            gameObject.GetComponent<CurveDrawer12>().pathEnd=targetData[distinctID].transform(coordinatesTarget[i].x,coordinatesTarget[i].y);
             allShapeGameObjects.Add(gameObject);
         }
         
-        for (int i = 0; i < idList.Count; i++)
+        
+    }
+
+    public void compile(string filename)
+    {
+        Process cmd = new Process();
+        cmd.StartInfo.FileName = @"xelatex";
+        cmd.StartInfo.WorkingDirectory = workFolder; 
+        cmd.StartInfo.CreateNoWindow = true;
+        cmd.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+        string param1 = "-no-pdf", param2 = filename+".tex";
+        cmd.StartInfo.Arguments = param1+" "+param2;
+        cmd.Start();
+        while (!cmd.HasExited)
         {
-            //Debug.Log(idList[i]);
+            
         }
-        for (int i = 0; i < co.Count; i++)
+        Debug.Log("xelatex compiled");
+        cmd = new Process();
+        cmd.StartInfo.FileName = @"dvisvgm";
+        cmd.StartInfo.UseShellExecute = false;
+        cmd.StartInfo.RedirectStandardInput = true;
+        cmd.StartInfo.RedirectStandardOutput = true;
+        cmd.StartInfo.WorkingDirectory = workFolder;
+        cmd.StartInfo.CreateNoWindow = true;
+        cmd.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+        string param3 = "-n -v 0";
+        string param4 = filename+".xdv";
+        cmd.StartInfo.Arguments = param3+" "+param4;
+        cmd.Start();
+        while (!cmd.HasExited)
         {
-            //Debug.Log(co[i].pathID+" "+i);
+            
         }
+        Debug.Log("dvisvgm compiled");
     }
     struct Coordinate
     {
@@ -123,7 +187,7 @@ public class AnimationTest12 : MonoBehaviour
         {
             Coordinate coord;
             coord.x = float.Parse(match.Groups[1].Value);
-            coord.y = float.Parse(match.Groups[2].Value);
+            coord.y = -float.Parse(match.Groups[2].Value);
             coord.pathID= match.Groups[3].Value;
             result.Add(coord);
             match = match.NextMatch();
@@ -162,13 +226,13 @@ public class AnimationTest12 : MonoBehaviour
     {
         StringReader textReader = new StringReader(data);
         var sceneInfo = SVGParser.ImportSVG(textReader);
-        Debug.Log(sceneInfo.NodeIDs.Count);
+        //Debug.Log(sceneInfo.NodeIDs.Count);
 
         
         
         foreach (var path in sceneInfo.NodeIDs) //each Path
         {
-            Debug.Log("Haha");
+            //Debug.Log("Haha");
             if (path.Value.Shapes == null) continue;
             foreach (var shape in path.Value.Shapes)
             {
@@ -203,13 +267,13 @@ public class AnimationTest12 : MonoBehaviour
     {
         StringReader textReader = new StringReader(data);
         var sceneInfo = SVGParser.ImportSVG(textReader);
-        Debug.Log(sceneInfo.NodeIDs.Count);
+        //Debug.Log(sceneInfo.NodeIDs.Count);
 
         
         
         foreach (var path in sceneInfo.NodeIDs) //each Path
         {
-            Debug.Log("Haha");
+            //Debug.Log("Haha");
             if (path.Value.Shapes == null) continue;
             foreach (var shape in path.Value.Shapes)
             {
