@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="add more compatibility for svg">
+    <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/AnimationTest12.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/AnimationTest12.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/TexTestFiles/empty.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/TexTestFiles/empty.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/CurveDrawer12.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/CurveDrawer12.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/fillTest12.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/fillTest12.shader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/finalize.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/finalize.shader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/finalized.renderTexture" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/finalized.renderTexture" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,8 +54,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/CurveDrawer11.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/Math.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/Structure.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/BezierCurves/0.3.5/AnimationTest12.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/BezierCurves/0.3.5/AnimationTest12.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.5/Structure.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_BaseEditorPanel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_FontAssetEditor.cs" root0="SKIP_HIGHLIGHTING" />
@@ -252,7 +252,9 @@
       <workItem from="1704823414465" duration="543000" />
       <workItem from="1704827888567" duration="3299000" />
       <workItem from="1704907793575" duration="516000" />
-      <workItem from="1704913384507" duration="9496000" />
+      <workItem from="1704913384507" duration="10309000" />
+      <workItem from="1704973278695" duration="480000" />
+      <workItem from="1704987664464" duration="6416000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -446,7 +448,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704831506432</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Add xelatex and dvisvgm compilation">
+      <option name="closed" value="true" />
+      <created>1704923424491</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1704923424491</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -502,7 +512,8 @@
     <MESSAGE value="add new test file. curve length can now be the same" />
     <MESSAGE value="Add secondary rendering" />
     <MESSAGE value="add more compatibility for svg" />
-    <option name="LAST_COMMIT_MESSAGE" value="add more compatibility for svg" />
+    <MESSAGE value="Add xelatex and dvisvgm compilation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add xelatex and dvisvgm compilation" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

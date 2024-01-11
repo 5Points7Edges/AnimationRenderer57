@@ -7,13 +7,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-public class CurveDrawer12 : MonoBehaviour
+public class CurveDrawer13 : MonoBehaviour
 {
-    public Path12 pathInitial = new Path12();
+    public Path13 pathInitial = new Path13();
     
-    public Path12 pathEnd = new Path12();
+    public Path13 pathEnd = new Path13();
     
-    public Path12 pathCurrent = new Path12();
+    public Path13 pathCurrent = new Path13();
     
     public Material material;
     public Material visualM;
@@ -60,10 +60,10 @@ public class CurveDrawer12 : MonoBehaviour
         
         for (int i = 0; i < pathInitial.subPaths.Count(); i++)
         {
-            SubPath12 tmp = new SubPath12();
+            SubPath13 tmp = new SubPath13();
             for (int j = 0; j < pathInitial.subPaths[i].segments.Count();j++)
             {
-                tmp.Add(new Segment12(pathInitial.subPaths[i].segments[j]));    
+                tmp.Add(new Segment13(pathInitial.subPaths[i].segments[j]));    
             }
             pathCurrent.Add(tmp);
         }
@@ -84,7 +84,7 @@ public class CurveDrawer12 : MonoBehaviour
         
         for (int i = 0; i < pathCurrent.subPaths.Count; i++)
         {
-            SubPath12 controlPointsSubPath=pathCurrent.subPaths[i];
+            SubPath13 controlPointsSubPath=pathCurrent.subPaths[i];
             
             List<Vector3> boundingBoxVerticesInTriangleStrip = ComputeBoundingBox(pathCurrent.subPaths[i]);
             foreach (Vector3 point in boundingBoxVerticesInTriangleStrip)
@@ -142,8 +142,8 @@ public class CurveDrawer12 : MonoBehaviour
     {
         for (int contourIndex = 0; contourIndex < pathInitial.subPaths.Count; contourIndex++)
         {
-            SubPath12 contourInitial = pathInitial.subPaths[contourIndex];
-            SubPath12 contourFinal = pathEnd.subPaths[contourIndex];
+            SubPath13 contourInitial = pathInitial.subPaths[contourIndex];
+            SubPath13 contourFinal = pathEnd.subPaths[contourIndex];
             int bestStartID = 0;
             float minDistance = int.MaxValue;
             //minDistance = 0;
@@ -164,11 +164,11 @@ public class CurveDrawer12 : MonoBehaviour
             //Debug.Log(contourInitial);
             
             contourInitial.segments = contourInitial.segments.GetRange(bestStartID, count - bestStartID).Concat(
-                contourInitial.segments.GetRange(0, bestStartID)).ToList<Segment12>();
+                contourInitial.segments.GetRange(0, bestStartID)).ToList<Segment13>();
         }
     }
 
-    public float calculateTotalDistance(int startID,SubPath12 contourInitial,SubPath12 contourEnd)
+    public float calculateTotalDistance(int startID,SubPath13 contourInitial,SubPath13 contourEnd)
     {
         List<float> distanceList = new List<float>();
         float sum = 0;
@@ -202,9 +202,9 @@ public class CurveDrawer12 : MonoBehaviour
         {
             List<lengthPair> lengthList = new List<lengthPair>();
             
-            SubPath12 contourInitial = pathInitial.subPaths[contourIndex];
+            SubPath13 contourInitial = pathInitial.subPaths[contourIndex];
             
-            SubPath12 contourFinal = pathEnd.subPaths[contourIndex];
+            SubPath13 contourFinal = pathEnd.subPaths[contourIndex];
 
             if (contourInitial.segments.Count() > contourFinal.segments.Count())
             {
@@ -240,12 +240,12 @@ public class CurveDrawer12 : MonoBehaviour
                 //Debug.Log("--------------------------"+PointsNeedToAdd);
                 //for(int  i=0;i<contourInitial.segments.Count();i++)Debug.Log(contourInitial.segments[i]);
                 
-                Segment12 firstCurve = new Segment12();
+                Segment13 firstCurve = new Segment13();
                 firstCurve.p0 = splittedCurve.Item1;
                 firstCurve.p1 = splittedCurve.Item2;
                 firstCurve.p2 = splittedCurve.Item3;
                 firstCurve.p3 = splittedCurve.Item4;
-                Segment12 secondCurve = new Segment12();
+                Segment13 secondCurve = new Segment13();
                 secondCurve.p0 = splittedCurve.Item5;
                 secondCurve.p1 = splittedCurve.Item6;
                 secondCurve.p2 = splittedCurve.Item7;
@@ -273,9 +273,9 @@ public class CurveDrawer12 : MonoBehaviour
         }
     }
 
-    public static List<Vector3> ComputeBoundingBox(SubPath12 subPath)
+    public static List<Vector3> ComputeBoundingBox(SubPath13 subPath)
     {
-        List<Segment12> points = subPath.segments;
+        List<Segment13> points = subPath.segments;
         List<Vector3> boundingBoxVertices = new List<Vector3>();
 
         for(int i = 0; i < points.Count; i++)
@@ -296,7 +296,7 @@ public class CurveDrawer12 : MonoBehaviour
         return boundingBoxVertices;
     }
 
-    public static bool isOnBothSide(Segment12 segment)
+    public static bool isOnBothSide(Segment13 segment)
     {
         if (GetDirection(segment.p0, segment.p3, segment.p1) !=
             GetDirection(segment.p0, segment.p3, segment.p2)) return true;
@@ -325,7 +325,7 @@ public class CurveDrawer12 : MonoBehaviour
         
         for (int i = 0; i < pathCurrent.subPaths.Count(); i++)
         {
-            SubPath12 controlPointsSubPath=pathCurrent.subPaths[i];
+            SubPath13 controlPointsSubPath=pathCurrent.subPaths[i];
             
             List<Vector3> boundingBoxVerticesInTriangleStrip = ComputeBoundingBox(pathCurrent.subPaths[i]);
             foreach (Vector3 point in boundingBoxVerticesInTriangleStrip)
