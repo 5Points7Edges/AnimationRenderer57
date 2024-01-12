@@ -19,6 +19,7 @@ public class CurveDrawer13 : MonoBehaviour
     
     private ComputeBuffer curveDataBufferSource;
     private ComputeBuffer curveDataBufferTarget;
+    private ComputeBuffer verticesBufferTarget;
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
 
@@ -55,21 +56,11 @@ public class CurveDrawer13 : MonoBehaviour
     void Start()
     {
         insertExtraPoints();
-        findBestReihenfolge();
+        findtheBestOder();
         
         //Debug.Log(pathInitial.subPaths.Count);
         //Debug.Log(pathEnd.subPaths.Count);
-        /*
-        for (int i = 0; i < pathInitial.subPaths.Count(); i++)
-        {
-            SubPath13 tmp = new SubPath13();
-            for (int j = 0; j < pathInitial.subPaths[i].segments.Count();j++)
-            {
-                tmp.Add(new Segment13(pathInitial.subPaths[i].segments[j]));    
-            }
-            pathCurrent.Add(tmp);
-        }
-        */
+        
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
         List<Vector3> vertices= new List<Vector3>();
@@ -101,8 +92,9 @@ public class CurveDrawer13 : MonoBehaviour
                 ShaderinputDataWrapper.control1 = controlPointsSubPath.segments[j].p1;
                 ShaderinputDataWrapper.control2 = controlPointsSubPath.segments[j].p2;
                 ShaderinputDataWrapper.end = controlPointsSubPath.segments[j].p3;
+                
                 ShaderinputDataWrapper.basePointIndex = basePointIndexCounter;
-                //Debug.Log(ShaderinputDataWrapper.orientation1);
+                
                 ShaderinputDataWrappersSource.Add(ShaderinputDataWrapper);
             }
 
@@ -128,7 +120,9 @@ public class CurveDrawer13 : MonoBehaviour
                 ShaderinputDataWrapper.control1 = controlPointsSubPath.segments[j].p1;
                 ShaderinputDataWrapper.control2 = controlPointsSubPath.segments[j].p2;
                 ShaderinputDataWrapper.end = controlPointsSubPath.segments[j].p3;
+                
                 ShaderinputDataWrapper.basePointIndex = basePointIndexCounter;
+                
                 ShaderinputDataWrappersTarget.Add(ShaderinputDataWrapper);
             }
             basePointIndexCounter += controlPointsSubPath.segments.Count;
@@ -143,6 +137,7 @@ public class CurveDrawer13 : MonoBehaviour
         mesh.SetIndices(indices, MeshTopology.Triangles, 0);
         
         int stride = System.Runtime.InteropServices.Marshal.SizeOf(typeof(CurveDataWrapper));
+        
         curveDataBufferSource = new ComputeBuffer(ShaderinputDataWrappersSource.Count, stride);
         curveDataBufferSource.SetData(ShaderinputDataWrappersSource.ToArray());
         material.SetBuffer("curvess_buffer", curveDataBufferSource);
@@ -152,35 +147,17 @@ public class CurveDrawer13 : MonoBehaviour
         material.SetBuffer("curvest_buffer", curveDataBufferTarget);
         
         stride = System.Runtime.InteropServices.Marshal.SizeOf(typeof(Vector3));
-        ComputeBuffer verticesBufferTarget = new ComputeBuffer(verticesTarget.Count, stride);
-        //Debug.Log("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+        verticesBufferTarget = new ComputeBuffer(verticesTarget.Count, stride);
         verticesBufferTarget.SetData(verticesTarget.ToArray());
-        /*
-        for (int i = 0; i < verticesTarget.Count; i++)
-        {
-            Debug.Log(verticesTarget[i]);
-        }
-        */
         material.SetBuffer("verticestarget", verticesBufferTarget);
         
         meshFilter.mesh = mesh;
         meshRenderer.material = material;
         
-        /*
-        //Debug
-        mesh.SetIndices(indices, MeshTopology.LineStrip, 0);
-        shape = new GameObject("shapeDebug");
-        shape.AddComponent<MeshFilter>();
-        shape.AddComponent<MeshRenderer>();
-        shape.GetComponent<MeshRenderer>().material = visualM;
-        shape.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
-        shape.transform.parent = transform;
-        shape.transform.position+=new Vector3(0, 0, (float)-0.05);
-        //Debug End
-        */
+        
     }
 
-    public void findBestReihenfolge()
+    public void findtheBestOder()
     {
         for (int contourIndex = 0; contourIndex < pathInitial.subPaths.Count; contourIndex++)
         {
@@ -337,90 +314,17 @@ public class CurveDrawer13 : MonoBehaviour
         }
         return boundingBoxVertices;
     }
-
-    public static bool isOnBothSide(Segment13 segment)
-    {
-        if (GetDirection(segment.p0, segment.p3, segment.p1) !=
-            GetDirection(segment.p0, segment.p3, segment.p2)) return true;
-        return false;
-    }
-    //n = u(x1, y1, z1) x v(x2, y2, z2) = (y1z2 - y2z1, x2z1-z2x1, x1y2 -x2y1)
-    public static int GetDirection(Vector3 p1, Vector3 p2, Vector3 p3)
-    {
-        Vector3 edge1 = p2 - p1;
-        Vector3 edge2 = p3 - p2;
-
-        Vector3 crossProduct = Vector3.Cross(edge1, edge2);
-        
-        // decide which side the triangle points at
-        return crossProduct.z > 0 ? 1 : -1;
-    }
+    
 
     // Update is called once per frame
     void Update()
     {
-        /*
-        List<Vector3> vertices= new List<Vector3>();
-        List<int> indices= new List<int>();
-        
-        List<CurveDataWrapper> shaderInputDataWrappers = new List<CurveDataWrapper>();
-        
-        for (int i = 0; i < pathCurrent.subPaths.Count(); i++)
-        {
-            SubPath13 controlPointsSubPath=pathCurrent.subPaths[i];
-            
-            List<Vector3> boundingBoxVerticesInTriangleStrip = ComputeBoundingBox(pathCurrent.subPaths[i]);
-            foreach (Vector3 point in boundingBoxVerticesInTriangleStrip)
-            {
-                vertices.Add(point);
-            }
-            
-            for (int j = 0; j < controlPointsSubPath.segments.Count; j++)
-            {
-                CurveDataWrapper shaderInputDataWrapper = new CurveDataWrapper();
-
-                shaderInputDataWrapper.start = controlPointsSubPath.segments[j].p0;
-                shaderInputDataWrapper.control1 = controlPointsSubPath.segments[j].p1;
-                shaderInputDataWrapper.control2 = controlPointsSubPath.segments[j].p2;
-                shaderInputDataWrapper.end = controlPointsSubPath.segments[j].p3;
-                
-                shaderInputDataWrapper.orientation1 = GetDirection(shaderInputDataWrapper.start, shaderInputDataWrapper.control1, shaderInputDataWrapper.control2);
-                shaderInputDataWrapper.orientation2 = GetDirection(shaderInputDataWrapper.start, shaderInputDataWrapper.control2, shaderInputDataWrapper.end);
-                shaderInputDataWrapper.orientationMainTri = GetDirection(pathCurrent.subPaths[i].GetBasePoint(),shaderInputDataWrapper.start,shaderInputDataWrapper.end);
-                //Debug.Log(ShaderInputDataWrapper.orientation1);
-                shaderInputDataWrappers.Add(shaderInputDataWrapper);
-            }
-        }
-        
-        for (int i = 0; i < vertices.Count; i++)
-        {
-            indices.Add(i);
-        }
-        Mesh mesh = new Mesh();
-        mesh.vertices = vertices.ToArray();
-        mesh.SetIndices(indices, MeshTopology.Triangles, 0);
-        curveDataBufferSource.SetData(shaderInputDataWrappers.ToArray());
-        meshFilter.mesh = mesh;
-        
-        if (showDebug)
-        {
-            Mesh mesh1 = new Mesh();
-            mesh1.vertices = vertices.ToArray();
-            mesh1.SetIndices(indices, MeshTopology.LineStrip, 0);
-            shape.GetComponent<MeshFilter>().mesh = mesh1;
-            shape.transform.position=transform.position+new Vector3(0, 0, (float)-0.05);
-        }
-        else
-        {
-            Mesh mesh1 = new Mesh();
-            shape.GetComponent<MeshFilter>().mesh = mesh1;
-        }
-        */
         
     }
     private void OnDestroy()
     {
         curveDataBufferSource.Release();
+        curveDataBufferTarget.Release();
     }
 }
 

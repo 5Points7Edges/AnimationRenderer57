@@ -31,10 +31,7 @@ public class AnimationTest13 : MonoBehaviour
     private List<Path13> targetData = new List<Path13>();
     
     
-    public float speed = 1;
-    private float val=0;
     
-    private float timer = 0;
     public bool animationEnable=false;
     
     public String sourceFileName;
@@ -72,28 +69,26 @@ public class AnimationTest13 : MonoBehaviour
         }
 
         //string sourceSVGString = sourceSVGFile.text;
-        string sourceSVGString=File.ReadAllText(workFolder+sourceFileName+".svg");
+        string sourceSVGPath=File.ReadAllText(workFolder+sourceFileName+".svg");
         
         //string targetSVGString = targetSVGFile.text;
-        string targetSVGString = File.ReadAllText(workFolder+targetFileName+".svg");
+        string targetSVGPath = File.ReadAllText(workFolder+targetFileName+".svg");
         
-        parseSVGFile(sourceSVGString,sourceData);
-        parseTargetSVGFile(targetSVGString,targetData);
+        parseSourceSVGFile(sourceSVGPath,sourceData);
+        parseTargetSVGFile(targetSVGPath,targetData);
         
         
-        //Debug.Log(allShapeGameObjects.Count);
-        //parseTargetSVGFile(targetSVGFile.text);
         
-        List<string> idSource=IDParsing(sourceSVGString);
-        List<Coordinate> coordinatesSource=CoordinatesParsing(sourceSVGString);
+        List<string> idSource=IDParsing(sourceSVGPath); //A list of IDs of paths. The order of the path should not be changed
+        List<Coordinate> coordinatesSource=CoordinatesParsing(sourceSVGPath);//a pair of <use ...> xlink coordinates.
         
-        List<string> idTarget=IDParsing(targetSVGString);
-        List<Coordinate> coordinatesTarget=CoordinatesParsing(targetSVGString);
+        List<string> idTarget=IDParsing(targetSVGPath);
+        List<Coordinate> coordinatesTarget=CoordinatesParsing(targetSVGPath);
         
         for (int i = 0; i < Math.Min(coordinatesSource.Count,coordinatesTarget.Count); i++)
         {
-            int distinctIDS = idSource.IndexOf(coordinatesSource[i].pathID);
-            int distinctIDT = idTarget.IndexOf(coordinatesTarget[i].pathID);
+            int pathIndexSource = idSource.IndexOf(coordinatesSource[i].pathID);    //the index of the ID in IDList is the index of the path
+            int pathIndexTarget = idTarget.IndexOf(coordinatesTarget[i].pathID);
             //Debug.Log(idSource[distinctID]);
             GameObject gameObject = new GameObject("shape["+i+"]");
             gameObject.AddComponent<MeshFilter>();
@@ -102,8 +97,10 @@ public class AnimationTest13 : MonoBehaviour
             gameObject.GetComponent<CurveDrawer13>().material = new Material(material);
             gameObject.GetComponent<CurveDrawer13>().visualM = visualM;
             gameObject.transform.parent = transform;
-            gameObject.GetComponent<CurveDrawer13>().pathInitial=sourceData[distinctIDS].transform(coordinatesSource[i].x,coordinatesSource[i].y);
-            gameObject.GetComponent<CurveDrawer13>().pathEnd=targetData[distinctIDT].transform(coordinatesTarget[i].x,coordinatesTarget[i].y);
+            
+            gameObject.GetComponent<CurveDrawer13>().pathInitial=sourceData[pathIndexSource].transform(coordinatesSource[i].x,coordinatesSource[i].y);
+            gameObject.GetComponent<CurveDrawer13>().pathEnd=targetData[pathIndexTarget].transform(coordinatesTarget[i].x,coordinatesTarget[i].y);
+            
             allShapeGameObjects.Add(gameObject);
         }
         
@@ -148,31 +145,7 @@ public class AnimationTest13 : MonoBehaviour
         public float x, y;
         public string pathID;
     }
-    class SVGCommand
-    {
-        public char command {get; private set;}
-        public float[] arguments {get; private set;}
-
-        public SVGCommand(char command, params float[] arguments)
-        {
-            this.command=command;
-            this.arguments=arguments;
-        }
-
-        public static SVGCommand Parse(string SVGpathstring)
-        {
-            var cmd = SVGpathstring.Take(1).Single();
-            string remainingargs = SVGpathstring.Substring(1);
-
-            string argSeparators = @"[\s,]|(?=-)";
-            var splitArgs = Regex
-                .Split(remainingargs, argSeparators)
-                .Where(t => !string.IsNullOrEmpty(t));
-
-            float[] floatArgs = splitArgs.Select(arg => float.Parse(arg)).ToArray();
-            return new SVGCommand(cmd,floatArgs);
-        }
-    }
+    
     List<Coordinate> CoordinatesParsing(string input)
     {
         List < Coordinate > result = new List < Coordinate >();
@@ -222,7 +195,7 @@ public class AnimationTest13 : MonoBehaviour
         }
         return result;
     }
-    public void parseSVGFile(string data,List<Path13> structuredData)
+    public void parseSourceSVGFile(string data,List<Path13> structuredData)
     {
         StringReader textReader = new StringReader(data);
         var sceneInfo = SVGParser.ImportSVG(textReader);
@@ -320,14 +293,13 @@ public class AnimationTest13 : MonoBehaviour
         Debug.Log("Restart Button Clicked!");
     }
     
-    public static Vector3 rateFunction_Linear(Vector3 start, Vector3 end, float val)
-    {
-        return (end - start) * val + start;
-    }
-
     // Update is called once per frame
     private void Update()
     {
-        
+        /*foreach (var gameObject in allShapeGameObjects)
+        {
+            gameObject.GetComponent<CurveDrawer13>().material.SetInt("_enable", animationEnable?1:0);
+        }
+        */
     }
 }

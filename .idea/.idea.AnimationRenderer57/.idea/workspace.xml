@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="">
+    <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="calculate animation on GPU">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.6/AnimationTest13.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.6/AnimationTest13.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.6/CurveDrawer13.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.6/CurveDrawer13.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.6/fillTest13.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.6/fillTest13.shader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -254,7 +253,7 @@
       <workItem from="1704913384507" duration="10309000" />
       <workItem from="1704973278695" duration="480000" />
       <workItem from="1704987664464" duration="7082000" />
-      <workItem from="1705082854278" duration="9400000" />
+      <workItem from="1705082854278" duration="15155000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -464,7 +463,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704994764535</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="calculate animation on GPU">
+      <option name="closed" value="true" />
+      <created>1705092382560</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1705092382560</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -522,7 +529,27 @@
     <MESSAGE value="add more compatibility for svg" />
     <MESSAGE value="Add xelatex and dvisvgm compilation" />
     <MESSAGE value="0.3.6" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.3.6" />
+    <MESSAGE value="calculate animation on GPU" />
+    <option name="LAST_COMMIT_MESSAGE" value="calculate animation on GPU" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/BezierCurves/0.3.6/AnimationTest13.cs</url>
+          <line>299</line>
+          <properties documentPath="E:\5Points7Edges\AnimationRenderer57\Assets\BezierCurves\0.3.6\AnimationTest13.cs" initialLine="299" containingFunctionPresentation="Method 'Update'">
+            <startOffsets>
+              <option value="10961" />
+            </startOffsets>
+            <endOffsets>
+              <option value="10962" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -5,7 +5,7 @@ Shader "Custom/BezierTest/fillTest13"
         _Color("Main Tint",Color)=(1,1,1,1)
         _smoothEdge("smoothEdge",Range(0.1,100))=1
         _approximationStep("approximationStep",Range(1,100))=20
-        
+        _enable("enable",Int)=1
     }
     SubShader
     {
@@ -60,10 +60,10 @@ Shader "Custom/BezierTest/fillTest13"
             };
             
             fixed4 _Color;
-
+            float dTime;
             fixed _smoothEdge;
             float _approximationStep;
-
+            int _enable;
             struct curveData
             {
                 float3 start;
@@ -120,11 +120,13 @@ Shader "Custom/BezierTest/fillTest13"
 	            float py = y1 + (y2 - y1) * r;
 	            return sqrt((x - px) * (x - px) + (y - py) * (y - py));
             }
-            
             v2f vert (appdata v)
             {
-                float time=(-_CosTime.w+1.0)/2;
                 v2f o;
+                float time=0;
+                time=(-_CosTime.w+1.0)/2;
+                
+                
                 float4 posS = UnityObjectToClipPos(v.pos);
                 float3 worldPosS = mul(unity_ObjectToWorld, v.pos).xyz;
 
@@ -153,14 +155,7 @@ Shader "Custom/BezierTest/fillTest13"
                 o.C1=rateFunction_Linear(c1S,c1T,time);
                 o.C2=rateFunction_Linear(c2S,c2T,time);
                 o.end=rateFunction_Linear(endS,endT,time);
-                /*
-                o.pos=posS;
-                o.worldPos=worldPosS;
-                o.start=mul(unity_ObjectToWorld, curvess_buffer[curveIndex].start).xyz;
-                o.C1=mul(unity_ObjectToWorld, curvess_buffer[curveIndex].control1).xyz;
-                o.C2=mul(unity_ObjectToWorld, curvess_buffer[curveIndex].control2).xyz;
-                o.end=mul(unity_ObjectToWorld, curvess_buffer[curveIndex].end).xyz;
-                */
+                
                 int curveIndex0To8=v.id%9;
                 
                 if (curveIndex0To8>=6)
@@ -184,6 +179,7 @@ Shader "Custom/BezierTest/fillTest13"
 
             fixed4 frag (v2f input) : SV_Target
             {
+                
                 float4 finalColor=_Color;
                 float4 a=finalColor.a*0.95;
                 a=1;
