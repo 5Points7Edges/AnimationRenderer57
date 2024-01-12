@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/AnimationTest12.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/AnimationTest12.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/CurveDrawer12.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/CurveDrawer12.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/fillTest12.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/fillTest12.shader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/finalize.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/finalize.shader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/finalized.renderTexture" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.5/finalized.renderTexture" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.6/AnimationTest13.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.6/AnimationTest13.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.6/CurveDrawer13.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.6/CurveDrawer13.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.3.6/fillTest13.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.3.6/fillTest13.shader" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,7 +19,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="832d7b8fcc16bec4731297327edf9aeb2731e6d7" />
+        <entry key="$PROJECT_DIR$" value="6b6f750de7aad64a187a85b189fc2a7898565a0c" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -54,6 +52,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/CurveDrawer11.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/Math.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/Structure.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/BezierCurves/0.3.5/AnimationTest12.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.5/Structure.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_BaseEditorPanel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_FontAssetEditor.cs" root0="SKIP_HIGHLIGHTING" />
@@ -254,7 +253,8 @@
       <workItem from="1704907793575" duration="516000" />
       <workItem from="1704913384507" duration="10309000" />
       <workItem from="1704973278695" duration="480000" />
-      <workItem from="1704987664464" duration="6416000" />
+      <workItem from="1704987664464" duration="7082000" />
+      <workItem from="1705082854278" duration="9400000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -456,7 +456,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704923424491</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="0.3.6">
+      <option name="closed" value="true" />
+      <created>1704994764535</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1704994764535</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -513,7 +521,8 @@
     <MESSAGE value="Add secondary rendering" />
     <MESSAGE value="add more compatibility for svg" />
     <MESSAGE value="Add xelatex and dvisvgm compilation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add xelatex and dvisvgm compilation" />
+    <MESSAGE value="0.3.6" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.3.6" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

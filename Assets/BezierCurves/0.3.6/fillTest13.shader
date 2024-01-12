@@ -37,7 +37,6 @@ Shader "Custom/BezierTest/fillTest13"
             #pragma vertex vert
             #pragma fragment frag
 
-            #include "UnityCG.cginc"
 
             struct appdata
             {
@@ -71,15 +70,36 @@ Shader "Custom/BezierTest/fillTest13"
                 float3 control1;
                 float3 control2;
                 float3 end;
-                int orientation1;
-                int orientation2;
-                int orientationMainTri;
-
+                int basePointIndex;
             };
-            StructuredBuffer<curveData> curves;
+            StructuredBuffer<curveData> curvess_buffer;
+            StructuredBuffer<curveData> curvest_buffer;
+
+            StructuredBuffer<float3> verticestarget;
 
             float2 BezierCurve(float t,float2 start, float2 control1, float2 control2, float2 end){
                 return (1 - t) * (1 - t) * (1 - t) * start + 3 * t * (1 - t) * (1 - t) * control1 + 3 * t * t * (1 - t) * control2 + t * t * t * end;
+            }
+            float3 rateFunction_Linear(float3 start, float3 end, float val)
+            {
+                return (end - start) * val + start;
+            }
+            float4 rateFunction_Linear(float4 start, float4 end, float val)
+            {
+                return (end - start) * val + start;
+            }
+            float2 rateFunction_Linear(float2 start, float2 end, float val)
+            {
+                return (end - start) * val + start;
+            }
+            int GetDirection(float3 p1, float3 p2, float3 p3)
+            {
+                float3 edge1 = p2 - p1;
+                float3 edge2 = p3 - p2;
+
+                float3 crossProduct = cross(edge1,edge2);
+                // decide which side the triangle points at
+                return crossProduct.z > 0 ? 1 : -1;
             }
             bool LeftOfLine(float2 p1,float2 p2,float2 c){
                 float tmp=(p1.x-c.x)*(p2.y-c.y)-(p1.y-c.y)*(p2.x-c.x);
@@ -100,35 +120,63 @@ Shader "Custom/BezierTest/fillTest13"
 	            float py = y1 + (y2 - y1) * r;
 	            return sqrt((x - px) * (x - px) + (y - py) * (y - py));
             }
-
+            
             v2f vert (appdata v)
             {
+                float time=(-_CosTime.w+1.0)/2;
                 v2f o;
-                o.pos = UnityObjectToClipPos(v.pos);
-                o.worldPos = mul(unity_ObjectToWorld, v.pos).xyz;
+                float4 posS = UnityObjectToClipPos(v.pos);
+                float3 worldPosS = mul(unity_ObjectToWorld, v.pos).xyz;
 
-                int curveIndex=v.id/9;
-
-                o.start=mul(unity_ObjectToWorld, curves[curveIndex].start).xyz;
-                o.C1=mul(unity_ObjectToWorld, curves[curveIndex].control1).xyz;
-                o.C2=mul(unity_ObjectToWorld, curves[curveIndex].control2).xyz;
-                o.end=mul(unity_ObjectToWorld, curves[curveIndex].end).xyz;
+                float4 posT = UnityObjectToClipPos(verticestarget[v.id]);
+                float3 worldPosT = mul(unity_ObjectToWorld, verticestarget[v.id]).xyz;
                 
+                o.pos=rateFunction_Linear(posS,posT,time);
+                o.worldPos=rateFunction_Linear(worldPosS,worldPosT,time);
+                int curveIndex=v.id/9;
+                curveData buffer=curvess_buffer[curveIndex];
+                float3 startS=mul(unity_ObjectToWorld, curvess_buffer[curveIndex].start).xyz;
+                float3 c1S=mul(unity_ObjectToWorld, curvess_buffer[curveIndex].control1).xyz;
+                float3 c2S=mul(unity_ObjectToWorld, curvess_buffer[curveIndex].control2).xyz;
+                float3 endS=mul(unity_ObjectToWorld, curvess_buffer[curveIndex].end).xyz;
+
+                float3 startT=mul(unity_ObjectToWorld, curvest_buffer[curveIndex].start).xyz;
+                float3 c1T=mul(unity_ObjectToWorld, curvest_buffer[curveIndex].control1).xyz;
+                float3 c2T=mul(unity_ObjectToWorld, curvest_buffer[curveIndex].control2).xyz;
+                float3 endT=mul(unity_ObjectToWorld, curvest_buffer[curveIndex].end).xyz;
+
+                float3 basePointS=mul(unity_ObjectToWorld, curvess_buffer[buffer.basePointIndex].start).xyz;
+                float3 basePointT=mul(unity_ObjectToWorld, curvest_buffer[buffer.basePointIndex].start).xyz;
+                float3 basePoint= rateFunction_Linear(basePointS,basePointT,time);
+                
+                o.start=rateFunction_Linear(startS,startT,time);
+                o.C1=rateFunction_Linear(c1S,c1T,time);
+                o.C2=rateFunction_Linear(c2S,c2T,time);
+                o.end=rateFunction_Linear(endS,endT,time);
+                /*
+                o.pos=posS;
+                o.worldPos=worldPosS;
+                o.start=mul(unity_ObjectToWorld, curvess_buffer[curveIndex].start).xyz;
+                o.C1=mul(unity_ObjectToWorld, curvess_buffer[curveIndex].control1).xyz;
+                o.C2=mul(unity_ObjectToWorld, curvess_buffer[curveIndex].control2).xyz;
+                o.end=mul(unity_ObjectToWorld, curvess_buffer[curveIndex].end).xyz;
+                */
                 int curveIndex0To8=v.id%9;
+                
                 if (curveIndex0To8>=6)
                 {
                     o.fillAll=1;
-                    o.orientation=curves[curveIndex].orientationMainTri;
+                    o.orientation=GetDirection(basePoint,o.start,o.end);
                 }
                 else if (curveIndex0To8>=3 && curveIndex0To8<=5)
                 {
                     o.fillAll=0;
-                    o.orientation=curves[curveIndex].orientation2;
+                    o.orientation=GetDirection(o.start,o.C2,o.end);
                 }
                 else
                 {
                     o.fillAll=0;
-                    o.orientation=curves[curveIndex].orientation1;
+                    o.orientation=GetDirection(o.start,o.C1,o.C2);
                 }
                 return o;
             }

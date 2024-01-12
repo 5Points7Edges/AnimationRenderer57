@@ -253,7 +253,7 @@ public class AnimationTest13 : MonoBehaviour
                        mysegment.p2 = new Vector3(segment.P2.x*xScale+xDelta, segment.P2.y*yScale+yDelta, -9);
                        mysegment.p3 = new Vector3(contour.Segments[segmentIndex + 1].P0.x*xScale+xDelta, contour.Segments[segmentIndex + 1].P0.y*yScale+yDelta, -9);
                        //mysegment.rotate(3.1416f);
-                       //mysegment.reverse();
+                       mysegment.reverse();
                        controlPointsOfaM.Add(mysegment);
                    }
                    readData.Add(controlPointsOfaM);
@@ -294,7 +294,7 @@ public class AnimationTest13 : MonoBehaviour
                         mysegment.p2 = new Vector3(segment.P2.x*xScale+xDelta, segment.P2.y*yScale+yDelta, -9);
                         mysegment.p3 = new Vector3(contour.Segments[segmentIndex + 1].P0.x*xScale+xDelta, contour.Segments[segmentIndex + 1].P0.y*yScale+yDelta, -9);
                         //mysegment.rotate(3.1416f);
-                        //mysegment.reverse();
+                        mysegment.reverse();
                         controlPointsOfaM.Add(mysegment);
                     }
                     readData.Add(controlPointsOfaM);
@@ -328,30 +328,6 @@ public class AnimationTest13 : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (!animationEnable) return;
-        
-        timer += Time.deltaTime;
-        val = (float)(-Math.Cos(timer*speed)+1)/2;
-        //val = timer - (int)timer;
-        foreach(GameObject shape in allShapeGameObjects)
-        {
-            
-            for (int i=0;i < shape?.GetComponent<CurveDrawer13>().pathCurrent.subPaths.Count;i++)
-            {
-                SubPath13 subPath = shape?.GetComponent<CurveDrawer13>().pathCurrent.subPaths[i];
-                SubPath13 subPathInitial = shape?.GetComponent<CurveDrawer13>().pathInitial.subPaths[i];
-                SubPath13 subPathEnd = shape?.GetComponent<CurveDrawer13>().pathEnd.subPaths[i];
-                
-                for (int j = 0; j < subPathInitial.segments.Count; j++)
-                {
-                    subPath.segments[j].p0= rateFunction_Linear(subPathInitial.segments[j].p0,subPathEnd.segments[j].p0,val);
-                    subPath.segments[j].p1= rateFunction_Linear(subPathInitial.segments[j].p1,subPathEnd.segments[j].p1,val);
-                    subPath.segments[j].p2= rateFunction_Linear(subPathInitial.segments[j].p2,subPathEnd.segments[j].p2,val);
-                    subPath.segments[j].p3= rateFunction_Linear(subPathInitial.segments[j].p3,subPathEnd.segments[j].p3,val);
-                }
-                
-            }
-        }
         
     }
 }
