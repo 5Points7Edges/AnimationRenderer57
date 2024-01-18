@@ -16,20 +16,20 @@ using Debug = UnityEngine.Debug;
 
 /*
  * Author:Thomas Lu
- * v0.3.6
- * calculating interpolation now on GPU
+ * v0.4.0
+ * stroke implementation
  */
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-public class AnimationTest13 : MonoBehaviour
+public class AnimationTest14 : MonoBehaviour
 {
 
     public Material material;
     public Material visualM;
     private List<GameObject> allShapeGameObjects = new List<GameObject>();
 
-    private List<Path13> sourceData = new List<Path13>();
-    private List<Path13> targetData = new List<Path13>();
+    private List<Path14> sourceData = new List<Path14>();
+    private List<Path14> targetData = new List<Path14>();
     
     
     
@@ -94,13 +94,13 @@ public class AnimationTest13 : MonoBehaviour
             GameObject gameObject = new GameObject("shape["+i+"]");
             gameObject.AddComponent<MeshFilter>();
             gameObject.AddComponent<MeshRenderer>();
-            gameObject.AddComponent<CurveDrawer13>();
-            gameObject.GetComponent<CurveDrawer13>().material = new Material(material);
-            gameObject.GetComponent<CurveDrawer13>().visualM = visualM;
+            gameObject.AddComponent<CurveDrawer14>();
+            gameObject.GetComponent<CurveDrawer14>().material = new Material(material);
+            gameObject.GetComponent<CurveDrawer14>().visualM = visualM;
             gameObject.transform.parent = transform;
             
-            gameObject.GetComponent<CurveDrawer13>().pathInitial=sourceData[pathIndexSource].transform(coordinatesSource[i].x,coordinatesSource[i].y);
-            gameObject.GetComponent<CurveDrawer13>().pathEnd=targetData[pathIndexTarget].transform(coordinatesTarget[i].x,coordinatesTarget[i].y);
+            gameObject.GetComponent<CurveDrawer14>().pathInitial=sourceData[pathIndexSource].transform(coordinatesSource[i].x,coordinatesSource[i].y);
+            gameObject.GetComponent<CurveDrawer14>().pathEnd=targetData[pathIndexTarget].transform(coordinatesTarget[i].x,coordinatesTarget[i].y);
             
             allShapeGameObjects.Add(gameObject);
         }
@@ -196,7 +196,7 @@ public class AnimationTest13 : MonoBehaviour
         }
         return result;
     }
-    public void parseSourceSVGFile(string data,List<Path13> structuredData)
+    public void parseSourceSVGFile(string data,List<Path14> structuredData)
     {
         StringReader textReader = new StringReader(data);
         var sceneInfo = SVGParser.ImportSVG(textReader);
@@ -211,15 +211,15 @@ public class AnimationTest13 : MonoBehaviour
             foreach (var shape in path.Value.Shapes)
             {
                 
-                Path13 readData = new Path13();
+                Path14 readData = new Path14();
                foreach (var contour in shape.Contours) //each closed M Or a SubPath
                {
-                   SubPath13 controlPointsOfaM = new SubPath13();
+                   SubPath14 controlPointsOfaM = new SubPath14();
                    for (int segmentIndex=0;segmentIndex< contour.Segments.Length-1;segmentIndex++)
                    {
                        var segment = contour.Segments[segmentIndex];
                        
-                       Segment13 mysegment = new Segment13();
+                       Segment14 mysegment = new Segment14();
                        float xScale = 1f, yScale = -1f;
                        float xDelta = 0, yDelta = 0; 
                        mysegment.p0 = new Vector3(segment.P0.x*xScale+xDelta, segment.P0.y*yScale+yDelta, -9);
@@ -237,7 +237,7 @@ public class AnimationTest13 : MonoBehaviour
         }
     }
 
-    public void parseTargetSVGFile(string data,List<Path13> structuredData)
+    public void parseTargetSVGFile(string data,List<Path14> structuredData)
     {
         StringReader textReader = new StringReader(data);
         var sceneInfo = SVGParser.ImportSVG(textReader);
@@ -252,15 +252,15 @@ public class AnimationTest13 : MonoBehaviour
             foreach (var shape in path.Value.Shapes)
             {
                 
-                Path13 readData = new Path13();
+                Path14 readData = new Path14();
                 foreach (var contour in shape.Contours) //each closed M Or a SubPath
                 {
-                    SubPath13 controlPointsOfaM = new SubPath13();
+                    SubPath14 controlPointsOfaM = new SubPath14();
                     for (int segmentIndex=0;segmentIndex< contour.Segments.Length-1;segmentIndex++)
                     {
                         var segment = contour.Segments[segmentIndex];
                        
-                        Segment13 mysegment = new Segment13();
+                        Segment14 mysegment = new Segment14();
                         float xScale = 1f, yScale = -1f;
                         float xDelta = 10, yDelta = 0; 
                         mysegment.p0 = new Vector3(segment.P0.x*xScale+xDelta, segment.P0.y*yScale+yDelta, -9);
@@ -299,7 +299,7 @@ public class AnimationTest13 : MonoBehaviour
     {
         /*foreach (var gameObject in allShapeGameObjects)
         {
-            gameObject.GetComponent<CurveDrawer13>().material.SetInt("_enable", animationEnable?1:0);
+            gameObject.GetComponent<CurveDrawer14>().material.SetInt("_enable", animationEnable?1:0);
         }
         */
     }
