@@ -2,7 +2,7 @@ Shader "finalize14"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+        _FillTex ("Texture", 2D) = "white" {}
     }
     SubShader {
 		Tags { "RenderType"="Opaque" "Queue"="Geometry"}
@@ -16,7 +16,7 @@ Shader "finalize14"
 			#pragma vertex vert
 			#pragma fragment frag
 			
-			sampler2D _MainTex;
+			sampler2D _FillTex;
 			
 			struct a2v {
 				float4 vertex : POSITION;
@@ -38,11 +38,11 @@ Shader "finalize14"
 			}
 			
 			fixed4 frag(v2f i) : SV_Target {
-				fixed4 color =tex2D(_MainTex, i.uv);
-
-				if(color.a == 0) discard;
+				fixed4 finalColor =tex2D(_FillTex, i.uv);
+								
+				if(finalColor.a == 0) discard;
 				//color.a *= 1.06;
-				return color;
+				return finalColor;
 			}
 			
 			ENDCG

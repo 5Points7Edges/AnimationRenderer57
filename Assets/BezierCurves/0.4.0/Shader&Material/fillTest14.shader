@@ -123,9 +123,7 @@ Shader "Custom/BezierTest/fillTest14"
             v2f vert (appdata v)
             {
                 v2f o;
-                float time=0;
-                time=(-_CosTime.w+1.0)/2;
-                
+                float time=(-_CosTime.w+1.0)/2;
                 
                 float4 posS = UnityObjectToClipPos(v.pos);
                 float3 worldPosS = mul(unity_ObjectToWorld, v.pos).xyz;

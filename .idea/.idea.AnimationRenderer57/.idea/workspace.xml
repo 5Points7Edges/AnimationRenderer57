@@ -6,6 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/AnimationTest14.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/AnimationTest14.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/CurveDrawer14.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/FillDrawer14.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/CurveDrawer14.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/FillDrawer14.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/fillTest14.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/fillTest14.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/fillTest14_Mat.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/fillTest14_Mat.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/finalize14.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/finalize14.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/finalize14.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/finalize14.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/finalized14.renderTexture" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/finalized14.renderTexture.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +52,7 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/43962bec8705445a98d4807e23f4b4a83a200/f7/788d556c/02000032pdb42Low.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.1.2/SVGRenderer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.1/CurveDrawer8.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.1/SubPath8.cs" root0="FORCE_HIGHLIGHTING" />
@@ -48,8 +63,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/CurveDrawer11.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/Math.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/Structure.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/BezierCurves/0.3.5/AnimationTest12.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.5/Structure.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/BezierCurves/0.4.0/AnimationTest14.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_BaseEditorPanel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_FontAssetEditor.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -79,7 +94,7 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.updates&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -251,7 +266,20 @@
       <workItem from="1704973278695" duration="480000" />
       <workItem from="1704987664464" duration="7082000" />
       <workItem from="1705082854278" duration="15404000" />
-      <workItem from="1705597014796" duration="392000" />
+      <workItem from="1705597014796" duration="2766000" />
+      <workItem from="1705776222479" duration="5553000" />
+      <workItem from="1705786242727" duration="4282000" />
+      <workItem from="1705790647664" duration="137000" />
+      <workItem from="1705790796532" duration="294000" />
+      <workItem from="1705791102997" duration="77000" />
+      <workItem from="1705791206196" duration="1036000" />
+      <workItem from="1705795233397" duration="283000" />
+      <workItem from="1705795597405" duration="10000" />
+      <workItem from="1705863791117" duration="268000" />
+      <workItem from="1705864132474" duration="3153000" />
+      <workItem from="1705867640139" duration="52000" />
+      <workItem from="1705867705851" duration="231000" />
+      <workItem from="1705868979063" duration="3473000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -477,7 +505,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705098542731</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="make new directory for the new version">
+      <option name="closed" value="true" />
+      <created>1705597555201</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1705597555201</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -511,7 +547,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="add some new files in preparation for next version of the demo" />
     <MESSAGE value="update CurveDrawer7.cs with new manim methods" />
     <MESSAGE value="Using Manim Algorithm" />
     <MESSAGE value="Complete Demo Version 0.3.0" />
@@ -536,7 +571,8 @@
     <MESSAGE value="0.3.6" />
     <MESSAGE value="calculate animation on GPU" />
     <MESSAGE value="clean up some codes" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean up some codes" />
+    <MESSAGE value="make new directory for the new version" />
+    <option name="LAST_COMMIT_MESSAGE" value="make new directory for the new version" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

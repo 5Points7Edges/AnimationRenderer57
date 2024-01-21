@@ -24,7 +24,8 @@ using Debug = UnityEngine.Debug;
 public class AnimationTest14 : MonoBehaviour
 {
 
-    public Material material;
+    public Material Fillmaterial;
+    public Material Strokematerial;
     public Material visualM;
     private List<GameObject> allShapeGameObjects = new List<GameObject>();
 
@@ -45,7 +46,7 @@ public class AnimationTest14 : MonoBehaviour
         
         if (sourceFileName == "") sourceFileName = "CSB";
         if (targetFileName == "") targetFileName = "CSB";
-        if (!material)
+        if (!Fillmaterial)
         {
             Debug.LogError("Please Assign a material on the inspector");
             return;
@@ -94,13 +95,13 @@ public class AnimationTest14 : MonoBehaviour
             GameObject gameObject = new GameObject("shape["+i+"]");
             gameObject.AddComponent<MeshFilter>();
             gameObject.AddComponent<MeshRenderer>();
-            gameObject.AddComponent<CurveDrawer14>();
-            gameObject.GetComponent<CurveDrawer14>().material = new Material(material);
-            gameObject.GetComponent<CurveDrawer14>().visualM = visualM;
+            gameObject.AddComponent<FillDrawer14>();
+            gameObject.GetComponent<FillDrawer14>().FillMaterial = new Material(Fillmaterial);
+            gameObject.GetComponent<FillDrawer14>().StrokeMaterial = new Material(Strokematerial);
             gameObject.transform.parent = transform;
             
-            gameObject.GetComponent<CurveDrawer14>().pathInitial=sourceData[pathIndexSource].transform(coordinatesSource[i].x,coordinatesSource[i].y);
-            gameObject.GetComponent<CurveDrawer14>().pathEnd=targetData[pathIndexTarget].transform(coordinatesTarget[i].x,coordinatesTarget[i].y);
+            gameObject.GetComponent<FillDrawer14>().pathInitial=sourceData[pathIndexSource].transform(coordinatesSource[i].x,coordinatesSource[i].y);
+            gameObject.GetComponent<FillDrawer14>().pathEnd=targetData[pathIndexTarget].transform(coordinatesTarget[i].x,coordinatesTarget[i].y);
             
             allShapeGameObjects.Add(gameObject);
         }

@@ -5,17 +5,18 @@ using System.Linq;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-public class CurveDrawer14 : MonoBehaviour
+public class FillDrawer14 : MonoBehaviour
 {
     public Path14 pathInitial = new Path14();
     
     public Path14 pathEnd = new Path14();
     
     
-    public Material material;
-    public Material visualM;
+    public Material FillMaterial;
+    public Material StrokeMaterial;
     
     private ComputeBuffer curveDataBufferSource;
     private ComputeBuffer curveDataBufferTarget;
@@ -25,11 +26,6 @@ public class CurveDrawer14 : MonoBehaviour
 
     public bool showDebug=false;
     
-    private GameObject shape;
-    private static readonly int CurvessBuffer = Shader.PropertyToID("curvess_buffer");
-    private static readonly int CurvestBuffer = Shader.PropertyToID("curvest_buffer");
-    private static readonly int Verticestarget = Shader.PropertyToID("verticestarget");
-
     struct CurveDataWrapper
     {
         public Vector3 start;
@@ -67,12 +63,12 @@ public class CurveDrawer14 : MonoBehaviour
         List<int> indices= new List<int>();
         
         Console.WriteLine($"Value of d attribute: ");
-        if (!material)
+        if (!FillMaterial)
         {
             Debug.LogError("Please Assign a material on the inspector");
             return;
         }
-
+        //Prepare data for the initial path 
         List<CurveDataWrapper> ShaderinputDataWrappersSource = new List<CurveDataWrapper>();
         int basePointIndexCounter = 0;
         for (int i = 0; i < pathInitial.subPaths.Count; i++)
@@ -100,6 +96,8 @@ public class CurveDrawer14 : MonoBehaviour
 
             basePointIndexCounter += controlPointsSubPath.segments.Count;
         }
+        
+        //Prepare data for the final path 
         List<Vector3> verticesTarget= new List<Vector3>();
         List<CurveDataWrapper> ShaderinputDataWrappersTarget = new List<CurveDataWrapper>();
         basePointIndexCounter = 0;
@@ -127,7 +125,7 @@ public class CurveDrawer14 : MonoBehaviour
             }
             basePointIndexCounter += controlPointsSubPath.segments.Count;
         }
-        
+        //create mesh object
         Mesh mesh = new Mesh();
         mesh.vertices = vertices.ToArray();
         for (int i = 0; i < vertices.Count; i++)
@@ -135,25 +133,38 @@ public class CurveDrawer14 : MonoBehaviour
             indices.Add(i);
         }
         mesh.SetIndices(indices, MeshTopology.Triangles, 0);
-        
+        //transfer data to buffer
         int stride = System.Runtime.InteropServices.Marshal.SizeOf(typeof(CurveDataWrapper));
         
         curveDataBufferSource = new ComputeBuffer(ShaderinputDataWrappersSource.Count, stride);
         curveDataBufferSource.SetData(ShaderinputDataWrappersSource.ToArray());
-        material.SetBuffer("curvess_buffer", curveDataBufferSource);
+        FillMaterial.SetBuffer("curvess_buffer", curveDataBufferSource);
         
         curveDataBufferTarget = new ComputeBuffer(ShaderinputDataWrappersTarget.Count, stride);
         curveDataBufferTarget.SetData(ShaderinputDataWrappersTarget.ToArray());
-        material.SetBuffer("curvest_buffer", curveDataBufferTarget);
+        FillMaterial.SetBuffer("curvest_buffer", curveDataBufferTarget);
         
         stride = System.Runtime.InteropServices.Marshal.SizeOf(typeof(Vector3));
         verticesBufferTarget = new ComputeBuffer(verticesTarget.Count, stride);
         verticesBufferTarget.SetData(verticesTarget.ToArray());
-        material.SetBuffer("verticestarget", verticesBufferTarget);
+        FillMaterial.SetBuffer("verticestarget", verticesBufferTarget);
         
         meshFilter.mesh = mesh;
-        meshRenderer.material = material;
+        meshRenderer.material = FillMaterial;
         
+        //Perpare for Stroke
+        GameObject gameObject = new GameObject("stroke");
+        gameObject.AddComponent<MeshFilter>();
+        gameObject.AddComponent<MeshRenderer>();
+        gameObject.AddComponent<StrokeDrawer14>();
+        gameObject.transform.parent = transform;
+        
+        var strokeObject =gameObject.GetComponent<StrokeDrawer14>();
+        strokeObject.material = StrokeMaterial;
+        strokeObject.pathInitial=pathInitial;
+        strokeObject.pathEnd=pathEnd;
+        strokeObject.curveDataBufferSource = curveDataBufferSource;
+        strokeObject.curveDataBufferTarget = curveDataBufferTarget;
         
     }
 
@@ -325,6 +336,7 @@ public class CurveDrawer14 : MonoBehaviour
     {
         curveDataBufferSource.Release();
         curveDataBufferTarget.Release();
+        verticesBufferTarget.Release();
     }
 }
 
