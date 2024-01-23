@@ -46,6 +46,15 @@ Shader "Custom/BezierTest/strokeTest14"
             float2 BezierCurve(float t,float2 start, float2 control1, float2 control2, float2 end){
                 return (1 - t) * (1 - t) * (1 - t) * start + 3 * t * (1 - t) * (1 - t) * control1 + 3 * t * t * (1 - t) * control2 + t * t * t * end;
             }
+            float BezierCurve(float t,float start, float control1, float control2, float end){
+                return (1 - t) * (1 - t) * (1 - t) * start + 3 * t * (1 - t) * (1 - t) * control1 + 3 * t * t * (1 - t) * control2 + t * t * t * end;
+            }
+            float BezierCurveDiff(float t,float p1, float p2, float p3, float p4){
+                return -3 * (p1 - 3*p2 + 3*p3 - p4) * t * t + 6 * (p1 - 2 * p2 + p3) * t - 3*(p1-p2);
+            }
+            float BezierCurveDiffDiff(float t,float p1, float p2, float p3, float p4){
+                return -6 * (p1 - 3*p2+3*p3 - p4) * t + 6 * ( p1 - 2 * p2 + p3);
+            }
             float3 rateFunction_Linear(float3 start, float3 end, float val)
             {
                 return (end - start) * val + start;
@@ -58,8 +67,6 @@ Shader "Custom/BezierTest/strokeTest14"
             {
                 return (end - start) * val + start;
             }
-                      
-            
             float PointToSegDist(float x, float y, float x1, float y1, float x2, float y2)
             {
 	            float cross = (x2 - x1) * (x - x1) + (y2 - y1) * (y - y1);
@@ -72,6 +79,57 @@ Shader "Custom/BezierTest/strokeTest14"
 	            float px = x1 + (x2 - x1) * r;
 	            float py = y1 + (y2 - y1) * r;
 	            return sqrt((x - px) * (x - px) + (y - py) * (y - py));
+            }
+            
+            float distance(float2 pos,float t,float2 p1,float2 p2,float2 p3,float2 p4)
+            {
+                float Dx=(BezierCurve(t,p1.x,p2.x,p3.x,p4.x)-pos.x);
+                float Dy=(BezierCurve(t,p1.y,p2.y,p3.y,p4.y)-pos.y);
+                return sqrt(Dx*Dx + Dy*Dy);
+            }
+            float f(float2 pos,float t,float2 p1,float2 p2,float2 p3,float2 p4)
+            {
+                float qx = BezierCurve(t, p1.x, p2.x, p3.x, p4.x);
+                float q1x = BezierCurveDiff(t, p1.x, p2.x, p3.x, p4.x);
+
+                float qy = BezierCurve(t, p1.y, p2.y, p3.y, p4.y);
+                float q1y = BezierCurveDiff(t, p1.y, p2.y, p3.y, p4.y);
+
+                return (qx-pos.x)*q1x + (qy-pos.y)*q1y;
+            }
+            float fDiff(float2 pos,float t,float2 p1,float2 p2,float2 p3,float2 p4)
+            {
+                float qx = BezierCurve(t, p1.x, p2.x, p3.x, p4.x);
+                float q1x = BezierCurveDiff(t, p1.x, p2.x, p3.x, p4.x);
+                float q2x = BezierCurveDiffDiff(t, p1.x, p2.x, p3.x, p4.x);
+                
+                float qy = BezierCurve(t, p1.y, p2.y, p3.y, p4.y);
+                float q1y = BezierCurveDiff(t, p1.y, p2.y, p3.y, p4.y);
+                float q2y = BezierCurveDiffDiff(t, p1.y, p2.y, p3.y, p4.y);
+
+                return q1x*q1x+(qx-pos.x)*q2x+q1y*q1y+(qy-pos.y)*q2y;
+            }
+            float NewtonIteration(float startT,float2 pos,float2 p1,float2 p2,float2 p3,float2 p4)
+            {
+                for(int i=0;i<2;i++)
+                {
+                    if(startT>1||startT<0)return startT;
+                    startT = startT - f(pos,startT,p1,p2,p3,p4) / fDiff(pos,startT,p1,p2,p3,p4);
+                }
+                return startT;
+            }
+
+            float shortestDistance(float2 pos,float2 p1,float2 p2,float2 p3,float2 p4)
+            {
+                float dis=1000;
+                float numberOfStartX=4;
+                for(int i=0;i<=numberOfStartX;i++)
+                {
+                    float solution=NewtonIteration(i/numberOfStartX,pos,p1,p2,p3,p4);
+                    if(solution>1||solution<0)continue;
+                    dis=min(dis,distance(pos,solution,p1,p2,p3,p4));
+                }
+                return dis;
             }
             StructuredBuffer<curveData> curvess_buffer;
             StructuredBuffer<curveData> curvest_buffer;
@@ -130,14 +188,16 @@ Shader "Custom/BezierTest/strokeTest14"
                 float2 pos= input.worldPos.xy;
 
                 float dist=10000;
-                for(int i=0;i<=_approximationStep;i++){
-                    float2 P1=BezierCurve((i-1)/_approximationStep,start,control1,control2,end);
-                    float2 P2=BezierCurve(i/_approximationStep,start,control1,control2,end);
-                    dist=min(dist,PointToSegDist(pos.x,pos.y,P1.x,P1.y,P2.x,P2.y));
-                }
+                // for(int i=0;i<=_approximationStep;i++){
+                //     float2 P1=BezierCurve((i-1)/_approximationStep,start,control1,control2,end);
+                //     float2 P2=BezierCurve(i/_approximationStep,start,control1,control2,end);
+                //     dist=min(dist,PointToSegDist(pos.x,pos.y,P1.x,P1.y,P2.x,P2.y));
+                // }
+                dist=shortestDistance(pos,start,control1,control2,end);
                 if (dist>0.1)discard;
                 return finalColor;
             }
+            
             ENDHLSL
         }
     }

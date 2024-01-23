@@ -77,7 +77,7 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
-    - _approximationStep: 20
+    - _approximationStep: 10
     - _enable: 0
     - _smoothEdge: 1
     m_Colors:

@@ -7,19 +7,9 @@
     <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/AnimationTest14.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/AnimationTest14.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/CurveDrawer14.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/FillDrawer14.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/CurveDrawer14.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/FillDrawer14.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/fillTest14.shader" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/fillTest14.shader.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/fillTest14_Mat.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/fillTest14_Mat.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/finalize14.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/finalize14.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/finalize14.shader" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/finalize14.shader.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/finalized14.renderTexture" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/finalized14.renderTexture.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/FillDrawer14.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/FillDrawer14.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/Shader&amp;Material/strokeTest14.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/Shader&amp;Material/strokeTest14.shader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/StrokeDrawer14.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/StrokeDrawer14.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +55,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/Structure.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.5/Structure.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/BezierCurves/0.4.0/AnimationTest14.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/BezierCurves/0.4.0/Shader&amp;Material/strokeTest14.shader" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_BaseEditorPanel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_FontAssetEditor.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -280,6 +271,9 @@
       <workItem from="1705867640139" duration="52000" />
       <workItem from="1705867705851" duration="231000" />
       <workItem from="1705868979063" duration="3473000" />
+      <workItem from="1705875464998" duration="64000" />
+      <workItem from="1705942399368" duration="2420000" />
+      <workItem from="1706040093544" duration="4674000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -513,7 +507,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705597555201</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="add stroke">
+      <option name="closed" value="true" />
+      <created>1705875510067</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1705875510067</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -547,7 +549,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="update CurveDrawer7.cs with new manim methods" />
     <MESSAGE value="Using Manim Algorithm" />
     <MESSAGE value="Complete Demo Version 0.3.0" />
     <MESSAGE value="Restructuring the whole projects&#10;Adding important comments to each version of the renderer" />
@@ -572,7 +573,8 @@
     <MESSAGE value="calculate animation on GPU" />
     <MESSAGE value="clean up some codes" />
     <MESSAGE value="make new directory for the new version" />
-    <option name="LAST_COMMIT_MESSAGE" value="make new directory for the new version" />
+    <MESSAGE value="add stroke" />
+    <option name="LAST_COMMIT_MESSAGE" value="add stroke" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

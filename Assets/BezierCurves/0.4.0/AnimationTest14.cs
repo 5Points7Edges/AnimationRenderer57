@@ -263,7 +263,7 @@ public class AnimationTest14 : MonoBehaviour
                        
                         Segment14 mysegment = new Segment14();
                         float xScale = 1f, yScale = -1f;
-                        float xDelta = 10, yDelta = 0; 
+                        float xDelta = 0, yDelta = 0; 
                         mysegment.p0 = new Vector3(segment.P0.x*xScale+xDelta, segment.P0.y*yScale+yDelta, -9);
                         mysegment.p1 = new Vector3(segment.P1.x*xScale+xDelta, segment.P1.y*yScale+yDelta, -9);
                         mysegment.p2 = new Vector3(segment.P2.x*xScale+xDelta, segment.P2.y*yScale+yDelta, -9);

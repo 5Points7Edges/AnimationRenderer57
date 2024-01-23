@@ -176,13 +176,13 @@ public class FillDrawer14 : MonoBehaviour
             SubPath14 contourFinal = pathEnd.subPaths[contourIndex];
             int bestStartID = 0;
             float minDistance = int.MaxValue;
-            minDistance = 0;
+            // minDistance = 0;
             for (int i = 0; i < contourInitial.segments.Count(); i++)
             {
                 float currentTotalDistance = calculateTotalDistance(i,contourInitial,contourFinal);
                 
                 //Debug.Log(currentTotalDistance+" "+i);
-                if (currentTotalDistance> minDistance)
+                if (currentTotalDistance< minDistance)
                 {
                     minDistance = currentTotalDistance;
                     bestStartID = i;

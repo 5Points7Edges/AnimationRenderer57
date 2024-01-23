@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 public class StrokeDrawer14 : MonoBehaviour
 {
@@ -79,25 +81,49 @@ public class StrokeDrawer14 : MonoBehaviour
         for(int i = 0; i < points.Count; i++)
         {
             Vector3 abVec = points[i].p1 - points[i].p0;
+            Vector3 bcVec = points[i].p2 - points[i].p1;
             Vector3 cdVec = points[i].p3 - points[i].p2;
             Vector3 c0Norm = new Vector3(abVec.y, -abVec.x, abVec.z).normalized*width;
             Vector3 c3Norm = new Vector3(cdVec.y, -cdVec.x, cdVec.z).normalized*width;
+
+            if (Vector3.Cross(abVec, bcVec).z > 0)
+            {
+                boundingBoxVertices.Add(points[i].p0+c0Norm);
+                boundingBoxVertices.Add(points[i].p0-c0Norm);
+                boundingBoxVertices.Add(points[i].p1+c0Norm);
             
-            boundingBoxVertices.Add(points[i].p0+c0Norm);
-            boundingBoxVertices.Add(points[i].p0-c0Norm);
-            boundingBoxVertices.Add(points[i].p1);
+                boundingBoxVertices.Add(points[i].p0-c0Norm);
+                boundingBoxVertices.Add(points[i].p1+c0Norm);
+                boundingBoxVertices.Add(points[i].p2+c3Norm);
             
-            boundingBoxVertices.Add(points[i].p0-c0Norm);
-            boundingBoxVertices.Add(points[i].p1);
-            boundingBoxVertices.Add(points[i].p2);
+                boundingBoxVertices.Add(points[i].p0-c0Norm);
+                boundingBoxVertices.Add(points[i].p2+c3Norm);
+                boundingBoxVertices.Add(points[i].p3-c3Norm);
             
-            boundingBoxVertices.Add(points[i].p0-c0Norm);
-            boundingBoxVertices.Add(points[i].p2);
-            boundingBoxVertices.Add(points[i].p3-c3Norm);
+                boundingBoxVertices.Add(points[i].p3-c3Norm);
+                boundingBoxVertices.Add(points[i].p2+c3Norm);
+                boundingBoxVertices.Add(points[i].p3+c3Norm);
+            }
+            else
+            {
+                boundingBoxVertices.Add(points[i].p0+c0Norm);
+                boundingBoxVertices.Add(points[i].p0-c0Norm);
+                boundingBoxVertices.Add(points[i].p1-c0Norm);
             
-            boundingBoxVertices.Add(points[i].p3-c3Norm);
-            boundingBoxVertices.Add(points[i].p2);
-            boundingBoxVertices.Add(points[i].p3+c3Norm);
+                boundingBoxVertices.Add(points[i].p0+c0Norm);
+                boundingBoxVertices.Add(points[i].p1-c0Norm);
+                boundingBoxVertices.Add(points[i].p2-c3Norm);
+            
+                boundingBoxVertices.Add(points[i].p0+c0Norm);
+                boundingBoxVertices.Add(points[i].p2-c3Norm);
+                boundingBoxVertices.Add(points[i].p3+c3Norm);
+            
+                boundingBoxVertices.Add(points[i].p3+c3Norm);
+                boundingBoxVertices.Add(points[i].p2-c3Norm);
+                boundingBoxVertices.Add(points[i].p3-c3Norm);
+            }
+            
+            
         }
         return boundingBoxVertices;
     }
