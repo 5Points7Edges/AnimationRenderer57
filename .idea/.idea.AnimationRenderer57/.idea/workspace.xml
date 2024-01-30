@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/AnimationTest14.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/AnimationTest14.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/FillDrawer14.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/FillDrawer14.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/Shader&amp;Material/strokeTest14.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/Shader&amp;Material/strokeTest14.shader" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/StrokeDrawer14.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.4.0/StrokeDrawer14.cs" afterDir="false" />
     </list>
@@ -273,7 +271,10 @@
       <workItem from="1705868979063" duration="3473000" />
       <workItem from="1705875464998" duration="64000" />
       <workItem from="1705942399368" duration="2420000" />
-      <workItem from="1706040093544" duration="4674000" />
+      <workItem from="1706040093544" duration="5088000" />
+      <workItem from="1706631545368" duration="1578000" />
+      <workItem from="1706635457351" duration="1404000" />
+      <workItem from="1706639045660" duration="7426000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -515,7 +516,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705875510067</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="adding newton iteration">
+      <option name="closed" value="true" />
+      <created>1706044834770</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1706044834770</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -549,7 +558,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Using Manim Algorithm" />
     <MESSAGE value="Complete Demo Version 0.3.0" />
     <MESSAGE value="Restructuring the whole projects&#10;Adding important comments to each version of the renderer" />
     <MESSAGE value="make new dir" />
@@ -574,7 +582,8 @@
     <MESSAGE value="clean up some codes" />
     <MESSAGE value="make new directory for the new version" />
     <MESSAGE value="add stroke" />
-    <option name="LAST_COMMIT_MESSAGE" value="add stroke" />
+    <MESSAGE value="adding newton iteration" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding newton iteration" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

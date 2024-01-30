@@ -74,55 +74,44 @@ public class StrokeDrawer14 : MonoBehaviour
     }
     public static List<Vector3> ComputeBoundingBox(SubPath14 subPath)
     {
-        float width = 0.5f;
+        float width = 0.1f;
         List<Segment14> points = subPath.segments;
         List<Vector3> boundingBoxVertices = new List<Vector3>();
 
         for(int i = 0; i < points.Count; i++)
         {
-            Vector3 abVec = points[i].p1 - points[i].p0;
-            Vector3 bcVec = points[i].p2 - points[i].p1;
-            Vector3 cdVec = points[i].p3 - points[i].p2;
+            Vector3 abVec = (points[i].p1 - points[i].p0).normalized*width;
+            Vector3 bcVec = (points[i].p2 - points[i].p1).normalized*width;
+            Vector3 cdVec = (points[i].p3 - points[i].p2).normalized*width;
             Vector3 c0Norm = new Vector3(abVec.y, -abVec.x, abVec.z).normalized*width;
             Vector3 c3Norm = new Vector3(cdVec.y, -cdVec.x, cdVec.z).normalized*width;
 
-            if (Vector3.Cross(abVec, bcVec).z > 0)
-            {
-                boundingBoxVertices.Add(points[i].p0+c0Norm);
-                boundingBoxVertices.Add(points[i].p0-c0Norm);
-                boundingBoxVertices.Add(points[i].p1+c0Norm);
+            Vector3 pp1 = points[i].p0 + c0Norm - abVec;
+            Vector3 pp2 = points[i].p0 - c0Norm - abVec;
+            Vector3 pp3 = points[i].p1 + c0Norm ;
+            Vector3 pp4 = points[i].p1 - c0Norm ;
+            Vector3 pp5 = points[i].p2 + c3Norm;
+            Vector3 pp6 = points[i].p2 - c3Norm;
+            Vector3 pp7 = points[i].p3 + c3Norm;
+            Vector3 pp8 = points[i].p3 - c3Norm;
             
-                boundingBoxVertices.Add(points[i].p0-c0Norm);
-                boundingBoxVertices.Add(points[i].p1+c0Norm);
-                boundingBoxVertices.Add(points[i].p2+c3Norm);
+            boundingBoxVertices.AddRange(new List<Vector3>(){pp1,pp2,pp3});
+            boundingBoxVertices.AddRange(new List<Vector3>(){pp1,pp2,pp4});
             
-                boundingBoxVertices.Add(points[i].p0-c0Norm);
-                boundingBoxVertices.Add(points[i].p2+c3Norm);
-                boundingBoxVertices.Add(points[i].p3-c3Norm);
+            boundingBoxVertices.AddRange(new List<Vector3>(){pp3,pp2,pp5});
+            boundingBoxVertices.AddRange(new List<Vector3>(){pp5,pp2,pp8});
             
-                boundingBoxVertices.Add(points[i].p3-c3Norm);
-                boundingBoxVertices.Add(points[i].p2+c3Norm);
-                boundingBoxVertices.Add(points[i].p3+c3Norm);
-            }
-            else
-            {
-                boundingBoxVertices.Add(points[i].p0+c0Norm);
-                boundingBoxVertices.Add(points[i].p0-c0Norm);
-                boundingBoxVertices.Add(points[i].p1-c0Norm);
+            boundingBoxVertices.AddRange(new List<Vector3>(){pp3,pp2,pp7});
+            boundingBoxVertices.AddRange(new List<Vector3>(){pp7,pp2,pp6});
             
-                boundingBoxVertices.Add(points[i].p0+c0Norm);
-                boundingBoxVertices.Add(points[i].p1-c0Norm);
-                boundingBoxVertices.Add(points[i].p2-c3Norm);
+            boundingBoxVertices.AddRange(new List<Vector3>(){pp1,pp4,pp7});
+            boundingBoxVertices.AddRange(new List<Vector3>(){pp7,pp4,pp6});
             
-                boundingBoxVertices.Add(points[i].p0+c0Norm);
-                boundingBoxVertices.Add(points[i].p2-c3Norm);
-                boundingBoxVertices.Add(points[i].p3+c3Norm);
+            boundingBoxVertices.AddRange(new List<Vector3>(){pp1,pp4,pp5});
+            boundingBoxVertices.AddRange(new List<Vector3>(){pp5,pp4,pp8});
             
-                boundingBoxVertices.Add(points[i].p3+c3Norm);
-                boundingBoxVertices.Add(points[i].p2-c3Norm);
-                boundingBoxVertices.Add(points[i].p3-c3Norm);
-            }
-            
+            boundingBoxVertices.AddRange(new List<Vector3>(){pp5,pp8,pp7});
+            boundingBoxVertices.AddRange(new List<Vector3>(){pp7,pp6,pp8});
             
         }
         return boundingBoxVertices;

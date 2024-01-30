@@ -81,7 +81,7 @@ Shader "Custom/BezierTest/strokeTest14"
 	            return sqrt((x - px) * (x - px) + (y - py) * (y - py));
             }
             
-            float distance(float2 pos,float t,float2 p1,float2 p2,float2 p3,float2 p4)
+            float distanceToCurveAtPoint(float2 pos,float t,float2 p1,float2 p2,float2 p3,float2 p4)
             {
                 float Dx=(BezierCurve(t,p1.x,p2.x,p3.x,p4.x)-pos.x);
                 float Dy=(BezierCurve(t,p1.y,p2.y,p3.y,p4.y)-pos.y);
@@ -111,7 +111,7 @@ Shader "Custom/BezierTest/strokeTest14"
             }
             float NewtonIteration(float startT,float2 pos,float2 p1,float2 p2,float2 p3,float2 p4)
             {
-                for(int i=0;i<2;i++)
+                for(int i=0;i<3;i++)
                 {
                     if(startT>1||startT<0)return startT;
                     startT = startT - f(pos,startT,p1,p2,p3,p4) / fDiff(pos,startT,p1,p2,p3,p4);
@@ -127,8 +127,11 @@ Shader "Custom/BezierTest/strokeTest14"
                 {
                     float solution=NewtonIteration(i/numberOfStartX,pos,p1,p2,p3,p4);
                     if(solution>1||solution<0)continue;
-                    dis=min(dis,distance(pos,solution,p1,p2,p3,p4));
+                    dis=min(dis,distanceToCurveAtPoint(pos,solution,p1,p2,p3,p4));
                 }
+
+                dis=min(dis,distance(pos,BezierCurve(0,p1,p2,p3,p4)));
+                dis=min(dis,distance(pos,BezierCurve(1,p1,p2,p3,p4)));
                 return dis;
             }
             StructuredBuffer<curveData> curvess_buffer;
@@ -154,7 +157,7 @@ Shader "Custom/BezierTest/strokeTest14"
                 o.pos=rateFunction_Linear(posS,posT,time);
                 o.worldPos=rateFunction_Linear(worldPosS,worldPosT,time);
                 
-                int curveIndex=v.id/12;
+                int curveIndex=v.id/36;
                 curveData buffer=curvess_buffer[curveIndex];
                 float3 startS=mul(unity_ObjectToWorld, curvess_buffer[curveIndex].start).xyz;
                 float3 c1S=mul(unity_ObjectToWorld, curvess_buffer[curveIndex].control1).xyz;
@@ -179,7 +182,7 @@ Shader "Custom/BezierTest/strokeTest14"
             {
                 
                 float4 finalColor=_Color;
-                                
+                // return finalColor;                
                 float2 start=input.start.xy;
                 float2 control1=input.C1.xy;
                 float2 control2=input.C2.xy;
@@ -187,13 +190,7 @@ Shader "Custom/BezierTest/strokeTest14"
 
                 float2 pos= input.worldPos.xy;
 
-                float dist=10000;
-                // for(int i=0;i<=_approximationStep;i++){
-                //     float2 P1=BezierCurve((i-1)/_approximationStep,start,control1,control2,end);
-                //     float2 P2=BezierCurve(i/_approximationStep,start,control1,control2,end);
-                //     dist=min(dist,PointToSegDist(pos.x,pos.y,P1.x,P1.y,P2.x,P2.y));
-                // }
-                dist=shortestDistance(pos,start,control1,control2,end);
+                float dist=shortestDistance(pos,start,control1,control2,end);
                 if (dist>0.1)discard;
                 return finalColor;
             }
