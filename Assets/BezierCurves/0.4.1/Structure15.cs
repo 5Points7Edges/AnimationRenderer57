@@ -159,6 +159,15 @@ public class Path15
         subPaths.Add(newSubPath);
     }
 
+    public Vector3 getCentralPoint()
+    {
+        Vector3 centralPoint = new Vector3(0, 0, 0);
+        foreach (SubPath15 sp in subPaths)
+        {
+            centralPoint += sp.getCentralPoint();
+        }
+        return centralPoint / subPaths.Count;
+    }
     public Path15 transform(float x, float y)
     {
         List<SubPath15> tmp = new List<SubPath15>();

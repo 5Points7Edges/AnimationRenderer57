@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.1/AnimationTest15.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.4.1/AnimationTest15.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.1/Structure15.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.4.1/Structure15.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,12 +54,13 @@
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.4/Structure.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.5/Structure.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.4.1/AnimationTest15.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/Scenes/MorphingTest.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_BaseEditorPanel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_FontAssetEditor.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="SWEA" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -273,7 +276,8 @@
       <workItem from="1706631545368" duration="1578000" />
       <workItem from="1706635457351" duration="1404000" />
       <workItem from="1706639045660" duration="7569000" />
-      <workItem from="1707338638755" duration="6046000" />
+      <workItem from="1707338638755" duration="6915000" />
+      <workItem from="1707936396179" duration="1256000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -531,7 +535,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706650453245</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="0.4.1 add support for holes">
+      <option name="closed" value="true" />
+      <created>1707345307681</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1707345307681</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -565,7 +577,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Restructuring the whole projects&#10;Adding important comments to each version of the renderer" />
     <MESSAGE value="make new dir" />
     <MESSAGE value="update to 0.3.1 SVGRenderer is now robust" />
     <MESSAGE value="The simplest animation implemented" />
@@ -590,7 +601,8 @@
     <MESSAGE value="add stroke" />
     <MESSAGE value="adding newton iteration" />
     <MESSAGE value="update bounding box and fix the joining points" />
-    <option name="LAST_COMMIT_MESSAGE" value="update bounding box and fix the joining points" />
+    <MESSAGE value="0.4.1 add support for holes" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.4.1 add support for holes" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

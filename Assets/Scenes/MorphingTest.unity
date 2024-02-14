@@ -2370,7 +2370,7 @@ MonoBehaviour:
   visualM: {fileID: 2100000, guid: 5dcb29c74fc96e74280e54ce08547556, type: 2}
   animationEnable: 1
   sourceFileName: test2
-  targetFileName: Euler
+  targetFileName: test1
 --- !u!23 &2130926974
 MeshRenderer:
   m_ObjectHideFlags: 0
