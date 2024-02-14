@@ -30,9 +30,9 @@ public class AnimationTest15 : MonoBehaviour
     private List<GameObject> allShapeGameObjects = new List<GameObject>();
 
     private List<Path15> sourceData = new List<Path15>();
-    private List<Path15> targetData = new List<Path15>();   
-    
-    
+    private List<Path15> targetData = new List<Path15>();
+
+    public bool enableStroke = false;
     
     public bool animationEnable=false;
     
@@ -90,39 +90,58 @@ public class AnimationTest15 : MonoBehaviour
         // int maxIndex = Math.Max(coordinatesSource.Count, coordinatesTarget.Count);
         // int minIndex= Math.Min(coordinatesSource.Count, coordinatesTarget.Count);
         
-        for (int i = 0; i < coordinatesSource.Count; i++)
+        if (coordinatesSource.Count < coordinatesTarget.Count)
         {
-            
-            // int pathIndexSource = idSource.IndexOf(coordinatesSource[i].pathID);    //the index of the ID in IDList is the index of the path
-            // int pathIndexTarget = idTarget.IndexOf(coordinatesTarget[i].pathID);
-            //Debug.Log(idSource[distinctID]);
-            GameObject gameObject = new GameObject("shape["+i+"]");
-            gameObject.AddComponent<MeshFilter>();
-            gameObject.AddComponent<MeshRenderer>();
-            gameObject.AddComponent<FillDrawer15>();
-            gameObject.GetComponent<FillDrawer15>().FillMaterial = new Material(Fillmaterial);
-            gameObject.GetComponent<FillDrawer15>().StrokeMaterial = new Material(Strokematerial);
-            gameObject.transform.parent = transform;
-
-            int j = (int)((float)i / coordinatesSource.Count * coordinatesTarget.Count);
-            
-            int pathIndexSource = idSource.IndexOf(coordinatesSource[i].pathID);    //the index of the ID in IDList is the index of the path
-            int pathIndexTarget = idTarget.IndexOf(coordinatesTarget[j].pathID);
-            gameObject.GetComponent<FillDrawer15>().pathInitial=sourceData[pathIndexSource].transform(coordinatesSource[i].x,coordinatesSource[i].y);
-            gameObject.GetComponent<FillDrawer15>().pathEnd=targetData[pathIndexTarget].transform(coordinatesTarget[j].x,coordinatesTarget[j].y);
-            
-            
-            allShapeGameObjects.Add(gameObject);
-            // if (i == 4)
-            // {
-            //     Debug.Log(gameObject.GetComponent<FillDrawer15>().pathInitial.subPaths.Count);
-            //     Debug.Log(gameObject.GetComponent<FillDrawer15>().pathInitial.subPaths[0]);
-            // }
+            int j = 0;
+            for (int i = 0; i < coordinatesSource.Count; i++)
+            {
+                while (j <= (i+1) *(float)coordinatesTarget.Count/coordinatesSource.Count-1)
+                {
+                    createObject(ref i, ref j, ref idSource, ref idTarget,ref coordinatesSource,ref coordinatesTarget);
+                    j++;
+                }
+            }
         }
-        
+        else
+        {
+            int i = 0;
+            for (int j = 0; j < coordinatesTarget.Count; j++)
+            {
+                while (i <= (j+1) *(float)coordinatesSource.Count/coordinatesTarget.Count-1)
+                {
+                    createObject(ref i, ref j, ref idSource, ref idTarget,ref coordinatesSource,ref coordinatesTarget);
+                    i++;
+                }
+            }
+        }
         
     }
 
+    public void createObject(ref int i, ref int j,ref List<string> idSource,ref List<string> idTarget,ref List<Coordinate> coordinatesSource,ref List<Coordinate> coordinatesTarget )
+    {
+        
+        //Debug.Log(idSource[distinctID]);
+        GameObject gameObject = new GameObject("shape["+i+"]");
+        gameObject.AddComponent<MeshFilter>();
+        gameObject.AddComponent<MeshRenderer>();
+        gameObject.AddComponent<FillDrawer15>();
+        gameObject.GetComponent<FillDrawer15>().FillMaterial = new Material(Fillmaterial);
+        gameObject.GetComponent<FillDrawer15>().StrokeMaterial = new Material(Strokematerial);
+        gameObject.transform.parent = transform;
+            
+        int pathIndexSource = idSource.IndexOf(coordinatesSource[i].pathID);    //the index of the ID in IDList is the index of the path
+        int pathIndexTarget = idTarget.IndexOf(coordinatesTarget[j].pathID);
+        gameObject.GetComponent<FillDrawer15>().pathInitial=sourceData[pathIndexSource].transform(coordinatesSource[i].x,coordinatesSource[i].y);
+        gameObject.GetComponent<FillDrawer15>().pathEnd=targetData[pathIndexTarget].transform(coordinatesTarget[j].x,coordinatesTarget[j].y);
+        gameObject.GetComponent<FillDrawer15>().strokeEnable = enableStroke;
+            
+        allShapeGameObjects.Add(gameObject);
+        // if (i == 4)
+        // {
+        //     Debug.Log(gameObject.GetComponent<FillDrawer15>().pathInitial.subPaths.Count);
+        //     Debug.Log(gameObject.GetComponent<FillDrawer15>().pathInitial.subPaths[0]);
+        // }
+    }
     public void compile(string filename)
     {
         
@@ -172,7 +191,7 @@ public class AnimationTest15 : MonoBehaviour
         
         Debug.Log("dvisvgm compiled");
     }
-    struct Coordinate
+    public struct Coordinate
     {
         public float x, y;
         public string pathID;

@@ -40,6 +40,8 @@ public class Segment15
 
         return (p0, p01, p014, p0143, p0143, p143,p23, p3);
     }
+
+    
     public float GetLength()
     {
         float totalLength = 0;

@@ -25,7 +25,7 @@ public class FillDrawer15 : MonoBehaviour
     private MeshRenderer meshRenderer;
 
     public bool showDebug=false;
-    
+    public bool strokeEnable = true;
     struct CurveDataWrapper
     {
         public Vector3 start;
@@ -34,7 +34,7 @@ public class FillDrawer15 : MonoBehaviour
         public Vector3 end;
         public int basePointIndex;
     }
-    public struct lengthPair
+    public class lengthPair
     {
         public float length;
         public int index;
@@ -153,19 +153,21 @@ public class FillDrawer15 : MonoBehaviour
         meshRenderer.material = FillMaterial;
         
         //Perpare for Stroke
-        GameObject gameObject = new GameObject("stroke");
-        gameObject.AddComponent<MeshFilter>();
-        gameObject.AddComponent<MeshRenderer>();
-        gameObject.AddComponent<StrokeDrawer15>();
-        gameObject.transform.parent = transform;
+        if (strokeEnable)
+        {
+            GameObject gameObject = new GameObject("stroke");
+            gameObject.AddComponent<MeshFilter>();
+            gameObject.AddComponent<MeshRenderer>();
+            gameObject.AddComponent<StrokeDrawer15>();
+            gameObject.transform.parent = transform;
         
-        var strokeObject =gameObject.GetComponent<StrokeDrawer15>();
-        strokeObject.material = StrokeMaterial;
-        strokeObject.pathInitial=pathInitial;
-        strokeObject.pathEnd=pathEnd;
-        strokeObject.curveDataBufferSource = curveDataBufferSource;
-        strokeObject.curveDataBufferTarget = curveDataBufferTarget;
-        
+            var strokeObject =gameObject.GetComponent<StrokeDrawer15>();
+            strokeObject.material = StrokeMaterial;
+            strokeObject.pathInitial=pathInitial;
+            strokeObject.pathEnd=pathEnd;
+            strokeObject.curveDataBufferSource = curveDataBufferSource;
+            strokeObject.curveDataBufferTarget = curveDataBufferTarget;
+        }
     }
 
     public void findtheBestOder()
@@ -228,7 +230,7 @@ public class FillDrawer15 : MonoBehaviour
     public void insertExtraPoints()
     {
         
-
+        //assure two path have same amount of subpaths
         int difference = Math.Abs(pathInitial.subPaths.Count() - pathEnd.subPaths.Count());
         if (difference != 0)
         {
@@ -245,7 +247,7 @@ public class FillDrawer15 : MonoBehaviour
         }
         // Debug.Log(difference);
         
-        //assume pathInitial has equal amount of contours as pathEnd
+        //assume pathInitial has equal amount of subpaths as pathEnd
         for (int contourIndex = 0; contourIndex < pathInitial.subPaths.Count; contourIndex++)
         {
             List<lengthPair> lengthList = new List<lengthPair>();
@@ -300,13 +302,12 @@ public class FillDrawer15 : MonoBehaviour
                 secondCurve.p3 = splittedCurve.Item8;
                 contourInitial.segments.Insert(id,secondCurve);
                 contourInitial.segments.Insert(id,firstCurve);
-                
+                float rubbish=firstCurve.GetLength();
+                rubbish=secondCurve.GetLength();
                 
                 for(int k=0;k<lengthList.Count;k++)
                 {
-                    lengthPair tmp = lengthList[k];
-                    tmp.index = tmp.index > id ? id + 1 : id;
-                    lengthList[k] = tmp;
+                    lengthList[k].index = lengthList[k].index > id ? lengthList[k].index + 1 : lengthList[k].index;
                 }
                 
                 lengthList.Add(new lengthPair{length = firstCurve.GetLength(),index = id});
