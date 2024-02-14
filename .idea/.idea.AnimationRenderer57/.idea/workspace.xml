@@ -7,8 +7,7 @@
     <list default="true" id="20d05798-f514-4299-ad2a-d109fe544b83" name="Changes" comment="multi shape morphing update">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AnimationRenderer57/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.1/AnimationTest15.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.4.1/AnimationTest15.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.1/FillDrawer15.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.4.1/FillDrawer15.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BezierCurves/0.4.1/Structure15.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BezierCurves/0.4.1/Structure15.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MorphingTest.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +44,7 @@
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/43962bec8705445a98d4807e23f4b4a83a200/f7/788d556c/02000032pdb42Low.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a3b02d6f9b494355b946095ea1f25c5446ac00/ad/7c0fecd7/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.1.2/SVGRenderer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.1/CurveDrawer8.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.3.1/SubPath8.cs" root0="FORCE_HIGHLIGHTING" />
@@ -59,6 +59,8 @@
     <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/BezierCurves/0.4.1/AnimationTest15.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/BezierCurves/0.4.1/AnimationTest15.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/BezierCurves/0.4.1/AnimationTest15.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/BezierCurves/0.4.1/Structure15.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/5Points7Edges/AnimationRenderer57/Assets/Scenes/MorphingTest.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_BaseEditorPanel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_FontAssetEditor.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -179,10 +181,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="4552">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="20348">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="4552" />
+      <option name="pid" value="20348" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -282,7 +284,7 @@
       <workItem from="1706635457351" duration="1404000" />
       <workItem from="1706639045660" duration="7569000" />
       <workItem from="1707338638755" duration="6915000" />
-      <workItem from="1707936396179" duration="8466000" />
+      <workItem from="1707936396179" duration="9587000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -564,7 +566,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707938405519</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="multi shape morphing update">
+      <option name="closed" value="true" />
+      <created>1707945000788</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1707945000788</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

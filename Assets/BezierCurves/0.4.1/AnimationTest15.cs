@@ -90,12 +90,13 @@ public class AnimationTest15 : MonoBehaviour
         // int maxIndex = Math.Max(coordinatesSource.Count, coordinatesTarget.Count);
         // int minIndex= Math.Min(coordinatesSource.Count, coordinatesTarget.Count);
         
+        
         if (coordinatesSource.Count < coordinatesTarget.Count)
         {
             int j = 0;
             for (int i = 0; i < coordinatesSource.Count; i++)
             {
-                while (j <= (i+1) *(float)coordinatesTarget.Count/coordinatesSource.Count-1)
+                while (j < (i+1) *(float)coordinatesTarget.Count/coordinatesSource.Count-1)
                 {
                     createObject(ref i, ref j, ref idSource, ref idTarget,ref coordinatesSource,ref coordinatesTarget);
                     j++;
@@ -107,7 +108,7 @@ public class AnimationTest15 : MonoBehaviour
             int i = 0;
             for (int j = 0; j < coordinatesTarget.Count; j++)
             {
-                while (i <= (j+1) *(float)coordinatesSource.Count/coordinatesTarget.Count-1)
+                while (i < (j+1) *(float)coordinatesSource.Count/coordinatesTarget.Count-1)
                 {
                     createObject(ref i, ref j, ref idSource, ref idTarget,ref coordinatesSource,ref coordinatesTarget);
                     i++;
