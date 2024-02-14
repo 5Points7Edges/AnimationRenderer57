@@ -86,8 +86,11 @@ public class AnimationTest15 : MonoBehaviour
         
         List<string> idTarget=IDParsing(targetSVGPath);
         List<Coordinate> coordinatesTarget=CoordinatesParsing(targetSVGPath);
+
+        // int maxIndex = Math.Max(coordinatesSource.Count, coordinatesTarget.Count);
+        // int minIndex= Math.Min(coordinatesSource.Count, coordinatesTarget.Count);
         
-        for (int i = 0; i < Math.Max(coordinatesSource.Count,coordinatesTarget.Count); i++)
+        for (int i = 0; i < coordinatesSource.Count; i++)
         {
             
             // int pathIndexSource = idSource.IndexOf(coordinatesSource[i].pathID);    //the index of the ID in IDList is the index of the path
@@ -100,29 +103,14 @@ public class AnimationTest15 : MonoBehaviour
             gameObject.GetComponent<FillDrawer15>().FillMaterial = new Material(Fillmaterial);
             gameObject.GetComponent<FillDrawer15>().StrokeMaterial = new Material(Strokematerial);
             gameObject.transform.parent = transform;
-            if (i >= coordinatesSource.Count)
-            {
-                int last = coordinatesSource.Count - 1;
-                int pathIndexSource = idSource.IndexOf(coordinatesSource[last].pathID);
-                gameObject.GetComponent<FillDrawer15>().pathInitial = sourceData[pathIndexSource].transform(coordinatesSource[last].x,coordinatesSource[last].y);
-            }
-            else
-            {
-                int pathIndexSource = idSource.IndexOf(coordinatesSource[i].pathID);    //the index of the ID in IDList is the index of the path
 
-                gameObject.GetComponent<FillDrawer15>().pathInitial=sourceData[pathIndexSource].transform(coordinatesSource[i].x,coordinatesSource[i].y);
-            }
-            if (i >= coordinatesTarget.Count)
-            {
-                int last = coordinatesTarget.Count - 1;
-                int pathIndexTarget = idTarget.IndexOf(coordinatesTarget[last].pathID);
-                gameObject.GetComponent<FillDrawer15>().pathEnd=targetData[pathIndexTarget].transform(coordinatesTarget[last].x,coordinatesTarget[last].y);
-            }
-            else
-            {
-                int pathIndexTarget = idTarget.IndexOf(coordinatesTarget[i].pathID);
-                gameObject.GetComponent<FillDrawer15>().pathEnd=targetData[pathIndexTarget].transform(coordinatesTarget[i].x,coordinatesTarget[i].y);
-            }
+            int j = (int)((float)i / coordinatesSource.Count * coordinatesTarget.Count);
+            
+            int pathIndexSource = idSource.IndexOf(coordinatesSource[i].pathID);    //the index of the ID in IDList is the index of the path
+            int pathIndexTarget = idTarget.IndexOf(coordinatesTarget[j].pathID);
+            gameObject.GetComponent<FillDrawer15>().pathInitial=sourceData[pathIndexSource].transform(coordinatesSource[i].x,coordinatesSource[i].y);
+            gameObject.GetComponent<FillDrawer15>().pathEnd=targetData[pathIndexTarget].transform(coordinatesTarget[j].x,coordinatesTarget[j].y);
+            
             
             allShapeGameObjects.Add(gameObject);
             // if (i == 4)
