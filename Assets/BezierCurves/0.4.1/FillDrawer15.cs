@@ -281,7 +281,7 @@ public class FillDrawer15 : MonoBehaviour
                 lengthList.Sort(new lengthPairComparer());
                 int id=lengthList[0].index;
                 
-                var splittedCurve = contourInitial.segments[id].SplitCurve(0.46f);
+                var splittedCurve = contourInitial.segments[id].SplitCurve(0.5f);
                 //Debug.Log(splittedCurve);
                 
                 contourInitial.segments.RemoveAt(id);
